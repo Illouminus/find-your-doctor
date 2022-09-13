@@ -1,0 +1,63 @@
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.bulkInsert('Users', [{
+      email: 'freetime@freetime.com',
+      password: 'freetime',
+      first_name: 'freetime',
+      last_name: 'freetime',
+      patronymic: 'freetime',
+      telephone: '80000000000',
+      photo: 'http://huyvortu.com/photos',
+      sex: 'other',
+      is_activated: true,
+      activation_link: 'freetime',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      email: 'huy@vortu.com',
+      password: 'qwerty',
+      first_name: 'Petya',
+      last_name: 'Bochkin',
+      patronymic: 'Drochkin',
+      telephone: '88005553535',
+      photo: 'http://huyvortu.com/photos',
+      sex: 'other',
+      is_activated: true,
+      activation_link: 'vrrrvvrr',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      email: 'dva-huya@vortu.com',
+      password: 'qwerty',
+      first_name: 'Vasya',
+      last_name: 'Kochkin',
+      patronymic: '',
+      telephone: '88009999999',
+      photo: 'http://huyvortu.com/photos2',
+      sex: 'male',
+      is_activated: false,
+      activation_link: 'qwqwqwwqwqwq',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }], {});
+  },
+
+  async down(queryInterface, Sequelize) {
+    await queryInterface.bulkDelete('Users', null, {});
+  },
+};
+
+// email: ,
+//   password: ,
+// first_name: ,
+//   last_name: ,
+// patronymic: ,
+//   telephone: ,
+// photo: ,
+//   sex: ,
+// is_activated: ,
+//   activation_link: ,
+// createdAt: ,
+//   updatedAt: ,
