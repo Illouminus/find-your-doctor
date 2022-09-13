@@ -20,9 +20,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // тут импорты всех роутов, если нужно
-// const indexRoutes = require('./routes/indexRoutes');
-// const loginRoutes = require('./routes/loginRoutes');
-// const regRoutes = require('./routes/regRoutes');
+// const regRouter = require('./routes/regRouter');
 
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, '../public/')));
@@ -45,9 +43,7 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 
 // ссылки на роуты
-// app.use('/', indexRoutes);
-// app.use('/login', loginRoutes);
-// app.use('/register', regRoutes);
+// app.use('/register', regRouter);
 
 app.listen(PORT ?? 3100, () => {
   console.log('Сервер запущен!');
