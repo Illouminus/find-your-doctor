@@ -1,0 +1,11 @@
+.chipContainer {
+    background-color: aliceblue ;
+    display: flex;
+    /*flex-wrap: wrap;*/
+    margin: 10px;
+
+}
+
+.chipContainer * {
+    margin: 10px;
+}
