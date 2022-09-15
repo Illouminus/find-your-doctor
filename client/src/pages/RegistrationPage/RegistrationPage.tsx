@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { DocReg, PatientReg } from '../../components/Register/index'
 
-function RegistrationPage() {
+
+export const RegistrationPage: React.FC = () => {
+
+const [whoReg, setWhoReg] = useState<boolean>(false);
+
+    
     return (
-        <>
-            Здесь будет РЕГИСТРАЦИЯ
-        </>
+        <div>
+            {whoReg ? (
+                <PatientReg setWhoReg={setWhoReg} whoReg={whoReg} />
+            ) : (
+                    <DocReg setWhoReg={setWhoReg} whoReg={whoReg} />
+            )}
+        </div>
     )
 }
-
-export default RegistrationPage
