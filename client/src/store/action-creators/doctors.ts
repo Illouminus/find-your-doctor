@@ -10,7 +10,7 @@ export const fetchDoctors = (inputSpecialist:string, inputLocation:string) =>  {
         try {
 
                 dispatch({type: DoctorActionTypes.FETCH_DOCTORS})
-                const response = await axios.get(`http://localhost:3100/main/${inputSpecialist}/${inputLocation}`)
+                const response = await axios.get(`http://localhost:4000/main/${inputSpecialist}/${inputLocation}`)
 
                 setTimeout(async() => {
 

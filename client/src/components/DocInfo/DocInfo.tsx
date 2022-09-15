@@ -7,7 +7,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {deepOrange, deepPurple, indigo, blue, teal, green, lime, orange, yellow, blueGrey} from '@mui/material/colors';
-
+import {NavLink} from 'react-router-dom'
 function pickRandomColor (){
     const colors:any[]=[deepOrange, deepPurple, indigo, blue, teal, green, lime, orange, yellow, blueGrey]
     return colors[Math.floor((Math.random()*colors.length))]
@@ -35,7 +35,7 @@ export default function DocInfo(props:any) {
                             <Avatar sx={{ bgcolor: pickRandomColor()[500] }}>{first_name[0]}{last_name[0]} </Avatar>
                             <br/>
                             <Typography variant="h5" component="div">
-                                {first_name} {last_name}
+                            <NavLink to={`/doctor/${id}`}>{first_name} {last_name} </NavLink>
                             </Typography>
                         </Box>
                         <br/>
@@ -52,9 +52,7 @@ export default function DocInfo(props:any) {
 
                         </Typography>
                     </CardContent>
-                    <CardActions>
-                        <Button size="small">Learn More</Button>
-                    </CardActions>
+
                 </Card>
             </div>
         </>

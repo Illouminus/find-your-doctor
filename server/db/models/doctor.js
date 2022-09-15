@@ -11,7 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.hasOne(models.Doctor_token, { foreignKey: 'doctor_id' });
-      this.belongsToMany(models.Tag, { through: 'Tag_doctor', foreignKey: 'tag_id' });
+      this.belongsToMany(models.Tag, {
+        through: models.Tag_doctor,
+        foreignKey: 'doctor_id',
+        otherKey: 'tag_id',
+      });
       this.hasMany(models.Raiting, { foreignKey: 'doctor_id' });
       this.hasMany(models.Appointment, { foreignKey: 'doctor_id' });
     }
