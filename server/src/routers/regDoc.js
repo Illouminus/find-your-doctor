@@ -1,7 +1,7 @@
 const router = require('express').Router();
 // const { register } = require('../controllers/register');
 const { body } = require('express-validator');
-const DocController = require('../controllers/doc-controller');
+const UserController = require('../controllers/user-controller');
 const authMiddleware = require('../middlewares/auth-middlewaire');
 
 router.post(
@@ -10,10 +10,10 @@ router.post(
   body('password').isLength({ min: 6, max: 32 }),
   DocController.registration,
 );
-router.post('/login', DocController.login);
-router.post('/logout', DocController.logout);
-router.get('/activate/:link', DocController.activate);
-router.get('/refresh', DocController.refresh);
-router.get('/users', authMiddleware, DocController.getUsers);
+router.post('/login', UserController.login);
+router.post('/logout', UserController.logout);
+router.get('/activate/:link', UserController.activate);
+router.get('/refresh', UserController.refresh);
+router.get('/users', authMiddleware, UserController.getUsers);
 
 module.exports = router;
