@@ -1,22 +1,22 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert('Tags', [{
-      name: 'urology',
+      name: 'урология',
       createdAt: new Date(),
       updatedAt: new Date(),
     },
     {
-      name: 'proctology',
+      name: 'проктология',
       createdAt: new Date(),
       updatedAt: new Date(),
     },
     {
-      name: 'psychology',
+      name: 'психиатрия',
       createdAt: new Date(),
       updatedAt: new Date(),
     },
     {
-      name: 'huyology',
+      name: 'терапия',
       createdAt: new Date(),
       updatedAt: new Date(),
     }], {});
