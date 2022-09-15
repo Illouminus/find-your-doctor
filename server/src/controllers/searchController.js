@@ -24,5 +24,4 @@ async function getDoctors (req, res)  {
     }
 }
 
-
-module.exports = {getDoctors}
+module.exports = { getDoctors };
