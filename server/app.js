@@ -22,11 +22,10 @@ app.use(cors(corsOptions));
 
 // тут импорты всех роутов, если нужно
 
-
 const userRouter = require('./src/routers/regRouter');
 const docRouter = require('./src/routers/regDoc');
 const doctorRouter = require('./src/routers/doctorRouter');
-
+const searchRouter = require('./src/routers/searchRouter');
 
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, '../public/')));
@@ -53,8 +52,8 @@ app.use(express.json());
 app.use('/api', userRouter);
 app.use('/api/doc', docRouter);
 app.use('/', doctorRouter);
+app.use('/', searchRouter);
 
-
-app.listen(PORT ?? 3100, () => {
+app.listen(PORT ?? 4000, () => {
   console.log('Сервер запущен!');
 });
