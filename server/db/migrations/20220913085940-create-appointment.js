@@ -24,7 +24,13 @@ module.exports = {
       date_time: {
         type: Sequelize.DATE,
       },
-      comments: {
+      comments_patient: {
+        type: Sequelize.TEXT,
+      },
+      first_time: {
+        type: Sequelize.BOOLEAN,
+      },
+      comments_doctor: {
         type: Sequelize.TEXT,
       },
       createdAt: {
