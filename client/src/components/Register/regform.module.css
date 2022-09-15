@@ -1,0 +1,74 @@
+.regPage {
+  height: 100vh;
+  background: no-repeat url(./img/stetoskop1.png);
+  background-size: cover;
+}
+
+.regPagePatient {
+  height: 100vh;
+  background: no-repeat url(./img/rentgen2.jpeg);
+  background-size: cover;
+  display: flex;
+  justify-content: right;
+}
+
+.regForm {
+  width: 50vw;
+  height: 100vh;
+  background-color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.regForm__form {
+  max-width: 360px;
+
+}
+
+.secondRegForm {
+  width: 50vw;
+  height: 100vh;
+  background-color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.secondRegForm__form {
+  max-width: 360px;
+
+}
+
+.error_reg {
+  color: #d32f2f;
+  font-size: 0.75rem;
+  font-family: "Roboto",
+    "Helvetica",
+    "Arial",
+    sans-serif;
+  margin: 4px 14px 0 14px;
+  line-height: 1.66;
+  letter-spacing: 0.03333em;
+  text-align: left;
+}
+
+.select_input_reg {
+  margin: 16px 0 8px;
+}
+
+.another_user {
+  color: gray;
+}
+
+.another_user:hover {
+  color: rgb(87, 87, 87);
+  text-decoration: underline;
+  cursor: pointer;
+}
