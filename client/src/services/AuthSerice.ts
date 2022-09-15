@@ -1,6 +1,7 @@
 import api from "../http";
 import { AxiosResponse } from "axios";
 import { AuthResponse } from "../models/response/AuthResponse";
+import { IAllFields } from '../components/Register/types';
 
 export default class AuthService {
 
@@ -12,12 +13,12 @@ export default class AuthService {
     return api.post<AuthResponse>('/doc/login', { email, password })
   }
 
-  static async register(email: string, password: string): Promise<AxiosResponse<AuthResponse>> {
-    return api.post<AuthResponse>('/register', { email, password })
+  static async register(object: IAllFields | {}): Promise<AxiosResponse<AuthResponse>> {
+    return api.post<AuthResponse>('/register', object)
   }
 
-  static async registerDoc(email: string, password: string): Promise<AxiosResponse<AuthResponse>> {
-    return api.post<AuthResponse>('/doc/register', { email, password })
+  static async registerDoc(object: IAllFields | {}): Promise<AxiosResponse<AuthResponse>> {
+    return api.post<AuthResponse>('/doc/register',  object)
   }
 
   static async logout(): Promise<void> {

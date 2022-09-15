@@ -7,8 +7,8 @@ import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { otherFields } from './validation';
-import { IRegForm3, PatientAllFields } from './types'
-
+import { IAllFields, IRegForm3, PatientAllFields } from './types'
+import { useActions } from '../../hooks/useActions'
 import styles from './regform.module.css';
 
 interface IOption {
@@ -28,20 +28,22 @@ const options: IOption[] = [{
 type RegFormType = {
   setWhoReg: React.Dispatch<React.SetStateAction<boolean>>
   setHarvester: React.Dispatch<React.SetStateAction<PatientAllFields | {}>>
-  whoReg: boolean
+  whoReg: boolean,
+  harvester: IAllFields | {}
 }
 
 const getValue = (value: string) =>
   value ? options.find((option) => option.value === value) : ''
 
-export const PatientSecondRegForm: React.FC<RegFormType> = ({ setHarvester, setWhoReg, whoReg }) => {
+export const PatientSecondRegForm: React.FC<RegFormType> = ({harvester, setHarvester, setWhoReg, whoReg }) => {
   const { handleSubmit, control } = useForm<IRegForm3>();
   const { errors } = useFormState({ control });
-
+  const {registerUser} = useActions()
   const onSubmit: SubmitHandler<IRegForm3> = (data) => {
     // console.log(data);
     setHarvester((prev) => { return { ...prev, ...data } })
     // setSecondForm((prev) => !prev)
+    registerUser({...data, ...harvester})
   }
 
   return (

@@ -11,14 +11,15 @@ type RegFormType = {
 export const DocReg: React.FC<RegFormType> = ({ setWhoReg, whoReg }) => {
   const [secondForm, setSecondForm] = useState<boolean>(true);
   const [harvester, setHarvester] = useState<IAllFields | {}>({});
-
   console.log(harvester);
+  
   return (
+    
     <div className={styles.regPage}>
       {secondForm ? (
         <DocRegForm setSecondForm={setSecondForm} setHarvester={setHarvester} setWhoReg={setWhoReg} whoReg={whoReg} />
       ) : (
-          <DocSecondRegForm setHarvester={setHarvester} setWhoReg={setWhoReg} whoReg={whoReg} />
+          <DocSecondRegForm harvester={harvester} setHarvester={setHarvester} setWhoReg={setWhoReg} whoReg={whoReg} />
       )}
     </div>
   )

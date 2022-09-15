@@ -9,11 +9,12 @@ class UserController {
       if (!errors.isEmpty()) {
         return next(ApiError.BadRequest('Ошибка при валидации', errors.array()));
       }
+      const sex = req.body.sex.value;
       const {
-        email, password, first_name, last_name, patronymic, telephone, photo, sex,
+        email, password, firstName, lastName, patronymic, telephone, photo,
       } = req.body;
       console.log(email, password);
-      const userData = await userService.registration(email, password, first_name, last_name, patronymic, telephone, photo, sex);
+      const userData = await userService.registration(email, password, firstName, lastName, patronymic, telephone, photo, sex);
       res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 1000, httpOnly: true });
       return res.json(userData);
     } catch (error) {

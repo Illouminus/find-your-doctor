@@ -7,7 +7,7 @@ const UserDto = require('../dtos/user-dto');
 const ApiError = require('../exceptions/api-error');
 
 class DocService {
-  async registration(email, password, first_name, last_name, patronymic, telephone, experience, education, speciality, photo, sex, adress) {
+  async registration(email, password, sex, firstName, lastName, patronymic, telephone, experience, education, speciality, photo, adress) {
     const candidate = await Doctor.findOne({
       where: {
         email,
@@ -18,15 +18,20 @@ class DocService {
     }
     const hashPassword = await bcrypt.hash(password, 10);
     const activationLink = uuid.v4();
-    const user = await Doctor.create({
-      email, password: hashPassword, first_name, last_name, patronymic, telephone, experience, education, speciality, photo, sex, adress, activationLink,
-    });
+    try {
+      const user = await Doctor.create({
+        email, password: hashPassword, first_name: firstName, last_name: lastName, patronymic, telephone, experience, education, speciality, photo, sex, adress, activationLink,
+      });
+      const isDoctor = true;
+      const userDto = new UserDto(user, isDoctor); // id, email, isActivated
+      const tokens = tokenService.generateTokens({ ...userDto });
+      await tokenService.saveTokenDoc(userDto.id, tokens.refreshToken);
+      return { ...tokens, user: userDto };
+    } catch (error) {
+      console.log(error);
+    }
+
     // await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`);
-    const isDoctor = true;
-    const userDto = new UserDto(user, isDoctor); // id, email, isActivated
-    const tokens = tokenService.generateTokens({ ...userDto });
-    await tokenService.saveTokenDoc(userDto.id, tokens.refreshToken);
-    return { ...tokens, user: userDto };
   }
 
   async activate(activationLink) {
@@ -51,7 +56,8 @@ class DocService {
     if (!isPassChech) {
       throw ApiError.BadRequest('Вы ввели неправильный пароль');
     }
-    const userDto = new UserDto(user);
+    const isDoctor = false;
+    const userDto = new UserDto(user, isDoctor);
     const tokens = tokenService.generateTokens({ ...userDto });
     await tokenService.saveTokenDoc(userDto.id, tokens.refreshToken);
     return { ...tokens, user: userDto };

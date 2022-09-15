@@ -6,17 +6,25 @@ import Button from '@mui/material/Button';
 import { emailValidation, passwordValidation } from '../Register/validation';
 import { LoginFormType } from '../Register/types';
 import styles from '../Register/regform.module.css'
+import { useActions } from '../../hooks/useActions'
 
 export const LoginForm: React.FC = () => {
   const [userSwitch, setUserSwitch] = useState<boolean>(false);
 
   const { handleSubmit, control } = useForm<LoginFormType>();
   const { errors } = useFormState({ control });
-
+  const {loginUser, loginDoc} = useActions()
   const onSubmit: SubmitHandler<LoginFormType> = (data) => {
-    console.log(data);
+    const {email, password} = data;
+    if(userSwitch) {
+      loginUser(email, password)
+    } else{
+      loginDoc(email, password)
+    }
+    
     // setHarvester(() => data)
   }
+
   return (
     <div className={userSwitch ? (styles.regPagePatient) : (styles.regPage)}>
       <div className={styles.regForm}>

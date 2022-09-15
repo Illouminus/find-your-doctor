@@ -19,7 +19,7 @@ export const PatientReg: React.FC<RegFormType> = ({ setWhoReg, whoReg }) => {
       {secondForm ? (
         <PatientRegForm setSecondForm={setSecondForm} setHarvester={setHarvester} setWhoReg={setWhoReg} whoReg={whoReg} />
       ) : (
-          <PatientSecondRegForm setHarvester={setHarvester} setWhoReg={setWhoReg} whoReg={whoReg} />
+          <PatientSecondRegForm harvester={harvester} setHarvester={setHarvester} setWhoReg={setWhoReg} whoReg={whoReg} />
       )}
     </div>
 )

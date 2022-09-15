@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { otherFields } from './validation';
 import { IRegForm2, IAllFields } from './types'
+import { useActions } from '../../hooks/useActions'
 
 import styles from './regform.module.css';
 
@@ -28,20 +29,24 @@ const options: IOption[] = [{
 type RegFormType = {
   setWhoReg: React.Dispatch<React.SetStateAction<boolean>>
   setHarvester: React.Dispatch<React.SetStateAction<IAllFields | {}>>
-  whoReg: boolean
+  whoReg: boolean,
+  harvester: IAllFields | {}
 }
 
 const getValue = (value: string) =>
   value ? options.find((option) => option.value === value) : ''
 
-export const DocSecondRegForm: React.FC<RegFormType> = ({ setHarvester, setWhoReg, whoReg }) => {
+export const DocSecondRegForm: React.FC<RegFormType> = ({harvester, setHarvester, setWhoReg, whoReg }) => {
   const { handleSubmit, control } = useForm<IRegForm2>();
   const { errors } = useFormState({ control });
-
+  const {registerDoc} = useActions()
   const onSubmit: SubmitHandler<IRegForm2> = (data) => {
     // console.log(data);
     setHarvester((prev) => {return {...prev, ...data}} )
     // setSecondForm((prev) => !prev)
+    
+    registerDoc({...data, ...harvester})
+
   }
 
   return (

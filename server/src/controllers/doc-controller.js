@@ -9,10 +9,14 @@ class DocController {
       if (!errors.isEmpty()) {
         return next(ApiError.BadRequest('Ошибка при валидации', errors.array()));
       }
+      console.log(req.body);
+      const sex = req.body.sex.value;
+      console.log(sex);
       const {
-        email, password, first_name, last_name, patronymic, telephone, experience, education, speciality, photo, sex, adress,
+        email, password, firstName, lastName, patronymic, telephone, experience, education, speciality, photo, adress,
       } = req.body;
-      const userData = await DocService.registration(email, password, first_name, last_name, patronymic, telephone, experience, education, speciality, photo, sex, adress);
+
+      const userData = await DocService.registration(email, password, sex, firstName, lastName, patronymic, telephone, experience, education, speciality, photo, sex, adress);
       res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 1000, httpOnly: true });
       return res.json(userData);
     } catch (error) {

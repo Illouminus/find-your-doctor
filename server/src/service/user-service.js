@@ -7,7 +7,7 @@ const UserDto = require('../dtos/user-dto');
 const ApiError = require('../exceptions/api-error');
 
 class UserService {
-  async registration(email, password, first_name, last_name, patronymic, telephone, photo, sex) {
+  async registration(email, password, firstName, lastName, patronymic, telephone, photo, sex) {
     const candidate = await User.findOne({
       where: {
         email,
@@ -19,7 +19,7 @@ class UserService {
     const hashPassword = await bcrypt.hash(password, 10);
     const activationLink = uuid.v4();
     const user = await User.create({
-      email, password: hashPassword, first_name, last_name, patronymic, telephone, photo, sex, activation_link: activationLink,
+      email, password: hashPassword, first_name: firstName, last_name: lastName, patronymic, telephone, photo, sex, activation_link: activationLink,
     });
     await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`);
     const isDoctor = false;
@@ -51,7 +51,8 @@ class UserService {
     if (!isPassChech) {
       throw ApiError.BadRequest('Вы ввели неправильный пароль');
     }
-    const userDto = new UserDto(user);
+    const isDoctor = false;
+    const userDto = new UserDto(user, isDoctor);
     const tokens = tokenService.generateTokens({ ...userDto });
     await tokenService.saveToken(userDto.id, tokens.refreshToken);
     return { ...tokens, user: userDto };
