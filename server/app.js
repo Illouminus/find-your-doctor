@@ -21,6 +21,7 @@ app.use(cors(corsOptions));
 
 // тут импорты всех роутов, если нужно
 // const regRouter = require('./routes/regRouter');
+const doctorRouter = require('./src/routers/doctorRouter');
 
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, '../public/')));
@@ -44,6 +45,7 @@ app.use(session(sessionConfig));
 
 // ссылки на роуты
 // app.use('/register', regRouter);
+app.use('/', doctorRouter);
 
 app.listen(PORT ?? 3100, () => {
   console.log('Сервер запущен!');
