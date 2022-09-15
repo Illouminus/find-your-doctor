@@ -1,6 +1,5 @@
-import {UserAction, UserActionType} from '../types/user'
+import { UserActionType} from '../types/user'
 import {Dispatch} from "redux"
-import axios from "axios";
 import AuthService from '../../services/AuthSerice';
 import { IAllFields } from '../../components/Register/types';
 
@@ -59,7 +58,7 @@ export const loginUser = (email:string, password:string) =>  async (dispatch: Di
 
       export const logoutUser = () =>  async (dispatch: Dispatch) => {
         try {
-            const response = await AuthService.logout();
+            await AuthService.logout();
             localStorage.removeItem('token')
             dispatch({type: UserActionType.LOGOUT})
         } catch (e) {
