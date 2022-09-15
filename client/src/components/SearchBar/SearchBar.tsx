@@ -5,8 +5,7 @@ import VaccinesIcon from '@mui/icons-material/Vaccines';
 import PlaceIcon from '@mui/icons-material/Place';
 import {useActions} from "../../hooks/useActions";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
-
-
+import {debounce} from 'lodash'
 function SearchBar() {
     const [inputs, setInputs] = useState({inputSpecialist:'', inputPlace:''})
 
@@ -14,17 +13,11 @@ function SearchBar() {
     const {fetchDoctors} = useActions()
 
 
-    // if (loading) {
-    //     return <h1>Идет загрузка...</h1>
-    // }
-    // if (error) {
-    //     return <h1>{error}</h1>
-    // }
-
     const inputsHandler = (e:any) => {
         setInputs((prev) => ({...prev, [e.target.name] : e.target.value}));
         fetchDoctors(inputs.inputSpecialist, inputs.inputPlace)
     }
+    const debouncedOnChange = debounce(inputsHandler, 2000)
 
 
     return (
@@ -32,7 +25,7 @@ function SearchBar() {
                 <Box sx={{ display: 'flex', flexWrap: 'nowrap', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
 
                     <TextField
-                            onChange = {inputsHandler}
+                            onChange = {debouncedOnChange}
                             name = 'inputSpecialist'
                             label="Специолист, жалобы"
                             id="Специолист, жалобы"
@@ -42,7 +35,7 @@ function SearchBar() {
                             }}
                         />
                     <TextField
-                        onChange={inputsHandler}
+                        onChange={debouncedOnChange}
                         name = 'inputPlace'
 
                         label="Страна, город"
