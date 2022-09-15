@@ -1,6 +1,6 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import { Navigation } from '../index'
+import { Navigation, Nav } from '../index'
 import './Layout.css'
 
 
@@ -12,7 +12,8 @@ function Layout() {
 
             <div>
                 <div>
-                    <Navigation  />
+                    {/* <Navigation  /> */}
+                    <Nav />
                 </div>
                 <div className="Outlet">
 
