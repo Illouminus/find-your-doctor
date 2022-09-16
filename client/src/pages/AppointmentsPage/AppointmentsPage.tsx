@@ -9,10 +9,11 @@ export const AppointmentsPage: React.FC = () => {
   useEffect(() => {
     axios.get(`http://localhost:4000/doctor/${1}`).then((resFromServer) => {
       const data = resFromServer.data;
-      console.log(data);
+      console.log('data', data);
       // setDocState(data);
     });
   }, []);
+
   return (
     <div className={styles.content_container}>
       <AllAppointments />
