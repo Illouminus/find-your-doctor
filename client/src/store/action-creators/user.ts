@@ -66,3 +66,14 @@ export const loginUser = (email:string, password:string) =>  async (dispatch: Di
           
         }
       }
+
+      export const logoutDoc = () =>  async (dispatch: Dispatch) => {
+        try {
+            await AuthService.logoutDoc();
+            localStorage.removeItem('token')
+            dispatch({type: UserActionType.LOGOUT})
+        } catch (e) {
+          console.log(e);
+          
+        }
+      }

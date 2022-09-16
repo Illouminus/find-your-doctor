@@ -2,7 +2,7 @@ import api from "../http";
 import { AxiosResponse } from "axios";
 import { AuthResponse } from "../models/response/AuthResponse";
 import { IAllFields } from '../components/Register/types';
-
+// import { useTypedSelector } from '../hooks/useTypedSelector';
 export default class AuthService {
 
   static async login(email: string, password: string): Promise<AxiosResponse<AuthResponse>> {

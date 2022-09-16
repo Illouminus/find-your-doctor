@@ -14,10 +14,23 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import {NavLink} from 'react-router-dom'
 import styles from './styles.module.css'
-const pages = [<NavLink to="registration" className={styles.links}>Регистрация</NavLink>, <NavLink to="login" className={styles.links}>Логин</NavLink>];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+import { useActions } from '../../hooks/useActions'
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import ButtonMy from './Button'
 
-const ResponsiveAppBar = () => {
+
+
+
+export const ResponsiveAppBar = () => {
+
+ const{user} = useTypedSelector(state => state.user)
+//  const {isDoctor} : any = useTypedSelector(state => state?.user?.user?.user)
+ console.log(user);
+
+
+ 
+const pages = [<NavLink to="registration" className={styles.links}>Регистрация</NavLink>, <NavLink to="login" className={styles.links}>Логин</NavLink>];
+const settings = [<NavLink to="/lk">Личный кабинет</NavLink>,<NavLink to="/lk/documents">Мои документы</NavLink>, <NavLink to="/lk/appointments">Мои записи</NavLink>];
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -35,6 +48,7 @@ const ResponsiveAppBar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const {logoutUser, logoutDoc} = useActions()
 
   return (
     <AppBar position="static">
@@ -56,7 +70,7 @@ const ResponsiveAppBar = () => {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            <NavLink to="/main" className={styles.links}>LOGO</NavLink>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -148,11 +162,15 @@ const ResponsiveAppBar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+              
+                <MenuItem  onClick={handleCloseUserMenu}>
+                <div className={styles.lk}>
+                  <Typography textAlign="center"><p className={styles.p}>{settings[0]}</p></Typography>
+                  <Typography textAlign="center">{settings[1]}</Typography>
+                  <Typography textAlign="center">{settings[2]}</Typography>
+                  <Typography textAlign="center"><ButtonMy/></Typography>
+                  </div>
                 </MenuItem>
-              ))}
             </Menu>
           </Box>
         </Toolbar>
@@ -160,4 +178,4 @@ const ResponsiveAppBar = () => {
     </AppBar>
   );
 };
-export default ResponsiveAppBar;
+
