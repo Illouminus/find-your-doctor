@@ -31,6 +31,7 @@ app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, '../public/')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cookieParser());
 
 // КОНФИГ ДЛЯ КУКИ
 // const sessionConfig = {

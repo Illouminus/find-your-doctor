@@ -1,4 +1,11 @@
 .links {
   text-decoration: none;
-  
+}
+
+.lk {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: black;
 }

@@ -1,8 +1,8 @@
 export interface IUser {
-  email: string;
-  id: number;
-  isActivated: boolean;
-  first_name: string;
-  last_name: string;
-  isDoctor: boolean;
+      email: string | null;
+      id: number | null;
+      isActivated: boolean | null;
+      first_name: string | null;
+      last_name: string | null;
+      isDoctor: boolean | null;
 }
