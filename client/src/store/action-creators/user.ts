@@ -78,9 +78,20 @@ export const loginUser = (email:string, password:string) =>  async (dispatch: Di
         }
       }
 
-      export const checkAuth = () =>  async (dispatch: Dispatch) => {
+      export const checkAuthUser = () =>  async (dispatch: Dispatch) => {
         try {
             const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, {withCredentials: true}  )
+            console.log(response);
+            localStorage.setItem('token', response.data.accesToken)
+            dispatch({type: UserActionType.LOGIN_SUCCESS, payload: response.data})
+        } catch (e) {
+          console.log(e);
+        }
+      }
+
+      export const checkAuthDoc = () =>  async (dispatch: Dispatch) => {
+        try {
+            const response = await axios.get<AuthResponse>(`${API_URL}/doc/refresh`, {withCredentials: true}  )
             console.log(response);
             localStorage.setItem('token', response.data.accesToken)
             dispatch({type: UserActionType.LOGIN_SUCCESS, payload: response.data})

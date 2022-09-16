@@ -5,17 +5,21 @@ import {Route, Routes, BrowserRouter} from 'react-router-dom'
 import {RegistrationPage, MainPage, LoginPage, DoctorPage, AppointmentsPage} from './pages'
 import {Layout} from './components'
 import { useActions } from './hooks/useActions'
+import { useTypedSelector } from './hooks/useTypedSelector';
+import { IUser } from './models/iUser'
 
 function App() {
-  const {checkAuth} = useActions()
+  const user : IUser = useTypedSelector(state => state.user.user)
+  const {checkAuthUser, checkAuthDoc} = useActions()
   useEffect(() => {
-    if(localStorage.getItem('token')) {
-      checkAuth()
+    if(localStorage.getItem('token') && !user.isDoctor) {
+      checkAuthUser()
+    } else if(localStorage.getItem('token') && user.isDoctor){
+      checkAuthDoc()
     }
   }, [])
   return (
     <>
-    <h1>Привет</h1>
         <BrowserRouter>
             <Provider store={store}>
       <Routes>
