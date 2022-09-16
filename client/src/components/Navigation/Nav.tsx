@@ -14,7 +14,6 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import {NavLink} from 'react-router-dom'
 import styles from './styles.module.css'
-import { useActions } from '../../hooks/useActions'
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import ButtonMy from './Button'
 
@@ -23,9 +22,8 @@ import ButtonMy from './Button'
 
 export const ResponsiveAppBar = () => {
 
- const{user} = useTypedSelector(state => state.user)
-//  const {isDoctor} : any = useTypedSelector(state => state?.user?.user?.user)
- console.log(user);
+ const{user} = useTypedSelector(state => state)
+ console.log(user.isAuth);
 
 
  
@@ -48,7 +46,7 @@ const settings = [<NavLink to="/lk">Личный кабинет</NavLink>,<NavLi
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  const {logoutUser, logoutDoc} = useActions()
+
 
   return (
     <AppBar position="static">

@@ -25,6 +25,7 @@ class DocService {
       const isDoctor = true;
       const userDto = new UserDto(user, isDoctor); // id, email, isActivated
       const tokens = tokenService.generateTokens({ ...userDto });
+      console.log(tokens);
       await tokenService.saveTokenDoc(userDto.id, tokens.refreshToken);
       return { ...tokens, user: userDto };
     } catch (error) {
