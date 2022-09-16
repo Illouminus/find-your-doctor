@@ -9,9 +9,7 @@ class DocController {
       if (!errors.isEmpty()) {
         return next(ApiError.BadRequest('Ошибка при валидации', errors.array()));
       }
-      console.log(req.body);
       const sex = req.body.sex.value;
-      console.log(sex);
       const {
         email, password, firstName, lastName, patronymic, telephone, experience, education, speciality, photo, adress,
       } = req.body;

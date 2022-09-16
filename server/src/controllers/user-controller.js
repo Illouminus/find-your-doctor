@@ -13,7 +13,7 @@ class UserController {
       const {
         email, password, firstName, lastName, patronymic, telephone, photo,
       } = req.body;
-      console.log(email, password);
+
       const userData = await userService.registration(email, password, firstName, lastName, patronymic, telephone, photo, sex);
       res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 1000, httpOnly: true });
       return res.json(userData);
