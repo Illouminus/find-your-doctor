@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import {Provider} from 'react-redux'
 import {store} from './store'
 import {Route, Routes, BrowserRouter} from 'react-router-dom'
-import {RegistrationPage, MainPage, LoginPage, DoctorPage} from './pages'
+import {RegistrationPage, MainPage, LoginPage, DoctorPage, AppointmentsPage} from './pages'
 import {Layout} from './components'
 import { useActions } from './hooks/useActions'
 
@@ -23,7 +23,8 @@ function App() {
           <Route path="/main" element={ <MainPage /> } />
           <Route path="/registration" element={ <RegistrationPage /> } />
           <Route path="/login" element={ <LoginPage /> } />
-          <Route path="/doctor/:id" element={ <DoctorPage /> }/>
+          <Route path="/doctor/:id" element={<DoctorPage />} />
+          <Route path="/appointments" element={ <AppointmentsPage /> } />
           </Route>
       </Routes>
             </Provider>
