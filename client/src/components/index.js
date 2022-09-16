@@ -8,5 +8,5 @@ import SearchedDoctorCard from "./SearchedDoctorCard/SearchedDoctorCard";
 import DocInfo from "./DocInfo/DocInfo";
 
 
-export { Layout, Navigation, ResponsiveAppBar, SearchBar, TagsCard, SearchedDoctorCard, DocInfo,  LoginForm };
+export { Layout, Navigation, ResponsiveAppBar, SearchBar, TagsCard, SearchedDoctorCard, DocInfo, LoginForm };
 
