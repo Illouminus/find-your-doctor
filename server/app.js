@@ -54,7 +54,6 @@ app.use('/api', userRouter);
 app.use('/api/doc', docRouter);
 app.use('/', doctorRouter);
 app.use('/', searchRouter);
-// app.use('/', userRouter);
 
 app.listen(PORT ?? 4000, () => {
   console.log('Сервер запущен!');

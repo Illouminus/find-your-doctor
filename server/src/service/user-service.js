@@ -88,15 +88,6 @@ class UserService {
     }
   }
 
-  async getUserLk() {
-    try {
-      const user = await User.findOne({ where: { id } });
-      console.log('user', user);
-      return user;
-    } catch (error) {
-      console.log(error);
-    }
-  }
 }
 
 module.exports = new UserService();
