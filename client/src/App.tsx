@@ -2,11 +2,13 @@ import React, { useEffect } from 'react'
 import {Provider} from 'react-redux'
 import {store} from './store'
 import {Route, Routes, BrowserRouter} from 'react-router-dom'
-import {RegistrationPage, MainPage, LoginPage, DoctorPage} from './pages'
+import {RegistrationPage, MainPage, LoginPage, DoctorPage, Documents} from './pages'
 import {Layout} from './components'
 import { useActions } from './hooks/useActions'
 import { useTypedSelector } from './hooks/useTypedSelector';
 import { IUser } from './models/iUser'
+
+
 
 function App() {
   const user : IUser = useTypedSelector(state => state.user.user)
@@ -28,6 +30,7 @@ function App() {
           <Route path="/registration" element={ <RegistrationPage /> } />
           <Route path="/login" element={ <LoginPage /> } />
           <Route path="/doctor/:id" element={ <DoctorPage /> }/>
+          <Route path="/documents" element={ <Documents />} />
           </Route>
       </Routes>
             </Provider>

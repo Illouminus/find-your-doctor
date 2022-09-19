@@ -23,11 +23,11 @@ import ButtonMy from './Button'
 export const ResponsiveAppBar = () => {
 
  const{user} = useTypedSelector(state => state)
- console.log(user.isAuth);
+ console.log(user);
 
 
 const pages = [<NavLink to="registration" className={styles.links}>Регистрация</NavLink>, <NavLink to="login" className={styles.links}>Логин</NavLink>];
-const settings = [<NavLink to="/lk">Личный кабинет</NavLink>,<NavLink to="/lk/documents">Мои документы</NavLink>, <NavLink to="/lk/appointments">Мои записи</NavLink>];
+const settings = [<NavLink to="/lk">Личный кабинет</NavLink>,<NavLink to="/documents">Мои документы</NavLink>, <NavLink to="/lk/appointments">Мои записи</NavLink>];
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -137,7 +137,7 @@ const settings = [<NavLink to="/lk">Личный кабинет</NavLink>,<NavLi
            } 
            
           </Box>
-
+          {user.isAuth && 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -160,17 +160,17 @@ const settings = [<NavLink to="/lk">Личный кабинет</NavLink>,<NavLi
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              
-                <MenuItem  onClick={handleCloseUserMenu}>
-                <div className={styles.lk}>
-                  <Typography textAlign="center"><p className={styles.p}>{settings[0]}</p></Typography>
-                  <Typography textAlign="center">{settings[1]}</Typography>
-                  <Typography textAlign="center">{settings[2]}</Typography>
-                  <Typography textAlign="center"><ButtonMy/></Typography>
-                  </div>
-                </MenuItem>
+              <MenuItem  onClick={handleCloseUserMenu}>
+              <div className={styles.lk}>
+                <Typography textAlign="center"><p className={styles.p}>{settings[0]}</p></Typography>
+                <Typography textAlign="center">{settings[1]}</Typography>
+                <Typography textAlign="center">{settings[2]}</Typography>
+                <Typography textAlign="center"><ButtonMy/></Typography>
+                </div>
+              </MenuItem>
             </Menu>
           </Box>
+            }
         </Toolbar>
       </Container>
     </AppBar>
