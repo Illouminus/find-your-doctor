@@ -1,5 +1,6 @@
 import { Avatar, Box, Button, Card, Typography } from "@mui/material";
 import * as React from "react";
+import { RatingDoc } from "../../components";
 import { DocState } from "./DoctorPage";
 
 export default function DoctorPage1({ el }: { el: DocState }) {
@@ -33,6 +34,7 @@ export default function DoctorPage1({ el }: { el: DocState }) {
         <Button variant="contained" color="success">
           Добавить в Мои врачи
         </Button>
+        <RatingDoc />
       </Box>
     </Card>
   );
