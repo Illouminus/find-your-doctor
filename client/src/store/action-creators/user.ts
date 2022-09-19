@@ -2,9 +2,7 @@ import { UserActionType} from '../types/user'
 import {Dispatch} from "redux"
 import AuthService from '../../services/AuthSerice';
 import { IAllFields } from '../../components/Register/types';
-import axios from 'axios';
-import { AuthResponse } from '../../models/response/AuthResponse';
-import { API_URL } from '../../http';
+
 
 
 export const loginUser = (email:string, password:string) =>  async (dispatch: Dispatch) => {
@@ -48,6 +46,8 @@ export const loginUser = (email:string, password:string) =>  async (dispatch: Di
       
       try {
           const response = await AuthService.registerDoc(object);
+          console.log(response);
+          
           localStorage.setItem('token', response.data.accesToken)
           dispatch({type: UserActionType.LOGIN_SUCCESS, payload: response.data})
       } catch (e) {
@@ -75,27 +75,5 @@ export const loginUser = (email:string, password:string) =>  async (dispatch: Di
         } catch (e) {
           console.log(e);
           
-        }
-      }
-
-      export const checkAuthUser = () =>  async (dispatch: Dispatch) => {
-        try {
-            const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, {withCredentials: true}  )
-            console.log(response);
-            localStorage.setItem('token', response.data.accesToken)
-            dispatch({type: UserActionType.LOGIN_SUCCESS, payload: response.data})
-        } catch (e) {
-          console.log(e);
-        }
-      }
-
-      export const checkAuthDoc = () =>  async (dispatch: Dispatch) => {
-        try {
-            const response = await axios.get<AuthResponse>(`${API_URL}/doc/refresh`, {withCredentials: true}  )
-            console.log(response);
-            localStorage.setItem('token', response.data.accesToken)
-            dispatch({type: UserActionType.LOGIN_SUCCESS, payload: response.data})
-        } catch (e) {
-          console.log(e);
         }
       }

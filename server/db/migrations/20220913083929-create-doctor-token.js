@@ -15,7 +15,7 @@ module.exports = {
         },
       },
       refresh_token: {
-        type: Sequelize.TEXT,
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,

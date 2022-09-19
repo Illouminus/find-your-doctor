@@ -6,8 +6,7 @@ import SearchBar from "./SearchBar/SearchBar";
 import TagsCard from "./TagsCard/TagsCard";
 import SearchedDoctorCard from "./SearchedDoctorCard/SearchedDoctorCard";
 import DocInfo from "./DocInfo/DocInfo";
-import Upload from "./UploadDocuments/Upload";
-import Map from "./Map/Map"
-import RatingDoc from "./Stars/Stars"
-export { Layout, Navigation, ResponsiveAppBar, SearchBar, TagsCard, SearchedDoctorCard, DocInfo,  LoginForm, Upload, Map, RatingDoc };
+
+
+export { Layout, Navigation, ResponsiveAppBar, SearchBar, TagsCard, SearchedDoctorCard, DocInfo,  LoginForm };
 
