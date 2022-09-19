@@ -2,8 +2,9 @@ import {LoginPage} from "./LoginPage/LoginPage";
 import {RegistrationPage} from "./RegistrationPage/RegistrationPage";
 import MainPage from "./MainPage/MainPage";
 import DoctorPage from "./DoctorPage/DoctorPage";
+import UserLkPage from "./UserLkPage/UserLkPage";
 
 
 
 
-export { LoginPage, MainPage, RegistrationPage, DoctorPage};
+export { LoginPage, MainPage, RegistrationPage, DoctorPage, UserLkPage};

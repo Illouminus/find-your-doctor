@@ -75,6 +75,19 @@ class UserController {
       next(error);
     }
   }
+
+  async getUserLk(req, res) {
+    try {
+      // const data = req.body;
+      const { id } = req.params;
+      console.log("id", id);
+      const data = await userService.getUserLk();
+      console.log('data', data);
+      res.json(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 module.exports = new UserController();
