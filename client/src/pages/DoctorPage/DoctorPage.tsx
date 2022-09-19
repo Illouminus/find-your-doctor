@@ -35,6 +35,7 @@ function DoctorPage() {
   return (
     <div className={styles.conteiner}>
       <div className={styles.content}>
+        
         {docState?.map((el) => (
           <div key={el.id} className={styles.mainInfo}>
             <DoctorPage1 el={el} />

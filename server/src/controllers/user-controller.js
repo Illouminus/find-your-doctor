@@ -4,7 +4,7 @@
 const { validationResult } = require('express-validator');
 const ApiError = require('../exceptions/api-error');
 const userService = require('../service/user-service');
-const { Appointment, Doctor, Timetable } = require('../../db/models');
+const { Appointment, User, Doctor, Timetable } = require('../../db/models');
 
 class UserController {
   async registration(req, res, next) {
@@ -80,6 +80,7 @@ class UserController {
     }
   }
 
+
   async getAppointments(req, res, next) {
     try {
       const { id } = req.params;
@@ -106,6 +107,19 @@ class UserController {
       res.json(result);
     } catch (error) {
       next(error);
+    }
+  }
+
+  async getUserLk(req, res) {
+    try {
+      // const data = req.body;
+      const { id } = req.params;
+      console.log("id", id);
+      const user = await User.findOne({ where: { id } });
+      console.log('user', user);
+      res.json(user);
+    } catch (error) {
+      console.log(error);
     }
   }
 
