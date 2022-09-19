@@ -6,6 +6,8 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 
 const ButtonMy = () => {
   const user : IUser = useTypedSelector(state => state.user.user)
+  console.log('===========>', user.isDoctor);
+  
   const {logoutUser, logoutDoc} = useActions()
   return (
      <button>{user.isDoctor ? (<button onClick={() => logoutDoc()}>Выход</button>) : (<button onClick={() => logoutUser()}>Выход</button>)}</button>

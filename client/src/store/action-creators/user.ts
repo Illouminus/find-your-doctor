@@ -24,6 +24,7 @@ export const loginUser = (email:string, password:string) =>  async (dispatch: Di
           const response = await AuthService.loginDoc(email, password);
           console.log(response);
           localStorage.setItem('token', response.data.accesToken)
+          localStorage.setItem('isDoctor', 'true')
           dispatch({type: UserActionType.LOGIN_SUCCESS, payload: response.data})
       } catch (e) {
         console.log(e);     
@@ -49,6 +50,7 @@ export const loginUser = (email:string, password:string) =>  async (dispatch: Di
       try {
           const response = await AuthService.registerDoc(object);
           localStorage.setItem('token', response.data.accesToken)
+          localStorage.setItem('isDoctor', 'true')
           dispatch({type: UserActionType.LOGIN_SUCCESS, payload: response.data})
       } catch (e) {
         console.log(e);
@@ -69,8 +71,9 @@ export const loginUser = (email:string, password:string) =>  async (dispatch: Di
 
       export const logoutDoc = () =>  async (dispatch: Dispatch) => {
         try {
+          
             await AuthService.logoutDoc();
-            localStorage.removeItem('token')
+            localStorage.clear()
             dispatch({type: UserActionType.LOGOUT})
         } catch (e) {
           console.log(e);

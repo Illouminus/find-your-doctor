@@ -73,7 +73,8 @@ class UserService {
       throw ApiError.UnathorizedError();
     }
     const user = await User.findByPk(userData.id);
-    const userDto = new UserDto(user);
+    const isDoctor = false;
+    const userDto = new UserDto(user, isDoctor);
     const tokens = tokenService.generateTokens({ ...userDto });
     await tokenService.saveToken(userDto.id, tokens.refreshToken);
     return { ...tokens, user: userDto };

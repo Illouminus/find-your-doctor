@@ -13,10 +13,12 @@ import { IUser } from './models/iUser'
 function App() {
   const user : IUser = useTypedSelector(state => state.user.user)
   const {checkAuthUser, checkAuthDoc} = useActions()
+  console.log(user.isDoctor)
+
   useEffect(() => {
-    if(localStorage.getItem('token') && !user.isDoctor) {
-      checkAuthUser()
-    } else if(localStorage.getItem('token') && user.isDoctor){
+    if(localStorage.getItem('token') && !localStorage.getItem('isDoctor')) {
+     checkAuthUser()
+    } else if (localStorage.getItem('token') && localStorage.getItem('isDoctor')){
       checkAuthDoc()
     }
   }, [])
