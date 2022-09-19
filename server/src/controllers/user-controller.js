@@ -1,7 +1,10 @@
+/* eslint-disable max-len */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-await-in-loop */
 const { validationResult } = require('express-validator');
 const ApiError = require('../exceptions/api-error');
 const userService = require('../service/user-service');
-const { Appointment } = require('../../db/models');
+const { Appointment, Doctor, Timetable } = require('../../db/models');
 
 class UserController {
   async registration(req, res, next) {
@@ -80,13 +83,71 @@ class UserController {
   async getAppointments(req, res, next) {
     try {
       const { id } = req.params;
-      const response = await Appointment.findAll({ where: { id } });
-      console.log(response);
-      res.json(response);
+      const response = await Appointment.findAll({ where: { user_id: id }, include: { model: Doctor }, order: [['date_time']] });
+      const result = response.map((el) => ({
+        id: el.id,
+        comments_patient: el.comments_patient,
+        comments_doctor: el.comments_doctor,
+        date_time: el.date_time,
+        first_time: el.first_time,
+        doctor: {
+          id: el.Doctor.id,
+          first_name: el.Doctor.first_name,
+          last_name: el.Doctor.last_name,
+          patronymic: el.Doctor.patronymic,
+          experience: el.Doctor.experience,
+          education: el.Doctor.education,
+          speciality: el.Doctor.speciality,
+          sex: el.Doctor.sex,
+          adress: el.Doctor.adress,
+        },
+      }));
+      // console.log(result);
+      res.json(result);
     } catch (error) {
       next(error);
     }
   }
+
+  // async calendar(req, res, next) {
+  //   const { id } = req.params;
+  //   const dayNum = new Date().getDay();
+  //   // console.log(dayNum);
+  //   const timetable = await Timetable.findAll({ where: { doctor_id: id } });
+  //   // console.log(+new Date(timetable[0].date), (Date.now()));
+  //   const delRows = timetable.filter((el) => +new Date(el.date) < (Date.now() - 86400000));
+  //   console.log(delRows);
+  //   for (let i = 0; i < delRows.length; i++) {
+  //     await Timetable.destroy({ where: { id: delRows[i].id } });
+  //   }
+
+  //   const date = new Date();
+  //   // console.log(new Date(date.setDate(date.getDate() + 1)).getDay());
+  //   if (!timetable.length) {
+  //     if (dayNum) {
+  //       await Timetable.create({ doctor_id: id, date: new Date() });
+  //     }
+  //     for (let i = 0; i < (24 - dayNum); i++) {
+  //       let dayCheck = new Date(date.setDate(date.getDate())).getDay();
+  //       if (!dayCheck) {
+  //         dayCheck = new Date(date.setDate(date.getDate() + 1)).getDay();
+  //       }
+  //       if (dayCheck) {
+  //         // console.log('daycheck', dayCheck);
+  //         // console.log(new Date(date.setDate(date.getDate() + 1)).getDay());
+  //         // console.log(new Date(date.setDate(date.getDate())));
+  //         await Timetable.create({ doctor_id: id, date: new Date(date.setDate(date.getDate() + 1)) });
+  //       }
+  //     }
+  //   } else {
+
+  //   }
+  //   try {
+  //     console.log('date ==========', new Date());
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 }
 
 module.exports = new UserController();

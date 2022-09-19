@@ -15,5 +15,6 @@ router.post('/logout', DocController.logout);
 router.get('/activate/:link', DocController.activate);
 router.get('/refresh', DocController.refresh);
 router.get('/users', authMiddleware, DocController.getUsers);
+router.get('/appointments/:id', DocController.getAppointments);
 
 module.exports = router;

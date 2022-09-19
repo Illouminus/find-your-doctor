@@ -33,6 +33,9 @@ module.exports = {
       comments_doctor: {
         type: Sequelize.TEXT,
       },
+      status: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
