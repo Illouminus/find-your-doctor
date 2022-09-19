@@ -2,7 +2,9 @@ import React, { useEffect } from 'react'
 import {Provider} from 'react-redux'
 import {store} from './store'
 import {Route, Routes, BrowserRouter} from 'react-router-dom'
-import {RegistrationPage, MainPage, LoginPage, DoctorPage, Documents} from './pages'
+
+import {RegistrationPage, MainPage, LoginPage, DoctorPage, UserLkPage, Documents} from './pages'
+
 import {Layout} from './components'
 import { useActions } from './hooks/useActions'
 import { useTypedSelector } from './hooks/useTypedSelector';
@@ -31,6 +33,7 @@ function App() {
           <Route path="/login" element={ <LoginPage /> } />
           <Route path="/doctor/:id" element={ <DoctorPage /> }/>
           <Route path="/documents" element={ <Documents />} />
+          <Route path="/user/:id" element={ <UserLkPage /> } />
           </Route>
       </Routes>
             </Provider>

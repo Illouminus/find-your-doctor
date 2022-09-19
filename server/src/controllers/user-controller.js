@@ -77,6 +77,7 @@ class UserController {
     }
   }
 
+
   async getAppointments(req, res, next) {
     try {
       const { id } = req.params;
@@ -85,6 +86,17 @@ class UserController {
       res.json(response);
     } catch (error) {
       next(error);
+
+  async getUserLk(req, res) {
+    try {
+      // const data = req.body;
+      const { id } = req.params;
+      console.log("id", id);
+      const data = await userService.getUserLk();
+      console.log('data', data);
+      res.json(data);
+    } catch (error) {
+      console.log(error);
     }
   }
 }
