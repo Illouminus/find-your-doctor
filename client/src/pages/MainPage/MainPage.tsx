@@ -16,10 +16,10 @@ function MainPage() {
         <>
             <Stack sx={{ display: 'flex',
                 alignElements: 'flex-start',
-                alignItems: 'flex-start',
+                alignItems: 'center',
                 p: 1,
                 m: 1,
-                ml: '50vh',
+
                 // height: 100,
                 borderRadius: 1,}}>
                 <SearchBar/>

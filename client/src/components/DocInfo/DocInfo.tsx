@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import {deepOrange, deepPurple, indigo, blue, teal, green, lime, orange, yellow, blueGrey} from '@mui/material/colors';
 import {NavLink} from 'react-router-dom'
 import {TagsCard} from "../index";
+import s from './docinfo.module.css'
 function pickRandomColor (){
     const colors:any[]=[deepOrange, deepPurple, indigo, blue, teal, green, lime, orange, yellow, blueGrey]
     return colors[Math.floor((Math.random()*colors.length))]
@@ -32,8 +33,8 @@ export default function DocInfo(props:any) {
                         <Box sx = {{display:'flex'}}>
                             <Avatar sx={{ bgcolor: pickRandomColor()[500] }}>{first_name[0]}{last_name[0]} </Avatar>
                             <br/>
-                            <Typography variant="h5" component="div">
-                            <NavLink to={`/doctor/${id}`}>{first_name} {last_name} </NavLink>
+                            <Typography variant="h5" component="div" className={s.docNameDiv}>
+                            <NavLink to={`/doctor/${id}`} className={s.docName}>{first_name} {last_name} </NavLink>
                             </Typography>
                         </Box>
                         <br/>

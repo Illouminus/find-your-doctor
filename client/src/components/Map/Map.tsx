@@ -1,13 +1,14 @@
-import React, {useState, useCallback, useRef} from 'react'
+import React, {useState, useCallback, useRef, useEffect} from 'react'
 import styles from './styles.module.css'
-import { GoogleMap, Marker} from '@react-google-maps/api';
+import { GoogleMap, Marker, InfoWindow} from '@react-google-maps/api';
 import {defaultTheme} from './Theme'
 import { CurrentLocation } from '../CurrentLocationMarker/CurrentLocation';
 import { MarkerDoc } from '../Marker/Marker';
 
 const containerStyle = {
   width: '400px',
-  height: '800px'
+  height: '700px',
+
 };
 
 const defaultOptions = {
@@ -30,22 +31,22 @@ export const MODES = {
   SET_MARKER: 1
 }
 
-const Map = ({center, mode, markers, onMarkerAdd}: any ) => {
+const Map = ({ center, mode, markers, onMarkerAdd, }: any ) => {
 
+  console.log(markers);
+  
   const mapRef = useRef(undefined)
-
-
   const onLoad = React.useCallback(function callback(map: any) {
     mapRef.current = map;
   }, [])
-
   const onUnmount = React.useCallback(function callback(map : any) {
     mapRef.current = undefined;
   }, [])
 
   const changeMode = useCallback((loc: any) => {
+    // handlerMode()
     if(mode === MODES.SET_MARKER) {
-      console.log(loc)
+      console.log('ПРИХОДЯЩИЕ КООРДИНАТЫ', loc)
       const lat = Number(loc.latLng.lat())
       const lng = Number(loc.latLng.lng())
       console.log(lat,lng)
@@ -67,7 +68,8 @@ const Map = ({center, mode, markers, onMarkerAdd}: any ) => {
         <CurrentLocation  position={center}/>
         { /* Child components, such as markers, info windows, etc. */ }
         {markers.map((pos: any) => {
-          return <MarkerDoc  position={pos}/>
+          return <MarkerDoc description={pos.description} position={pos}>
+          </MarkerDoc>
         })}
         <></>
       </GoogleMap>

@@ -5,7 +5,7 @@ import {DocInfo, DocCalendar, ParentMap} from '../'
 import IconButton, {IconButtonProps} from "@mui/material/IconButton";
 import {styled} from "@mui/material/styles";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-
+import s from './doctorcard.module.css'
 
 const bull = (
     <Box
@@ -20,12 +20,11 @@ export default function SearchedDoctorCard(props:any) {
 
     return (
         <>
-            <Box sx={{display: 'flex', minWidth: 250, maxWidth: 500}}>
+        <div className={s.containerCard}></div>
+            <Box sx={{display: 'flex', minWidth: 250, maxWidth: 700, }}>
                 <DocInfo props={props}/>
                 <DocCalendar props={props}/>
         </Box>
-        
-
             </>
     );
 }
