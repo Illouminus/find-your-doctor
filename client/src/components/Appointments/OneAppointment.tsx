@@ -1,25 +1,54 @@
-import React from 'react';
-import { OneAppStateType } from '../../components/Appointments/types'
+import React, { useState } from 'react';
+import axios from 'axios';
 import cn from 'classnames'
 import Button from '@mui/material/Button';
 import AccessTimeRoundedIcon from '@mui/icons-material/AccessTime';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import SaveAsIcon from '@mui/icons-material/SaveAs';
+import CloseIcon from '@mui/icons-material/Close';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { OneAppStateType } from '../../components/Appointments/types'
 import { IUser } from '../../models/iUser'
 
 import styles from './appoint.module.css'
 
 type appType = {
   oneApp: OneAppStateType
+  setOneApp: React.Dispatch<React.SetStateAction<OneAppStateType>>
 }
 
-export const OneAppointment: React.FC<appType> = ({ oneApp }) => {
+export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
   const user: IUser = useTypedSelector(state => state.user.user)
   const isDoctor = user.isDoctor
-  console.log('USER', user);
-  
-  console.log(oneApp.appointment);
+
+  const [input, setInput] = useState<boolean>(false);
+
+  console.log('appointment', oneApp.appointment);
+  console.log('oneApp', oneApp);
   const item = oneApp.appointment;
+
+  const appCancel = (id: number) => {
+    try {
+      axios.post(`http://localhost:4000/appointment/undo`, { id: item.id, doctor_id: item.doctor.id, date_time: item.date_time }).then((resFromServer) => {
+        const data = resFromServer.data;
+        console.log(data);
+        setOneApp((prev) => {
+          const obj = { ...prev }
+          obj.appointment.status = false
+          return obj;
+        })
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const updateComment = () => {
+    console.log('update comment');
+    
+  }
+
   return (
     <div className={styles.onecard_content_container}>
       <div className={styles.onecard_firstcard_container}>
@@ -76,7 +105,7 @@ export const OneAppointment: React.FC<appType> = ({ oneApp }) => {
           {item.status ? ((new Date(item.date_time) < new Date() ?
             ('') : (
               <>
-                <Button size="small">Отменить запись</Button>
+                <Button onClick={() => appCancel(item.id)} size="small">Отменить запись</Button>
                 <Button size="small">перенести запись</Button>
               </>
             ))
@@ -100,21 +129,39 @@ export const OneAppointment: React.FC<appType> = ({ oneApp }) => {
               <p>{`${item.doctor.adress}`}</p>
           </div>
           }
-          <div className={styles.comments_container}>
             {!isDoctor ? (
-              <>
+              <div className={styles.comments_container}>
                 <p>Ваш комментарий:</p>
-                <p>{`${item.comments_patient}`}</p>
-              </>
+                <div className={styles.comment_box}>
+                  <p>{item.comments_patient ? `${item.comments_patient}` : 'нет комментария'}</p>
+                  <button className={styles.pen_button}><BorderColorIcon fontSize='small' /></button>
+                </div>
+              </div>
             ) : (
               <>
-                  <p>Комментарий пациента:</p>
-                  <p>{`${item.comments_doctor}`}</p>
-                  <p>Ваш комментарий:</p>
-                  <p>{`${item.comments_doctor}`}</p>
+                <div className={styles.comments_container}>
+                    <p>Комментарий пациента:</p>
+                  <p>{item.comments_patient ? `${item.comments_patient}` : 'нет комментария'}</p>
+                </div>
+                <div className={styles.comments_container}>
+                      <p>Ваш комментарий:</p>
+                  <div className={styles.comment_box}>
+                    {input ? (
+                      <>
+                        <textarea className={styles.textarea} defaultValue={item.comments_doctor ? `${item.comments_doctor}` : ''}/>
+                        <button onClick={() => setInput((true))} className={styles.pen_button}><SaveAsIcon fontSize='small' /></button>
+                        <button onClick={() => setInput(false)} className={styles.close_button}><CloseIcon fontSize='small' /></button>
+                      </>
+                    ): (
+                      <>
+                        <p>{item.comments_doctor ? `${item.comments_doctor}` : 'нет комментария'}</p>
+                        <button onClick={() => setInput(true)} className={styles.pen_button}><BorderColorIcon fontSize='small' /></button>
+                      </>
+                    )}
+                  </div>
+                </div>
               </>
             )}
-          </div>
         </div>
       </div>
     </div>

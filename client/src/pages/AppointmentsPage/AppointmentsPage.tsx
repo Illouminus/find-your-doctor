@@ -28,7 +28,7 @@ export const AppointmentsPage: React.FC = () => {
       });
     }
     
-  }, []);
+  }, [user]);
 
   console.log('appointments', appointments);
   console.log('user', user);
@@ -36,7 +36,7 @@ export const AppointmentsPage: React.FC = () => {
   return (
     <div className={styles.content_container}>
       <AllAppointments appointments={appointments} setOneApp={setOneApp} />
-      {oneApp.isVisible && <OneAppointment oneApp={oneApp} />}
+      {oneApp.isVisible && <OneAppointment oneApp={oneApp} setOneApp={setOneApp} />}
       {/* <DocCalendar /> */}
     </div>
   )
