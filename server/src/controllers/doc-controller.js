@@ -11,6 +11,7 @@ class DocController {
       if (!errors.isEmpty()) {
         return next(ApiError.BadRequest('Ошибка при валидации', errors.array()));
       }
+
       const sex = req.body.sex.value;
       const {
         email, password, firstName, lastName, patronymic, telephone, experience, education, speciality, photo, adress,

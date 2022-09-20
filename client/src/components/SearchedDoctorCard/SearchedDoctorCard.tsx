@@ -1,6 +1,10 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import {DocInfo} from '../'
+import {DocInfo, DocCalendar} from '../'
+import IconButton, {IconButtonProps} from "@mui/material/IconButton";
+import {styled} from "@mui/material/styles";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
 
 const bull = (
     <Box
@@ -12,11 +16,15 @@ const bull = (
 );
 
 export default function SearchedDoctorCard(props:any) {
+
     return (
         <>
-            <div>
-        <DocInfo props={props}/>
-        </div>
+            <Box sx={{display: 'flex', minWidth: 250, maxWidth: 500}}>
+                <DocInfo props={props}/>
+                <DocCalendar props={props}/>
+
+        </Box>
+
             </>
     );
 }
