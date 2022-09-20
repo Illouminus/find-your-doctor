@@ -1,7 +1,12 @@
 import React from 'react'
-import { Stack, Skeleton, Avatar, Typography, Box} from '@mui/material'
+import { Stack, Skeleton, Avatar, Typography, Box, Card} from '@mui/material'
 import {SearchBar, TagsCard, SearchedDoctorCard} from '../../components'
 import {useTypedSelector} from "../../hooks/useTypedSelector";
+import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import { styled } from '@mui/material/styles';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+
 
 function MainPage() {
     const {doctors, error, loading} = useTypedSelector(state => state.doctor)
@@ -9,15 +14,16 @@ function MainPage() {
     return (
         <>
             <Stack sx={{ display: 'flex',
-                alignItems: 'center',
+                alignElements: 'flex-start',
+                alignItems: 'flex-start',
                 p: 1,
                 m: 1,
-                margin: '30vh',
-                height: 100,
+                ml: '50vh',
+                // height: 100,
                 borderRadius: 1,}}>
                 <SearchBar/>
                 <br/>
-                <TagsCard/>
+                {/*<TagsCard props={null}/>*/}
                 <br/>
                 {loading &&
                     <>
@@ -26,12 +32,12 @@ function MainPage() {
                             <Skeleton variant="circular">
                                 <Avatar />
                             </Skeleton>
-                            <Skeleton variant="rectangular" width="600px">
+                            <Skeleton variant="rounded"  width="600px">
 
                             </Skeleton>
 
                         </Box>
-                        <Skeleton variant="rectangular" width="600px" height='500px'>
+                        <Skeleton variant="rounded" width="600px" height='500px'>
 
                         </Skeleton>
                         </>
@@ -39,7 +45,10 @@ function MainPage() {
                 {doctors &&
                 <>
                     {doctors.map((el:object,index:number) =>
+                        <Box mt ={3}>
                         <SearchedDoctorCard el={el} key={index}/>
+
+                        </Box>
                     )}
                 </>
                 }

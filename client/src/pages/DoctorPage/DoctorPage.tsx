@@ -37,7 +37,7 @@ function DoctorPage() {
   }, []);
 
   return (
-    <div className={styles.conteiner}>
+    <div className={styles.container}>
       <div className={styles.content}>
         
         {docState?.map((el) => (
