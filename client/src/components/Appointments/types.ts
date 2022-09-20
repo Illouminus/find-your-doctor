@@ -1,5 +1,5 @@
 export type AppStateType = {
-  id: number | null
+  id: number
   comments_doctor: string | null
   comments_patient: string | null
   date_time: string

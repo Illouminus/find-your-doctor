@@ -152,6 +152,39 @@ export const DocSecondRegForm: React.FC<RegFormType> = ({harvester, setHarvester
               />
             )}
           />
+            </div>
+            <Controller
+              control={control}
+              name="education"
+              render={({ field }) => (
+                <TextField
+                  label="Образование"
+                  size="small"
+                  margin="normal"
+                  className={styles.regForm__inputSpeciality}
+                  fullWidth={true}
+                  onChange={(e) => field.onChange(e)}
+                  value={field.value || ''}
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="experience"
+              render={({ field }) => (
+                <TextField
+                  label="Опыт"
+                  size="small"
+                  margin="normal"
+                  className={styles.regForm__inputPatronymic}
+                  fullWidth={true}
+                  onChange={(e) => field.onChange(e)}
+                  value={field.value || ''}
+                // error={!!errors.patronymic?.message}
+                // helperText={errors.patronymic?.message}
+                />
+              )}
+            />
           <div className={styles.select_input_reg}>
             <Controller
               control={control}
@@ -160,7 +193,7 @@ export const DocSecondRegForm: React.FC<RegFormType> = ({harvester, setHarvester
               render={({ field: {onChange, value}, fieldState: {error} }) => (
                 <>
                   <ReactSelect
-                    // placeholder='пол'
+                    placeholder='Пол'
                     options={options}
                     defaultValue={{label: 'POL', value: 'none'}}
                     value={getValue(value)}
@@ -183,39 +216,6 @@ export const DocSecondRegForm: React.FC<RegFormType> = ({harvester, setHarvester
               )}
             />
           </div>
-        </div>
-        <Controller
-          control={control}
-          name="education"
-          render={({ field }) => (
-            <TextField
-              label="Образование"
-              size="small"
-              margin="normal"
-              className={styles.regForm__inputSpeciality}
-              fullWidth={true}
-              onChange={(e) => field.onChange(e)}
-              value={field.value || ''}
-            />
-          )}
-        />
-        <Controller
-          control={control}
-          name="experience"
-          render={({ field }) => (
-            <TextField
-              label="Опыт"
-              size="small"
-              margin="normal"
-              className={styles.regForm__inputPatronymic}
-              fullWidth={true}
-              onChange={(e) => field.onChange(e)}
-              value={field.value || ''}
-            // error={!!errors.patronymic?.message}
-            // helperText={errors.patronymic?.message}
-            />
-          )}
-        />
         <Button
           type="submit"
           variant="contained"

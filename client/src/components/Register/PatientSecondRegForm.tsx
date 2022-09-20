@@ -120,9 +120,9 @@ export const PatientSecondRegForm: React.FC<RegFormType> = ({harvester, setHarve
               render={({ field: { onChange, value }, fieldState: { error } }) => (
                 <>
                   <ReactSelect
-                    // placeholder='пол'
+                    placeholder='Пол'
                     options={options}
-                    defaultValue={{ label: 'POL', value: 'none' }}
+                    // defaultValue={{ label: 'POL', value: 'none' }}
                     value={getValue(value)}
                     onChange={(newValue: SingleValue<string | IOption>, actionMeta: ActionMeta<string | IOption>) => onChange(newValue)}
                   />
