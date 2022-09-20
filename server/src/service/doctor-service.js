@@ -57,7 +57,7 @@ class DocService {
     if (!isPassChech) {
       throw ApiError.BadRequest('Вы ввели неправильный пароль');
     }
-    const isDoctor = false;
+    const isDoctor = true;
     const userDto = new UserDto(user, isDoctor);
     const tokens = tokenService.generateTokens({ ...userDto });
     await tokenService.saveTokenDoc(userDto.id, tokens.refreshToken);

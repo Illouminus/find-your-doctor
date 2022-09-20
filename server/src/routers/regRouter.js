@@ -17,5 +17,6 @@ router.get('/refresh', UserController.refresh);
 router.get('/users', authMiddleware, UserController.getUsers);
 router.get('/appointments/:id', UserController.getAppointments);
 router.get('/user/:id', UserController.getUserLk);
+// router.get('/calendar/:id', UserController.calendar);
 
 module.exports = router;

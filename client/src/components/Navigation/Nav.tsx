@@ -27,7 +27,7 @@ export const ResponsiveAppBar = () => {
 
 
 const pages = [<NavLink to="registration" className={styles.links}>Регистрация</NavLink>, <NavLink to="login" className={styles.links}>Логин</NavLink>];
-const settings = [<NavLink to={`/user/${user.user.id}`}>Личный кабинет</NavLink>,<NavLink to="/documents">Мои документы</NavLink>, <NavLink to="/lk/appointments">Мои записи</NavLink>];
+const settings = [<NavLink to={`/user/${user.user.id}`}>Личный кабинет</NavLink>,<NavLink to="/documents">Мои документы</NavLink>, <NavLink to="/appointments">Мои записи</NavLink>];
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 

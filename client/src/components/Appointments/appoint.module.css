@@ -1,0 +1,175 @@
+.content_container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  font-family: 'Roboto';
+}
+
+.cards_box::-webkit-scrollbar {
+  display: none;
+}
+
+.cards_box {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  padding-top: 15px;
+  height: calc(100vh - 70px);
+  min-width: 320px;
+  overflow: scroll;
+  /* min-height: 100%; */
+}
+
+.card_box {
+  background-color: rgb(234, 234, 234);
+  min-width: 275px;
+  /* border: 1px solid rgba(151, 151, 151, 0.566); */
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 30px 10px;
+}
+
+.card_header {
+  padding-left: 15px;
+  height: 27px;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 2px;
+  color: aliceblue;
+  /* background-color: red; */
+}
+
+.card_header_gray {
+  background-color: rgb(115, 126, 144);
+}
+
+.card_header_red {
+  background-color: rgb(253, 105, 25);
+}
+
+.card_header_blue {
+  background-color: rgb(25, 131, 253);
+}
+
+.card_header_text {
+  font-size: 14px;
+  color: aliceblue;
+  margin-top: 2px;
+}
+
+.onecard_header_text {
+  font-size: 14px;
+  color: aliceblue;
+  margin-top: 4px;
+}
+
+.onecard_name {
+  font-weight: 700;
+}
+
+.icon {
+  display: block;
+  margin: 2px 4px 0 0;
+  color: aliceblue;
+}
+
+.icon_time {
+  display: block;
+  margin: 2px 4px 0 10px;
+  color: aliceblue;
+}
+
+.p_head {
+  display: flex;
+}
+
+.card_doc_desc {
+  max-width: 250px;
+  display: flex;
+  align-items: center;
+  /* border-bottom: 1px solid rgba(151, 151, 151, 0.566); */
+  padding: 10px 20px 10px 10px;
+}
+
+.card_avatar_box {
+  margin-right: 15px;
+}
+
+.card_avatar {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(115, 126, 144);
+  color: aliceblue;
+  border-radius: 50%;
+}
+
+.card_button_box {
+  padding-left: 10px;
+  border-top: 1px solid rgba(151, 151, 151, 0.566);
+}
+
+.onecard_firstcard_container {
+  background-color: rgb(234, 234, 234);
+  min-width: 275px;
+  max-width: 800px;
+  /* border: 1px solid rgba(151, 151, 151, 0.566); */
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 30px 10px;
+}
+
+.onecard_secondcard_container {
+  background-color: rgb(234, 234, 234);
+  min-width: 275px;
+  max-width: 800px;
+  /* border: 1px solid rgba(151, 151, 151, 0.566); */
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 30px 10px;
+}
+
+.onecard_content_container {
+  width: 100%;
+  padding-top: 15px;
+}
+
+.onecard_first_desc {
+  /* max-width: 250px; */
+  display: flex;
+  /* flex-direction: column; */
+  padding: 10px 20px 10px 20px;
+}
+
+.onecard_second_desc {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px 10px 20px;
+}
+
+.doctor_adress {
+  border-top: 1px solid rgba(151, 151, 151, 0.566);
+}
+
+.comments_container {
+  border-top: 1px solid rgba(151, 151, 151, 0.566);
+}
+
+.first_time_container {
+  min-height: 40px;
+}
+
+.doctor_adress {
+  padding-top: 10px;
+  min-height: 50px;
+}
+
+.comments_container {
+  padding-top: 10px;
+  min-height: 50px;
+}
+
+.app_cancel_p {
+  margin: 5px 0 8px;
+}

@@ -21,12 +21,16 @@ class UserService {
     const user = await User.create({
       email, password: hashPassword, first_name: firstName, last_name: lastName, patronymic, telephone, photo, sex, activation_link: activationLink,
     });
-    await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`);
+    // await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`);
     const isDoctor = false;
     const userDto = new UserDto(user, isDoctor); // id, email, isActivated
-    const tokens = tokenService.generateTokens({ ...userDto });
-    await tokenService.saveToken(userDto.id, tokens.refreshToken);
-    return { ...tokens, user: userDto };
+    try {
+      const tokens = tokenService.generateTokens({ ...userDto });
+      await tokenService.saveToken(userDto.id, tokens.refreshToken);
+      return { ...tokens, user: userDto };
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async activate(activationLink) {
