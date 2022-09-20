@@ -5,6 +5,8 @@ import DoctorPage1 from "./DoctorPage1";
 import DoctorPage2 from "./DoctorPage2";
 import DoctorPage3 from "./DoctorPage3";
 import DoctorPage4 from "./DoctorPage4";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { IUser } from "../../models/iUser";
 
 export interface DocState {
   id: string;
@@ -22,10 +24,12 @@ export interface DocState {
 }
 
 function DoctorPage() {
+  const user : IUser = useTypedSelector(state => state.user.user);
+
   const [docState, setDocState] = useState<DocState[]>();
 
   useEffect(() => {
-    axios.get(`http://localhost:4000/doctor/${1}`).then((resFromServer) => {
+    axios.get(`http://localhost:4000/doctor/${user.id}`).then((resFromServer) => {
       const data = resFromServer.data;
       // console.log(data);
       setDocState(data);
@@ -33,7 +37,7 @@ function DoctorPage() {
   }, []);
 
   return (
-    <div className={styles.conteiner}>
+    <div className={styles.container}>
       <div className={styles.content}>
         
         {docState?.map((el) => (
