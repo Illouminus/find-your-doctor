@@ -16,7 +16,7 @@ const defaultCenter = {
 const libraries  = ['places']
 
 
-const Documents = () => {
+const ParentMap = ({docs}: any) => {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: "AIzaSyCFjP-ieVgCSib4ZtVd3DIRtfEVMNgxppk",
@@ -65,14 +65,14 @@ const handlerMode = useCallback(() => {
   }, [])
 
   return (
-    <div>
+    <div className={s.mapContainer}>
       <div className={s.searchContainer}>
-      <Autocomplete isLoaded={isLoaded} onSelect={onPlaceSelect}/>
-      <button onClick={handlerMode}>Сменить режим</button>
+      <Autocomplete isLoaded={isLoaded} onSelect={onPlaceSelect} docs={docs}/>
+      {/* <button onClick={handlerMode}>Сменить режим</button> */}
       </div>
     {isLoaded ?  (<Map center={center} mode={mode} markers={markers} onMarkerAdd={onMarkerAdd}/>): (<h2>Загрузка</h2>)}
     </div>
   )
 }
 
-export default Documents
+export default ParentMap

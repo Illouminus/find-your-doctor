@@ -1,16 +1,17 @@
 import React from 'react'
 import { Stack, Skeleton, Avatar, Typography, Box, Card} from '@mui/material'
-import {SearchBar, TagsCard, SearchedDoctorCard} from '../../components'
+import {SearchBar, TagsCard, SearchedDoctorCard, ParentMap} from '../../components'
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
+import s from './mainPage.module.css'
 
 
 function MainPage() {
     const {doctors, error, loading} = useTypedSelector(state => state.doctor)
-
+    console.log('Доктора', doctors);
+    
     return (
         <>
             <Stack sx={{ display: 'flex',
@@ -42,18 +43,18 @@ function MainPage() {
                         </Skeleton>
                         </>
                 }
+                <div>
                 {doctors &&
                 <>
                     {doctors.map((el:object,index:number) =>
                         <Box mt ={3}>
                         <SearchedDoctorCard el={el} key={index}/>
-
                         </Box>
                     )}
+                   <ParentMap docs={doctors}/>
                 </>
                 }
-
-
+                </div>
 
 
             </Stack>
