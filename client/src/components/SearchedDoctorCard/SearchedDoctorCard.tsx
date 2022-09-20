@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import {DocInfo, DocCalendar} from '../'
+import {DocInfo, DocCalendar, ParentMap} from '../'
+// import {ParentMap} from '../index'
 import IconButton, {IconButtonProps} from "@mui/material/IconButton";
 import {styled} from "@mui/material/styles";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -22,8 +23,8 @@ export default function SearchedDoctorCard(props:any) {
             <Box sx={{display: 'flex', minWidth: 250, maxWidth: 500}}>
                 <DocInfo props={props}/>
                 <DocCalendar props={props}/>
-
         </Box>
+        
 
             </>
     );

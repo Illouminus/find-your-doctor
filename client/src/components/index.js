@@ -11,5 +11,8 @@ import FileUpload from "./FileUpload/FileUpload";
 import Upload from "./UploadDocuments/Upload";
 import Map from "./Map/Map";
 import RatingDoc from "./Stars/Stars";
-export { Layout, Navigation, ResponsiveAppBar, SearchBar, TagsCard, SearchedDoctorCard, DocInfo,  LoginForm, DocCalendar, FileUpload, Upload, Map, RatingDoc };
+import ParentMap from './ParentMap/ParentMap'
+export { Layout, Navigation, ResponsiveAppBar, SearchBar, TagsCard,
+   SearchedDoctorCard, DocInfo,  LoginForm, DocCalendar, FileUpload, 
+   Upload, Map, RatingDoc, ParentMap };
 

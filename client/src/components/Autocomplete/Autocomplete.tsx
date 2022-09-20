@@ -6,7 +6,7 @@ import usePlacesAutocomplete, {
 } from "use-places-autocomplete";
 import useOnclickOutside from "react-cool-onclickoutside";
 
- export const Autocomplete = ({isLoaded, onSelect}: any) => {
+ export const Autocomplete = ({isLoaded, onSelect, docs}: any) => {
   const {
     ready,
     value,
@@ -24,10 +24,17 @@ import useOnclickOutside from "react-cool-onclickoutside";
     clearSuggestions();
   });
 
-  const handleInput = (e: any) => {
-    // Update the keyword of the input element
-    setValue(e.target.value);
-  };
+  // const handleInput = (e: any) => {
+  //   // Update the keyword of the input element
+  //   setValue(e.target.value);
+  // };
+
+  console.log('DOCTORS AUTOCOMPLETE',docs)
+  useEffect(() => {
+    const address = docs.map((el: any) => el.adress)
+    console.log('ADRESS OF DOCTOR MOTHER FATHER', address);
+    
+  }, [docs])
 
   const handleSelect =
     ({ description }: any) =>
@@ -35,7 +42,7 @@ import useOnclickOutside from "react-cool-onclickoutside";
       // When user selects a place, we can replace the keyword without request data from API
       // by setting the second parameter to "false"
       setValue(description, false);
-      console.log(description);
+      console.log('DESCRIPTION AUTOCOMPLETE', description);
       
       clearSuggestions();
 
@@ -69,13 +76,13 @@ import useOnclickOutside from "react-cool-onclickoutside";
 
   return (
     <div className={s.root} ref={ref}>
-      <input type="text"
+      {/* <input type="text"
        className={s.input}
        value={value}
        onChange={handleInput}
        disabled={!ready}
        placeholder="Where are you going?"
-       />
+       /> */}
       {status === "OK" && <ul className={s.sugestions}>{renderSuggestions()}</ul>}
     </div>
   )
