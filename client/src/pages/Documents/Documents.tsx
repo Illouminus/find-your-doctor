@@ -66,6 +66,7 @@ const handlerMode = useCallback(() => {
 
   return (
     <div>
+      <Upload />
       <div className={s.searchContainer}>
       <Autocomplete isLoaded={isLoaded} onSelect={onPlaceSelect}/>
       <button onClick={handlerMode}>Сменить режим</button>

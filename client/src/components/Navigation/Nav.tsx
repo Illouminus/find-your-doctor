@@ -126,7 +126,7 @@ const settings = [<NavLink to="/lk">Личный кабинет</NavLink>,<NavLi
               textDecoration: 'none',
             }}
           >
-            LOGO
+            <NavLink to="/main" className={styles.links}>LOGO</NavLink>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
            { !user.isAuth && 
