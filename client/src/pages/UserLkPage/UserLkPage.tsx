@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react'
-import userStyle from "./user.module.css"
+import userStyle from "./userStyle.module.css"
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import axios from "axios";
 import { IUser } from '../../models/iUser';
