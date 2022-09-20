@@ -149,7 +149,7 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
                     {input ? (
                       <>
                         <textarea className={styles.textarea} defaultValue={item.comments_doctor ? `${item.comments_doctor}` : ''}/>
-                        <button onClick={() => setInput((true))} className={styles.pen_button}><SaveAsIcon fontSize='small' /></button>
+                        <button onClick={() => updateComment()} className={styles.pen_button}><SaveAsIcon fontSize='small' /></button>
                         <button onClick={() => setInput(false)} className={styles.close_button}><CloseIcon fontSize='small' /></button>
                       </>
                     ): (
