@@ -1,4 +1,4 @@
-const {Doctor, Tag, Raiting, Appointment} = require('../../db/models')
+const {Doctor, Tag, Raiting, Appointment, Timetable} = require('../../db/models')
 const {Op} = require('sequelize')
 
 async function getDoctors (req, res)  {
@@ -7,14 +7,14 @@ async function getDoctors (req, res)  {
         let inputplace = req.params['inputplace']
         if(!inputplace || inputplace==undefined) {
             const theDoctors = await Doctor.findAll({
-                include: [{model: Tag}, {model: Raiting}, {model: Appointment}],
+                include: [{model: Tag}, {model: Raiting}, {model: Appointment}, {model:Timetable}],
                 where: {speciality: {[Op.substring]: inputspecialist}}
             })
             return res.json(theDoctors)
 
         }else{
             const theDoctors = await Doctor.findAll({
-                include:[{model:Tag}, {model:Raiting}, {model:Appointment}],
+                include:[{model:Tag}, {model:Raiting}, {model:Appointment}, {model:Timetable}],
                 where:{[Op.and]:[{speciality:{[Op.substring]: inputspecialist }},{adress:{[Op.substring]: inputplace }}]}})
             return res.json(theDoctors)
 

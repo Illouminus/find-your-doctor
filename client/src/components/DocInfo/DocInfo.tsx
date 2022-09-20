@@ -2,12 +2,12 @@ import React from "react";
 
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import {CardActions, Avatar} from '@mui/material';
+import { Avatar} from '@mui/material';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {deepOrange, deepPurple, indigo, blue, teal, green, lime, orange, yellow, blueGrey} from '@mui/material/colors';
 import {NavLink} from 'react-router-dom'
+import {TagsCard} from "../index";
 function pickRandomColor (){
     const colors:any[]=[deepOrange, deepPurple, indigo, blue, teal, green, lime, orange, yellow, blueGrey]
     return colors[Math.floor((Math.random()*colors.length))]
@@ -23,13 +23,11 @@ const bull = (
 );
 
 export default function DocInfo(props:any) {
-    console.log(props.props.el)
-    const {id, email, photo, sex, experience, first_name, last_name, speciality} = props.props.el
-    console.log(id,email, photo, sex, experience, )
+    const {id, email, photo, sex, experience, first_name, last_name, speciality, tags} = props.props.el
     return (
         <>
-            <div>
-                <Card sx={{ minWidth: 275, maxWidth: 309}}>
+
+                <Card sx={{ minWidth: 250, maxWidth: 250, mr:2, border: "none", boxShadow: "none"}}>
                     <CardContent>
                         <Box sx = {{display:'flex'}}>
                             <Avatar sx={{ bgcolor: pickRandomColor()[500] }}>{first_name[0]}{last_name[0]} </Avatar>
@@ -42,19 +40,19 @@ export default function DocInfo(props:any) {
                         <Typography sx={{ fontSize: 14 }}  gutterBottom>
                             {speciality}     {sex}
                         </Typography>
-
+                        {/*<TagsCard ></TagsCard>*/}
                         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                             Опыт
                         </Typography>
                         <Typography variant="body2">
-                            {experience} awdawdawdawdawdawdwadawdawdawdawdawdawdawdawdawdawdawdawdawdawdawdaw awdawdawdawd awdawdawdawd awdawdawdawd awdawd awdawdawdkbawdkabdw
+                            {experience} awdawdaw dawdawdaw dwadawdaw dawdawdawdaw dawdawdawdawda wdawdawdawdawdaw awdawdawdawd awdawdawdawd awdawdawdawd awdawd awdawdawdkbawdkabdw
                             <br />
 
                         </Typography>
                     </CardContent>
 
                 </Card>
-            </div>
+
         </>
     );
 }

@@ -6,7 +6,7 @@ import SearchBar from "./SearchBar/SearchBar";
 import TagsCard from "./TagsCard/TagsCard";
 import SearchedDoctorCard from "./SearchedDoctorCard/SearchedDoctorCard";
 import DocInfo from "./DocInfo/DocInfo";
-
-
-export { Layout, Navigation, ResponsiveAppBar, SearchBar, TagsCard, SearchedDoctorCard, DocInfo,  LoginForm };
+import DocCalendar from "./DocCalendar/DocCalendar";
+import FileUpload from "./FileUpload/FileUpload"
+export { Layout, Navigation, ResponsiveAppBar, SearchBar, TagsCard, SearchedDoctorCard, DocInfo,  LoginForm, DocCalendar, FileUpload };
 

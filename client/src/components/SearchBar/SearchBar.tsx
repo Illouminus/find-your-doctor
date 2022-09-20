@@ -6,26 +6,26 @@ import PlaceIcon from '@mui/icons-material/Place';
 import {useActions} from "../../hooks/useActions";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {debounce} from 'lodash'
+
 function SearchBar() {
     const [inputs, setInputs] = useState({inputSpecialist:'', inputPlace:''})
 
     const {doctors, error, loading} = useTypedSelector(state => state.doctor)
     const {fetchDoctors} = useActions()
 
-
     const inputsHandler = (e:any) => {
+
         setInputs((prev) => ({...prev, [e.target.name] : e.target.value}));
-        fetchDoctors(inputs.inputSpecialist, inputs.inputPlace)
+        fetchDoctors(inputs.inputSpecialist.toLowerCase(), inputs.inputPlace.toLowerCase())
     }
-    const debouncedOnChange = debounce(inputsHandler, 2000)
 
 
     return (
 
                 <Box sx={{ display: 'flex', flexWrap: 'nowrap', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-
+                    <form></form>
                     <TextField
-                            onChange = {debouncedOnChange}
+                            onChange = {inputsHandler}
                             name = 'inputSpecialist'
                             label="Специолист, жалобы"
                             id="Специолист, жалобы"
@@ -35,7 +35,7 @@ function SearchBar() {
                             }}
                         />
                     <TextField
-                        onChange={debouncedOnChange}
+                        onChange={inputsHandler}
                         name = 'inputPlace'
 
                         label="Страна, город"

@@ -6,6 +6,7 @@ function TagsCard() {
     return (
         <Box
             className = 'chipContainer'
+            sx = {{display:'flex',wrap:'wrap'}}
         >
             <Chip label='Урологи' variant="outlined" size="small" clickable />
             <Chip label='Урологи' variant="outlined" size="small"  clickable/>

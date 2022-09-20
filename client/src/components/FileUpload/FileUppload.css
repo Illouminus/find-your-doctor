@@ -1,0 +1,20 @@
+.file-card {
+    background-color: white;
+    border: 3px dashed white;
+    padding: 1em;
+    min-width: 380px;
+    min-height: 230px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.file-input {
+    position: relative;
+    margin-bottom: 1.5em;
+}
+input {
+    position:relative;
+    max-width: 200px;
+    height: 46px;
+}
