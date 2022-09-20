@@ -72,4 +72,22 @@ async function cancelAppointment(req, res) {
   }
 }
 
-module.exports = { setAppointment, cancelAppointment };
+async function updCommentAppointment(req, res) {
+  try {
+    console.log(req.body);
+    const { id, value, isDoctor } = req.body;
+    if (isDoctor) {
+      await Appointment.update({ comments_doctor: value }, { where: { id } });
+    } else {
+      await Appointment.update({ comments_patient: value }, { where: { id } });
+    }
+    const message = 'Комментарий сохранен';
+    res.json(message);
+  } catch (error) {
+    const message = 'Что-то пошло не так. Обновите страницу и попробуйте снова';
+    console.log(error);
+    res.json(message);
+  }
+}
+
+module.exports = { setAppointment, cancelAppointment, updCommentAppointment };

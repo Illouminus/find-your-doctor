@@ -44,9 +44,29 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
     }
   }
 
-  const updateComment = () => {
-    console.log('update comment');
-    
+  const updateComment = (e: any, isDoctor: boolean) => {
+    e.preventDefault();
+    const value = e.target.comment.value;
+    // const user_id = (!isDoctor ? item?.doctor?.id : item?.patient?.id);
+    console.log(item.id, value, isDoctor);
+    try {
+      axios.post('http://localhost:4000/appointment/updcomment', { id: item.id, value, isDoctor }).then((resFromServer) => {
+        const data = resFromServer.data;
+        console.log(data);
+        setOneApp((prev) => {
+          const obj = { ...prev }
+          if (isDoctor) {
+            obj.appointment.comments_doctor = value;
+          } else {
+            obj.appointment.comments_patient = value;
+          }
+          return obj;
+        })
+        setInput(false)
+      })
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -133,8 +153,18 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
               <div className={styles.comments_container}>
                 <p>Ваш комментарий:</p>
                 <div className={styles.comment_box}>
-                  <p>{item.comments_patient ? `${item.comments_patient}` : 'нет комментария'}</p>
-                  <button className={styles.pen_button}><BorderColorIcon fontSize='small' /></button>
+                {input ? (
+                  <form onSubmit={(e) => updateComment(e, false)}>
+                    <textarea name='comment' className={styles.textarea} defaultValue={item.comments_patient ? `${item.comments_patient}` : ''} />
+                    <button type='submit' className={styles.pen_button}><SaveAsIcon fontSize='small' /></button>
+                    <button onClick={() => setInput(false)} className={styles.close_button}><CloseIcon fontSize='small' /></button>
+                  </form>
+                ) : (
+                  <>
+                    <p>{item.comments_patient ? `${item.comments_patient}` : 'нет комментария'}</p>
+                    <button onClick={() => setInput(true)} className={styles.pen_button}><BorderColorIcon fontSize='small' /></button>
+                  </>
+                  )}
                 </div>
               </div>
             ) : (
@@ -147,11 +177,11 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
                       <p>Ваш комментарий:</p>
                   <div className={styles.comment_box}>
                     {input ? (
-                      <>
-                        <textarea className={styles.textarea} defaultValue={item.comments_doctor ? `${item.comments_doctor}` : ''}/>
-                        <button onClick={() => updateComment()} className={styles.pen_button}><SaveAsIcon fontSize='small' /></button>
+                      <form onSubmit={(e) => updateComment(e, true)}>
+                        <textarea name='comment' className={styles.textarea} defaultValue={item.comments_doctor ? `${item.comments_doctor}` : ''}/>
+                        <button type='submit' className={styles.pen_button}><SaveAsIcon fontSize='small' /></button>
                         <button onClick={() => setInput(false)} className={styles.close_button}><CloseIcon fontSize='small' /></button>
-                      </>
+                      </form>
                     ): (
                       <>
                         <p>{item.comments_doctor ? `${item.comments_doctor}` : 'нет комментария'}</p>
