@@ -37,7 +37,6 @@ function SearchBar() {
                     <TextField
                         onChange={inputsHandler}
                         name = 'inputPlace'
-
                         label="Страна, город"
                         id="outlined-start-adornment"
                         sx={{ m: 1, width: '25ch' }}
@@ -45,7 +44,6 @@ function SearchBar() {
                             startAdornment: <InputAdornment position="start"><PlaceIcon/></InputAdornment>
                         }}
                     />
-                    <Button className='btn' variant="outlined">Найти</Button>
                 </Box>
 
     )

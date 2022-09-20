@@ -6,7 +6,7 @@ import usePlacesAutocomplete, {
 } from "use-places-autocomplete";
 import useOnclickOutside from "react-cool-onclickoutside";
 
- export const Autocomplete = ({isLoaded, onSelect, docs}: any) => {
+ export const Autocomplete = ({isLoaded, onSelect, handlerMode, docs, onMarkerAdd}: any) => {
   const {
     ready,
     value,
@@ -29,31 +29,30 @@ import useOnclickOutside from "react-cool-onclickoutside";
   //   setValue(e.target.value);
   // };
 
-  console.log('DOCTORS AUTOCOMPLETE',docs)
-  useEffect(() => {
-    const address = docs.map((el: any) => el.adress)
-    console.log('ADRESS OF DOCTOR MOTHER FATHER', address);
-    
-  }, [docs])
-
   const handleSelect =
-    ({ description }: any) =>
-    () => {
-      // When user selects a place, we can replace the keyword without request data from API
-      // by setting the second parameter to "false"
-      setValue(description, false);
-      console.log('DESCRIPTION AUTOCOMPLETE', description);
-      
-      clearSuggestions();
+  ( description : any) => {
+    console.log(description);
+    
+    // When user selects a place, we can replace the keyword without request data from API
+    // by setting the second parameter to "false"
+    setValue(description, false);
+    
+    
+    clearSuggestions();
+    
+    // Get latitude and longitude via utility functions
+    getGeocode({ address: description.adress }).then((results) => {
+      const { lat, lng } = getLatLng(results[0]);
+      console.log("📍 Coordinates: ", { lat, lng });
+      onMarkerAdd({ lat, lng, description } )
+    });
+  };
 
-      // Get latitude and longitude via utility functions
-      getGeocode({ address: description }).then((results) => {
-        const { lat, lng } = getLatLng(results[0]);
-        console.log("📍 Coordinates: ", { lat, lng });
-        onSelect({ lat, lng } )
-      });
-    };
+  useEffect(() => {
+    const address = docs.map((doc: any) => handleSelect(doc))
+  }, [docs, onMarkerAdd])
 
+  
   const renderSuggestions = () =>
     data.map((suggestion) => {
       const {
@@ -62,7 +61,7 @@ import useOnclickOutside from "react-cool-onclickoutside";
       } = suggestion;
 
       return (
-        <li className={s.listItem} key={place_id} onClick={handleSelect(suggestion)}>
+        <li className={s.listItem} key={place_id} >
           <strong>{main_text}</strong> <small>{secondary_text}</small>
         </li>
       );

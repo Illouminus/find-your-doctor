@@ -86,12 +86,7 @@ export default function DocCalendar(props:any) {
                                                 {fourDays[2] && <TableCell>{fourDays[2].timetable[hour] == true? <Button onClick={()=>handleClickOpen(hour, fourDays[2].day)}>{hour}:00</Button>:<Button disabled>{hour}:00</Button>}</TableCell>}
                                                 {fourDays[3] && <TableCell>{fourDays[3].timetable[hour] == true? <Button onClick={()=>handleClickOpen(hour, fourDays[3].day)}>{hour}:00</Button>:<Button disabled>{hour}:00</Button>}</TableCell>}
                                             </TableRow>
-
                                         )}
-
-
-
-
                                     </TableBody>
                                 </Table>
                             </TabPanel>
@@ -99,7 +94,6 @@ export default function DocCalendar(props:any) {
                             </Collapse>
                         </Box>
                         </TabContext>
-
                 </Card>
                 <ExpandMore
                     expand={expanded}
