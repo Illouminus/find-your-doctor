@@ -33,8 +33,8 @@ export const AllAppointments: React.FC<appsType> = ({ appointments, setOneApp })
         <div key={item.id} className={styles.card_box}>
           <div className={cn([
             styles.card_header,
-            (new Date(item.date_time) < new Date()) ?
-            styles.card_header_gray : styles.card_header_red])}>
+            item.status ? ((new Date(item.date_time) < new Date()) ?
+              styles.card_header_blue : styles.card_header_red) : styles.card_header_gray])}>
             <Typography sx={{ mb: 1.5 }} color="text.primary" gutterBottom>
               <p className={styles.p_head}>
                 <span className={styles.icon}><CalendarMonthIcon fontSize='small' /></span>

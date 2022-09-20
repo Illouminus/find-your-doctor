@@ -4,6 +4,7 @@ export type AppStateType = {
   comments_patient: string | null
   date_time: string
   first_time: boolean | null
+  status: boolean
   doctor: {
     id: number | null
     first_name: string

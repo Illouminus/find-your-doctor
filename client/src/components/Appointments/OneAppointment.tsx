@@ -25,15 +25,15 @@ export const OneAppointment: React.FC<appType> = ({ oneApp }) => {
       <div className={styles.onecard_firstcard_container}>
         <div className={cn([
           styles.card_header,
-          (new Date(item.date_time) < new Date()) ?
-            styles.card_header_gray : styles.card_header_red])}>
+          item.status ? ((new Date(item.date_time) < new Date()) ?
+            styles.card_header_blue : styles.card_header_red) : styles.card_header_gray])}>
           <p className={styles.p_head}>
             <span className={styles.icon}><CalendarMonthIcon fontSize='small' /></span>
-            <span className={styles.card_header_text}>
+            <span className={styles.onecard_header_text}>
               {new Date(item.date_time).toLocaleDateString()}
             </span>
             <span className={styles.icon_time}><AccessTimeRoundedIcon fontSize='small' /></span>
-            <span className={styles.card_header_text}>
+            <span className={styles.onecard_header_text}>
               {new Date(item.date_time).toLocaleTimeString().slice(0, 5)}
             </span>
           </p>
@@ -52,22 +52,32 @@ export const OneAppointment: React.FC<appType> = ({ oneApp }) => {
           </div>
           <div>
             {!isDoctor ? (
-              <>
-                <p>{`${item.doctor.last_name} ${item.doctor.first_name} ${item.doctor.patronymic}`}</p>
+              <div >
+                <div className={styles.onecard_name}>
+                  <p>{`${item.doctor.last_name} ${item.doctor.first_name} ${item.doctor.patronymic}`}</p>
+                </div>
                 <p>{`${item.doctor.speciality}`}</p>
-              </>
-            ): (
-              <>
-                  <p>{`${item.patient.last_name} ${item.patient.first_name} ${item.patient.patronymic}`}</p>
-                  <p>{`${item.patient.telephone}`}</p>
-                  <p>{`${item.patient.email}`}</p>
-              </>
+              </div>
+            ) : (
+                <>
+                  <div className={styles.onecard_name}>
+                    <p>{`${item.patient.last_name} ${item.patient.first_name} ${item.patient.patronymic}`}</p>
+                  </div>
+                  <div>
+                    <p>{`телефон: ${item.patient.telephone}`}</p>
+                    <p>{`email: ${item.patient.email}`}</p>
+                </div>
+                </>
             )}
             
           </div>
         </div>
         <div className={styles.card_button_box}>
-          <Button size="small">Отменить запись</Button>
+          {item.status ? (
+            <Button size="small">Отменить запись</Button>
+          ) : (
+              <p className={styles.app_cancel_p}>запись отменена</p>
+          )}
         </div>
       </div>
       <div className={styles.onecard_secondcard_container}>
@@ -77,16 +87,22 @@ export const OneAppointment: React.FC<appType> = ({ oneApp }) => {
           </div>
           {!isDoctor &&
           <div className={styles.doctor_adress}>
-            <p>{`Адрес: ${item.doctor.adress}`}</p>
+              <p>Адрес:</p>
+              <p>{`${item.doctor.adress}`}</p>
           </div>
           }
           <div className={styles.comments_container}>
             {!isDoctor ? (
-              <p>{`Ваш комментарий: ${item.comments_patient}`}</p>
+              <>
+                <p>Ваш комментарий:</p>
+                <p>{`${item.comments_patient}`}</p>
+              </>
             ) : (
               <>
-                <p>{`Комментарий пациента: ${item.comments_doctor}`}</p>
-                <p>{`Ваш комментарий: ${item.comments_doctor}`}</p>
+                  <p>Комментарий пациента:</p>
+                  <p>{`${item.comments_doctor}`}</p>
+                  <p>Ваш комментарий:</p>
+                  <p>{`${item.comments_doctor}`}</p>
               </>
             )}
           </div>

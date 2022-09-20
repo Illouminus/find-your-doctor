@@ -2,6 +2,7 @@
   width: 100%;
   height: 100%;
   display: flex;
+  font-family: 'Roboto';
 }
 
 .cards_box::-webkit-scrollbar {
@@ -45,10 +46,24 @@
   background-color: rgb(253, 105, 25);
 }
 
+.card_header_blue {
+  background-color: rgb(25, 131, 253);
+}
+
 .card_header_text {
   font-size: 14px;
   color: aliceblue;
   margin-top: 2px;
+}
+
+.onecard_header_text {
+  font-size: 14px;
+  color: aliceblue;
+  margin-top: 4px;
+}
+
+.onecard_name {
+  font-weight: 700;
 }
 
 .icon {
@@ -142,15 +157,19 @@
 }
 
 .first_time_container {
-  height: 40px;
+  min-height: 40px;
 }
 
 .doctor_adress {
   padding-top: 10px;
-  height: 50px;
+  min-height: 50px;
 }
 
 .comments_container {
   padding-top: 10px;
-  height: 50px;
+  min-height: 50px;
+}
+
+.app_cancel_p {
+  margin: 5px 0 8px;
 }

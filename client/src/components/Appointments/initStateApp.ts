@@ -8,6 +8,7 @@ export const initStateApp: OneAppStateType = {
     comments_patient: null,
     date_time: '',
     first_time: null,
+    status: false,
     doctor: {
       id: null,
       first_name: '',

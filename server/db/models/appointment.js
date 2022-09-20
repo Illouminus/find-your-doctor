@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     comments_patient: DataTypes.TEXT,
     comments_doctor: DataTypes.TEXT,
     first_time: DataTypes.BOOLEAN,
-    status: DataTypes.STRING,
+    status: DataTypes.BOOLEAN,
   }, {
     sequelize,
     modelName: 'Appointment',

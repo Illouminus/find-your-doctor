@@ -15,8 +15,8 @@ class DocController {
       const {
         email, password, firstName, lastName, patronymic, telephone, experience, education, speciality, photo, adress,
       } = req.body;
-
-      const userData = await DocService.registration(email, password, sex, firstName, lastName, patronymic, telephone, experience, education, speciality, photo, sex, adress);
+      console.log(req.body);
+      const userData = await DocService.registration(email, password, sex, firstName, lastName, patronymic, telephone, experience, education, speciality, photo, adress);
       res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 1000, httpOnly: true });
       return res.json(userData);
     } catch (error) {
@@ -89,6 +89,7 @@ class DocController {
         comments_doctor: el.comments_doctor,
         date_time: el.date_time,
         first_time: el.first_time,
+        status: el.status,
         patient: {
           id: el.User.id,
           first_name: el.User.first_name,
