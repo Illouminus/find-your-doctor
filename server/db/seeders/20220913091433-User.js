@@ -125,6 +125,20 @@ module.exports = {
       activation_link: 'qwqdcesewcsddwqwq',
       createdAt: new Date(),
       updatedAt: new Date(),
+    },
+    {
+      email: 'shestakovoa@gmail.com',
+      password: '$2b$10$DhgsPgFAXQzLUN1d2JGlK.EF4uD0TTs0qZ1k3GsSFzitlIuKZqvzq',
+      first_name: 'Олег',
+      last_name: 'Шестаков',
+      patronymic: 'Александрович',
+      telephone: '71242112414',
+      photo: 'http://photo.com/photos8',
+      sex: 'male',
+      is_activated: true,
+      activation_link: 'qwqdcesewcsddwqwq',
+      createdAt: new Date(),
+      updatedAt: new Date(),
     }], {});
   },
 

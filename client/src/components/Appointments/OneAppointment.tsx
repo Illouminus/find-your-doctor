@@ -73,11 +73,20 @@ export const OneAppointment: React.FC<appType> = ({ oneApp }) => {
           </div>
         </div>
         <div className={styles.card_button_box}>
-          {item.status ? (
-            <Button size="small">Отменить запись</Button>
+          {item.status ? ((new Date(item.date_time) < new Date() ?
+            ('') : (
+              <>
+                <Button size="small">Отменить запись</Button>
+                <Button size="small">перенести запись</Button>
+              </>
+            ))
           ) : (
               <p className={styles.app_cancel_p}>запись отменена</p>
           )}
+          {!isDoctor && item.status ? ((new Date(item.date_time) < new Date() ?
+            (
+              <Button size="small">Оценить врача</Button>
+            ) : (''))) : ('')}
         </div>
       </div>
       <div className={styles.onecard_secondcard_container}>
