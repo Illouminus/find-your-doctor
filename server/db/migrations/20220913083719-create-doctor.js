@@ -32,11 +32,9 @@ module.exports = {
       },
       experience: {
         type: Sequelize.TEXT,
-        allowNull: false,
       },
       education: {
         type: Sequelize.TEXT,
-        allowNull: false,
       },
       speciality: {
         type: Sequelize.STRING,

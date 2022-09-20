@@ -87,6 +87,7 @@ class UserService {
       console.log(error);
     }
   }
+
 }
 
 module.exports = new UserService();

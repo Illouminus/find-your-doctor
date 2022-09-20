@@ -8,5 +8,5 @@ import SearchedDoctorCard from "./SearchedDoctorCard/SearchedDoctorCard";
 import DocInfo from "./DocInfo/DocInfo";
 import DocCalendar from "./DocCalendar/DocCalendar";
 import FileUpload from "./FileUpload/FileUpload"
-export { Layout, Navigation, ResponsiveAppBar, SearchBar, TagsCard, SearchedDoctorCard, DocInfo,  LoginForm, DocCalendar, FileUpload };
+export { Layout, Navigation, ResponsiveAppBar, SearchBar, TagsCard, SearchedDoctorCard, DocInfo,  LoginForm, DocCalendar, FileUpload,Upload, Map, RatingDoc };
 
