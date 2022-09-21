@@ -3,12 +3,12 @@ import userStyle from "./userStyle.module.css"
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import axios from "axios";
 import { IUser } from '../../models/iUser';
-import { Avatar, Box, Button, Card, Typography } from '@mui/material';
+import { Avatar, Box, Button, Card, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, Typography } from '@mui/material';
 
 export interface UserLkState {
   id: string;
   email: string;
-  first_name: string;
+  first_name: string | any;
   last_name: string;
   patronymic: string;
   telephone: string;
@@ -25,6 +25,16 @@ const UserLkPage = () => {
   
   const [ userLk, setUserLk ] = useState<UserLkState>();
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   useEffect(() => {
     axios.get(`http://localhost:4000/api/user/${user.id}`)
       .then((resFromServer) => {
@@ -32,6 +42,27 @@ const UserLkPage = () => {
       setUserLk(data);
     });
   }, []);
+
+  const updateUser = (e: any) => {
+    e.preventDefault();
+    const valueName = e.target.first_name.value
+    const valueLastName = e.target.last_name.value
+    const valueEmail = e.target.email.value
+    const valueTelephone = e.target.telephone.value
+    try {
+      axios.post(`http://localhost:4000/api/user/${user.id}`, 
+      { first_name: valueName, last_name: valueLastName, email: valueEmail, telephone: valueTelephone
+    }).then((resFromServer) => {
+      const data = resFromServer.data
+      setUserLk(data);
+      console.log("LOX", data);
+    })
+    } catch (error) {
+      
+    }
+    
+
+  } 
 
   return (
     <Card className={userStyle.card}
@@ -63,10 +94,66 @@ const UserLkPage = () => {
           Номер Телефона:{userLk?.telephone}
           </Typography>
         </Box>
-        <Button variant="contained" color="success">
-          Изменить
-        </Button>
+        <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+        Изменить данные
+      </Button>
       </Box>
+      <div>
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
+      <form onSubmit={updateUser}>
+        <DialogTitle id="form-dialog-title">Изменить данные:</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Чтобы поменять данные, сохраните изменения
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            name="first_name"
+            label="Имя"
+            type="text"
+            fullWidth
+            defaultValue={userLk?.first_name}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            name="last_name"
+            label="Фамилия"
+            type="text"
+            fullWidth
+            defaultValue={userLk?.last_name}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            name="email"
+            label="Email"
+            type="email"
+            fullWidth
+            defaultValue={userLk?.email}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            name="telephone"
+            label="Номер телефона"
+            type="text"
+            fullWidth
+            defaultValue={userLk?.telephone}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Отмена
+          </Button>
+          <Button type='submit' onClick={handleClose} color="primary" >
+            Сохранить
+          </Button>
+        </DialogActions>
+      </form>
+      </Dialog>
+    </div>
     </Card>
   )
 }
