@@ -1,6 +1,6 @@
 import React from 'react'
 import AttachFileIcon from '@mui/icons-material/AttachFile';
-import './FileUppload.css'
+import styles from './styles.module.css'
 
 function FileUpload() {
     const uploadHandler = () => {
@@ -8,13 +8,13 @@ function FileUpload() {
     }
     return (
         <>
-            <div className='file-card'>
-                <div className='file-input'>
-                    <input type='file'>
+            <div className={styles.file_card}>
+                <div className={styles.file_input}>
+                    <input type='file' className={styles.input}>
                     </input>
 
-                    <p className='main'> Поддерживаются файлы типа</p>
-                    <p className='info'> PDF,JPG,PNG</p>
+                    <p className={styles.main}> Поддерживаются файлы типа</p>
+                    <p className={styles.info}> PDF,JPG,PNG</p>
 
                 </div>
             </div>

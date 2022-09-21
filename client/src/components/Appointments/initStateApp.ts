@@ -3,7 +3,7 @@ import { OneAppStateType } from './types'
 export const initStateApp: OneAppStateType = {
   isVisible: false,
   appointment: {
-    id: null,
+    id: 0,
     comments_doctor: null,
     comments_patient: null,
     date_time: '',

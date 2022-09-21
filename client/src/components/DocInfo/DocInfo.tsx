@@ -9,6 +9,7 @@ import {deepOrange, deepPurple, indigo, blue, teal, green, lime, orange, yellow,
 import {NavLink} from 'react-router-dom'
 import {TagsCard} from "../index";
 import s from './docinfo.module.css'
+
 function pickRandomColor (){
     const colors:any[]=[deepOrange, deepPurple, indigo, blue, teal, green, lime, orange, yellow, blueGrey]
     return colors[Math.floor((Math.random()*colors.length))]
