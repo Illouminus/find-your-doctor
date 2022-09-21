@@ -20,8 +20,7 @@ export default function SearchedDoctorCard(props:any) {
 
     return (
         <>
-        <div className={s.containerCard}></div>
-            <Box sx={{display: 'flex', minWidth: 250, maxWidth: 700, }}>
+            <Box className={s.containerCard} sx={{display: 'flex', minWidth: 250, maxWidth: 900} }>
                 <DocInfo props={props}/>
                 <DocCalendar props={props}/>
         </Box>

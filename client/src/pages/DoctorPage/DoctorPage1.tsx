@@ -28,7 +28,7 @@ export default function DoctorPage1({ el }: { el: DocState }) {
             {el?.first_name} {el?.last_name} {el?.patronymic}
           </Typography>
           <Typography fontSize="25px" id="card-description" mb={0.5}>
-            {el?.speciality}, {el?.sex}
+            {el?.speciality}
           </Typography>
         </Box>
         <Button variant="contained" color="success">

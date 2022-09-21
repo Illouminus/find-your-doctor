@@ -30,7 +30,7 @@ function App() {
             <Provider store={store}>
       <Routes>
           <Route path="/" element={<Layout />}>
-          <Route path="/main" element={ <MainPage /> } />
+          <Route path="/" element={ <MainPage /> } />
           <Route path="/registration" element={ <RegistrationPage /> } />
           <Route path="/login" element={ <LoginPage /> } />
           <Route path="/doctor/:id" element={<DoctorPage />} />

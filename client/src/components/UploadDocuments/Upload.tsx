@@ -16,9 +16,10 @@ const Upload = () => {
   const onDropHandler = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault()
     let files = e.dataTransfer.files
+    console.log(files);
+    
     const formData = new FormData()
     Array.from(files).forEach(file => formData.append('file', file))
-    console.log('FORMDATA', formData);
     setDrag(false)
   }
 

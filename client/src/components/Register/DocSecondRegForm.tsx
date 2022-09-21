@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
+import { useNavigate } from "react-router-dom";
 import { useForm, Controller, SubmitHandler, useFormState } from 'react-hook-form';
 import ReactSelect from 'react-select';
 import Typography from '@mui/material/Typography';
@@ -9,7 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { otherFields } from './validation';
 import { IRegForm2, IAllFields } from './types'
 import { useActions } from '../../hooks/useActions'
-
+import { MessageUser } from '..';
 import styles from './regform.module.css';
 
 interface IOption {
@@ -37,19 +38,40 @@ const getValue = (value: string) =>
   value ? options.find((option) => option.value === value) : ''
 
 export const DocSecondRegForm: React.FC<RegFormType> = ({harvester, setHarvester, setWhoReg, whoReg }) => {
+  const [open, setOpen] = React.useState(false);
+  const [severity, setSeverity] = useState('');
+  const [message, setMessage] = useState('');
+  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const navigate = useNavigate()
   const { handleSubmit, control } = useForm<IRegForm2>();
   const { errors } = useFormState({ control });
   const {registerDoc} = useActions()
   const onSubmit: SubmitHandler<IRegForm2> = (data) => {
-    // console.log(data);
-    setHarvester((prev) => {return {...prev, ...data}} )
-    // setSecondForm((prev) => !prev)
-    
-    registerDoc({...data, ...harvester})
 
+    setHarvester((prev) => {return {...prev, ...data}} )
+    
+    const registerDocIn = registerDoc({...data, ...harvester})
+    console.log(registerDocIn);
+    setTimeout(() => {
+      if(localStorage.getItem('token')) {
+        setSeverity('success')
+        setMessage('Вы успешно вошли!')
+        setOpen(true)
+        setTimeout(() => {
+          navigate('/')
+        }, 1000)
+      } 
+    }, 500)
   }
 
   return (
+    <>
     <div className={styles.secondRegForm}>
       <Typography variant="h5" >
         Зарегистрироваться как: {whoReg ? 'Пациент' : 'Доктор'} / <span
@@ -229,5 +251,7 @@ export const DocSecondRegForm: React.FC<RegFormType> = ({harvester, setHarvester
         </Button>
       </form>
   </div>
+  <MessageUser open={open} handleClose={handleClose} severity={severity} message={message}/>
+  </>
 )
 }
