@@ -42,6 +42,8 @@ function DoctorPage() {
     });
   }, []);
 
+  console.log(docState);
+  
   return (
     <div className={styles.container}>
       <div className={styles.content}>
