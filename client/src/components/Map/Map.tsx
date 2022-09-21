@@ -8,7 +8,7 @@ import { MarkerDoc } from '../Marker/Marker';
 const containerStyle = {
   width: '400px',
   height: '700px',
-
+  
 };
 
 const defaultOptions = {
