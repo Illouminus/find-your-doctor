@@ -1,3 +1,11 @@
-.containerDoc{
-  display: flex
+.content_container {
+  width: 100vw;
+  display: flex;
+  justify-content: end;
+  padding-right: 40px;
+}
+
+.map_container {
+  width: 25vw;
+  margin-left: 40px;
 }

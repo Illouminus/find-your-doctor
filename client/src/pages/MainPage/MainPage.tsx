@@ -45,14 +45,18 @@ function MainPage() {
                 }
                 <div>
                 {doctors &&
-                <>
-                    {doctors.map((el:object,index:number) =>
-                        <Box mt ={3}>
-                        <SearchedDoctorCard el={el} key={index}/>
-                        </Box>
-                    )}
-                   <ParentMap docs={doctors}/>
-                </>
+                <div className={s.content_container}>
+                    <div>
+                        {doctors.map((el:object,index:number) =>
+                            <Box mt ={3}>
+                            <SearchedDoctorCard el={el} key={index}/>
+                            </Box>
+                        )}
+                    </div>
+                    <div className={s.map_container}>
+                        <ParentMap docs={doctors} />
+                    </div>
+                </div>
                 }
                 </div>
 
