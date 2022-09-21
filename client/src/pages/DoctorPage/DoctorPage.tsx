@@ -7,6 +7,7 @@ import DoctorPage3 from "./DoctorPage3";
 import DoctorPage4 from "./DoctorPage4";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { IUser } from "../../models/iUser";
+import { useParams } from "react-router-dom";
 
 export interface DocState {
   id: string;
@@ -24,12 +25,13 @@ export interface DocState {
 }
 
 function DoctorPage() {
-  const user : IUser = useTypedSelector(state => state.user.user);
-
+  // const user : IUser = useTypedSelector(state => state.user.user);
+  const { id } = useParams();
+  console.log(id);
   const [docState, setDocState] = useState<DocState[]>();
 
   useEffect(() => {
-    axios.get(`http://localhost:4000/doctor/${user.id}`).then((resFromServer) => {
+    axios.get(`http://localhost:4000/doctor/${id}`).then((resFromServer) => {
       const data = resFromServer.data;
       // console.log(data);
       setDocState(data);

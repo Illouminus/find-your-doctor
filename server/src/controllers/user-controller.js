@@ -114,11 +114,28 @@ class UserController {
 
   async getUserLk(req, res) {
     try {
-      // const data = req.body;
       const { id } = req.params;
       console.log('id', id);
       const user = await User.findOne({ where: { id } });
       console.log('user', user);
+      res.json(user);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async updateUser(req, res) {
+    try {
+      console.log('!!!!', req.body);
+      const { id } = req.params;
+      const { first_name, last_name, email, telephone } = req.body;
+      // const { id } = req.params;
+      console.log('PARAMS', req.params);
+      const newUser = await User.update({
+        first_name, last_name, email, telephone,
+      }, { where: { id } });
+      // const data = 'Данные изменены';
+      const user = await User.findOne({ where: { id } });
       res.json(user);
     } catch (error) {
       console.log(error);
