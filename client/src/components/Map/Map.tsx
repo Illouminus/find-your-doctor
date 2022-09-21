@@ -6,8 +6,8 @@ import { CurrentLocation } from '../CurrentLocationMarker/CurrentLocation';
 import { MarkerDoc } from '../Marker/Marker';
 
 const containerStyle = {
-  width: '400px',
-  height: '700px',
+  width: '25vw',
+  height: '60vh',
   
 };
 

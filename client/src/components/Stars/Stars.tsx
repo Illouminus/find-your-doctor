@@ -1,59 +1,27 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Rating, { IconContainerProps } from '@mui/material/Rating';
-import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
-import SentimentDissatisfiedIcon from '@mui/icons-material/SentimentDissatisfied';
-import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';
-import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAltOutlined';
-import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import Rating from '@mui/material/Rating';
+import { DocState } from "../../pages/DoctorPage/DoctorPage";
 
-const StyledRating = styled(Rating)(({ theme }) => ({
-  '& .MuiRating-iconEmpty .MuiSvgIcon-root': {
-    color: theme.palette.action.disabled,
-  },
-}));
+export default function RatingDoc({ el }: { el: DocState }) {
+  console.log(el);
 
-const customIcons: {
-  [index: string]: {
-    icon: React.ReactElement;
-    label: string;
-  };
-} = {
-  1: {
-    icon: <SentimentVeryDissatisfiedIcon color="error" />,
-    label: 'Very Dissatisfied',
-  },
-  2: {
-    icon: <SentimentDissatisfiedIcon color="error" />,
-    label: 'Dissatisfied',
-  },
-  3: {
-    icon: <SentimentSatisfiedIcon color="warning" />,
-    label: 'Neutral',
-  },
-  4: {
-    icon: <SentimentSatisfiedAltIcon color="success" />,
-    label: 'Satisfied',
-  },
-  5: {
-    icon: <SentimentVerySatisfiedIcon color="success" />,
-    label: 'Very Satisfied',
-  },
-};
+  const [rating, setRating] = useState<number>(0)
+  
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await axios.get(`http://localhost:4000/doctor/${el.id}/stars`)
+        if (res.data) {
+          setRating(res.data)
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
 
-function IconContainer(props: IconContainerProps) {
-  const { value, ...other } = props;
-  return <span {...other}>{customIcons[value].icon}</span>;
-}
-
-export default function RatingDoc() {
   return (
-    <StyledRating
-      name="highlight-selected-only"
-      defaultValue={2}
-      IconContainerComponent={IconContainer}
-      getLabelText={(value: number) => customIcons[value].label}
-      highlightSelectedOnly
-    />
+    <Rating name="half-rating-read" defaultValue={0} value={rating} precision={0.5} readOnly />
   );
 }
