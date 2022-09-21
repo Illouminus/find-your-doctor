@@ -7,6 +7,7 @@ import DoctorPage3 from "./DoctorPage3";
 import DoctorPage4 from "./DoctorPage4";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { IUser } from "../../models/iUser";
+import { MessageUser } from "../../components";
 
 export interface DocState {
   id: string;
@@ -39,7 +40,7 @@ function DoctorPage() {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        
+        <MessageUser />
         {docState?.map((el) => (
           <div key={el.id} className={styles.mainInfo}>
             <DoctorPage1 el={el} />

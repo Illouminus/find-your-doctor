@@ -27,7 +27,7 @@ export const ResponsiveAppBar = () => {
 
 
 const pages = [<NavLink to="registration" className={styles.links}>Регистрация</NavLink>, <NavLink to="login" className={styles.links}>Логин</NavLink>];
-const settings = [<NavLink to={`/user/${user.user.id}`}>Личный кабинет</NavLink>,<NavLink to="/documents">Мои документы</NavLink>, <NavLink to="/appointments">Мои записи</NavLink>];
+const settings = [<NavLink to={`/user/${user.user.id}`} className={styles.linksLk}>Личный кабинет</NavLink>,<NavLink to="/documents" className={styles.linksLk}>Мои документы</NavLink>, <NavLink to="/appointments" className={styles.linksLk}>Мои записи</NavLink>];
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -51,7 +51,6 @@ const settings = [<NavLink to={`/user/${user.user.id}`}>Личный кабин�
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -67,9 +66,10 @@ const settings = [<NavLink to={`/user/${user.user.id}`}>Личный кабин�
               textDecoration: 'none',
             }}
           >
-            <NavLink to="/main" className={styles.links}>LOGO</NavLink>
+            <div className={styles.containerLogo}>
+            <NavLink to="/" className={styles.links}><img className={styles.logo} src="./logo.png" alt=""/></NavLink>
+            </div>
           </Typography>
-
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -109,7 +109,6 @@ const settings = [<NavLink to={`/user/${user.user.id}`}>Личный кабин�
                 </MenuItem>
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -126,7 +125,9 @@ const settings = [<NavLink to={`/user/${user.user.id}`}>Личный кабин�
               textDecoration: 'none',
             }}
           >
-            <NavLink to="/main" className={styles.links}>LOGO</NavLink>
+            <div className={styles.containerLogo}>
+            <NavLink to="/" className={styles.links}><img className={styles.logo} src="./logo.png" alt=""/></NavLink>
+            </div>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
            { !user.isAuth && 
@@ -141,7 +142,7 @@ const settings = [<NavLink to={`/user/${user.user.id}`}>Личный кабин�
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src="./defaultProfile.png" />
               </IconButton>
             </Tooltip>
             <Menu
