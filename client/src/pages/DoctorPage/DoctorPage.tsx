@@ -42,7 +42,7 @@ function DoctorPage() {
     });
   }, []);
 
-  console.log(docState);
+  // console.log('docState', docState);
   
   return (
     <div className={styles.container}>
