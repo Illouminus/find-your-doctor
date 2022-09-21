@@ -128,7 +128,9 @@ class UserController {
     try {
       console.log('!!!!', req.body);
       const { id } = req.params;
-      const { first_name, last_name, email, telephone } = req.body;
+      const {
+        first_name, last_name, email, telephone,
+      } = req.body;
       // const { id } = req.params;
       console.log('PARAMS', req.params);
       const newUser = await User.update({

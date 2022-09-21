@@ -9,6 +9,7 @@ import {Layout} from './components'
 import { useActions } from './hooks/useActions'
 import { useTypedSelector } from './hooks/useTypedSelector';
 import { IUser } from './models/iUser'
+import DoctorLkPage from './pages/DoctorPage/DoctorLkPage'
 
 
 
@@ -37,6 +38,7 @@ function App() {
           <Route path="/appointments" element={ <AppointmentsPage /> } />
           <Route path="/documents" element={ <Documents />} />
           <Route path="/user/:id" element={ <UserLkPage /> } />
+          <Route path="/doctor/lk/:id" element={<DoctorLkPage />} />
           </Route>
       </Routes>
             </Provider>
