@@ -1,0 +1,10 @@
+.top {
+  display: flex;
+  align-items: flex-start;
+}
+
+.center {
+  height: 50vh;
+  display: flex;
+  align-items: flex-end;
+}

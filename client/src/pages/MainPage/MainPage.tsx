@@ -46,16 +46,17 @@ function MainPage() {
                 <div>
                 {doctors &&
                 <div className={s.content_container}>
-                    <div>
+                    <div className={s.cards_box}>
                         {doctors.map((el:object,index:number) =>
                             <Box mt ={3}>
                             <SearchedDoctorCard el={el} key={index}/>
                             </Box>
                         )}
                     </div>
+                    {doctors.length > 0 && 
                     <div className={s.map_container}>
                         <ParentMap docs={doctors} />
-                    </div>
+                    </div>}
                 </div>
                 }
                 </div>
