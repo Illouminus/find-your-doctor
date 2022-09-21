@@ -180,6 +180,7 @@
 .pen_button {
   height: 24px;
   width: 24px;
+  margin-left: 5px;
   color: rgb(151, 151, 151);
   border: 1px solid rgba(25, 131, 253, 0);
 }
@@ -206,4 +207,12 @@
 .textarea {
   /* min-width: 400px; */
   width: 80%;
+}
+
+.rating {
+  margin-top: 4px;
+}
+
+.button_box {
+  margin-top: 1px;
 }

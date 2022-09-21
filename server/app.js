@@ -26,7 +26,9 @@ const userRouter = require('./src/routers/regRouter');
 const docRouter = require('./src/routers/regDoc');
 const doctorRouter = require('./src/routers/doctorRouter');
 const searchRouter = require('./src/routers/searchRouter');
-const appointmentRouter = require('./src/routers/appointmentRouter')
+const appointmentRouter = require('./src/routers/appointmentRouter');
+const ratingRouter = require('./src/routers/ratingRouter');
+
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, '../public/')));
 app.use(express.urlencoded({ extended: true }));
@@ -54,6 +56,7 @@ app.use('/api/doc', docRouter);
 app.use('/', doctorRouter);
 app.use('/', searchRouter);
 app.use('/', appointmentRouter);
+app.use('/api/rating', ratingRouter);
 
 app.listen(PORT ?? 4000, () => {
   console.log('Сервер запущен!');

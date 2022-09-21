@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import cn from 'classnames'
 import Button from '@mui/material/Button';
@@ -7,6 +7,7 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import SaveAsIcon from '@mui/icons-material/SaveAs';
 import CloseIcon from '@mui/icons-material/Close';
+import Rating from '@mui/material/Rating';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { OneAppStateType } from '../../components/Appointments/types'
 import { IUser } from '../../models/iUser'
@@ -21,12 +22,46 @@ type appType = {
 export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
   const user: IUser = useTypedSelector(state => state.user.user)
   const isDoctor = user.isDoctor
+  const item = oneApp.appointment;
+  console.log('appointment', oneApp.appointment);
+  console.log('oneApp', oneApp);
 
   const [input, setInput] = useState<boolean>(false);
 
-  console.log('appointment', oneApp.appointment);
-  console.log('oneApp', oneApp);
-  const item = oneApp.appointment;
+  const [stars, setStars] = useState<number | null>(0);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        if (item.status && (new Date(item.date_time) < new Date())) {
+          const response = await axios.post('http://localhost:4000/api/rating/getstars', { user_id: user.id, doctor_id: item.doctor.id})
+          console.log(response.data);
+          if (response.data) {
+            setStars(response.data.stars);
+          } else {
+            setStars(0);
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, [item]);
+
+  const addRating = async (user_id: number | null, doctor_id: number | null, stars: number | null) => {
+    console.log('stars:', stars, 'user_id:', user_id, 'doctor_id:', doctor_id);
+    try {
+      const response = await axios.post(`http://localhost:4000/api/rating/setstars`, {user_id, doctor_id, stars })
+      console.log(response.data);
+        // setOneApp((prev) => {
+        //   const obj = { ...prev }
+        //   obj.appointment.status = false
+        //   return obj;
+        // })
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const appCancel = (id: number) => {
     try {
@@ -124,17 +159,27 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
         <div className={styles.card_button_box}>
           {item.status ? ((new Date(item.date_time) < new Date() ?
             ('') : (
-              <>
+              <div className={styles.button_box}>
                 <Button onClick={() => appCancel(item.id)} size="small">Отменить запись</Button>
                 <Button size="small">перенести запись</Button>
-              </>
+              </div>
             ))
           ) : (
               <p className={styles.app_cancel_p}>запись отменена</p>
           )}
           {!isDoctor && item.status ? ((new Date(item.date_time) < new Date() ?
             (
-              <Button size="small">Оценить врача</Button>
+              <>
+                {/* <Button size="small">Оценить врача</Button> */}
+                <Rating className={styles.rating}
+                  name="simple-controlled"
+                  value={stars}
+                  onChange={(event, newValue) => {
+                    setStars(newValue);
+                    addRating(user.id, item.doctor.id, newValue);
+                  }}
+                />
+              </>
             ) : (''))) : ('')}
         </div>
       </div>
