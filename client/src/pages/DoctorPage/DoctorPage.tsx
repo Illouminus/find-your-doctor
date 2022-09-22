@@ -53,7 +53,7 @@ function DoctorPage() {
             <DoctorPage1 el={el} />
             <DoctorPage2 el={el} />
             <DoctorPage3 el={el} />
-            <DoctorPage4 el={el} />
+            {/* <DoctorPage4 el={el} /> */}
             {/* <div className={styles.mainInfo}>
               <div>
                 {el?.first_name} {el?.last_name} {el?.patronymic}{" "}

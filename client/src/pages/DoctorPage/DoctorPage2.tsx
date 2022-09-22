@@ -16,6 +16,7 @@ export default function DoctorPage2({ el }: { el: DocState }) {
         <Box sx={{ ml: 0.5 }}>
           <Typography fontSize="25px" id="card-description" mb={0.5}>
             {el?.adress}
+            {el?.experience}
           </Typography>
         </Box>
       </Box>
