@@ -3,6 +3,7 @@ import userStyle from "./userStyle.module.css";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import axios from "axios";
 import { IUser } from "../../models/iUser";
+import { pickRandomColor } from '../../components/Appointments/AllAppointments'
 import {
   Avatar,
   Box,
@@ -107,6 +108,7 @@ const UserLkPage = () => {
       console.log(error);
     }
   };
+  console.log('userLk', userLk);
 
   return (
     <>
@@ -124,13 +126,23 @@ const UserLkPage = () => {
         >
           <Box>
             <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Avatar
+              {/* <Avatar
                 src="/static/images/avatar/1.jpg"
                 sx={{ width: 100, height: 100 }}
               >
                 {userLk?.first_name[0]}
                 {userLk?.last_name[0]}
-              </Avatar>
+              </Avatar> */}
+              {userLk?.photo ? (
+                <Avatar src={`http://localhost:4000/img/${userLk?.photo}`} sx={{ width: 150, height: 150 }} />
+              ) : (
+                <Avatar
+                  sx={{ width: 150, height: 150, bgcolor: pickRandomColor()[500] }}
+                >
+                  {userLk?.last_name[0]}
+                  {userLk?.first_name[0]}
+                </Avatar>
+              )}
               <Box>
                 <Box sx={{ ml: 0.5 }}>
                   <Typography fontSize="25px" id="card-description" mb={0.5}>
@@ -152,38 +164,21 @@ const UserLkPage = () => {
                   <Typography fontSize="25px" id="card-description" mb={0.5}>
                     Пол: {userLk?.sex}
                   </Typography>
-                </Box>
-              </Box>
-            </Box>
-            <Card
-              variant="outlined"
-              sx={{
-                minWidth: "420px",
-                gap: 2,
-                display: "table-caption",
-                border: "none",
-              }}
-            >
-              <Box>
-                <Box sx={{ ml: 0.5, display: "contents" }}>
-                  <Typography
-                    fontSize="20px"
-                    id="card-description"
-                    mb={0.5}
-                    align="justify"
-                  >
+                  <Typography fontSize="25px" id="card-description" mb={0.5}>
                     Опыт: {userLk?.experience}
                   </Typography>
                 </Box>
               </Box>
-            </Card>
-            <Button
-              variant="outlined"
-              color="primary"
-              onClick={handleClickOpen}
-            >
-              Изменить данные
-            </Button>
+            </Box>
+            <Box className="BOXBUUTON" sx={{ display: "grid" }}>
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={handleClickOpen}
+              >
+                Изменить данные
+              </Button>
+            </Box>
           </Box>
           <div>
             <Dialog
@@ -216,6 +211,15 @@ const UserLkPage = () => {
                     type="text"
                     fullWidth
                     defaultValue={userLk?.last_name}
+                  />
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    name="patronymic"
+                    label="Отчество"
+                    type="text"
+                    fullWidth
+                    defaultValue={userLk?.patronymic}
                   />
                   <TextField
                     autoFocus
@@ -295,13 +299,23 @@ const UserLkPage = () => {
             border: "none",
           }}
         >
-          <Avatar
+          {/* <Avatar
             src="/static/images/avatar/1.jpg"
             sx={{ width: 100, height: 100 }}
           >
             {userLk?.first_name[0]}
             {userLk?.last_name[0]}
-          </Avatar>
+            </Avatar> */}
+            {userLk?.photo ? (
+              <Avatar src={`http://localhost:4000/img/${userLk?.photo}`} sx={{ width: 150, height: 150 }} />
+            ) : (
+              <Avatar
+                sx={{ width: 150, height: 150, bgcolor: pickRandomColor()[500] }}
+              >
+                {userLk?.last_name[0]}
+                {userLk?.first_name[0]}
+              </Avatar>
+            )}
           <Box>
             <Box sx={{ ml: 0.5 }}>
               <Typography fontSize="25px" id="card-description" mb={0.5}>
@@ -353,6 +367,15 @@ const UserLkPage = () => {
                     type="text"
                     fullWidth
                     defaultValue={userLk?.last_name}
+                  />
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    name="last_name"
+                    label="Фамилия"
+                    type="text"
+                    fullWidth
+                    defaultValue={userLk?.patronymic}
                   />
                   <TextField
                     autoFocus

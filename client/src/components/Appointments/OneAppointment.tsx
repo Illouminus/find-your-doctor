@@ -256,6 +256,9 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
             )}
         </div>
       </div>
+      <div className={styles.onecard_secondcard_container}>
+        <div className={styles.onecard_second_desc}></div>
+      </div>
     </div>
   )
 }
