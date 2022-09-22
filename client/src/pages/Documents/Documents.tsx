@@ -31,7 +31,8 @@ const Documents = () => {
 
 
   const deleteHeandler = (link: any) => {
-    
+
+    axios.post('http://localhost:4000/deleteDocuments', {id, link}).then(data => data).catch(error => error)
     return setLinks(links.filter(item => item !== link))
   }
 
