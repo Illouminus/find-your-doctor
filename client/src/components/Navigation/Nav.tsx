@@ -27,7 +27,12 @@ export const ResponsiveAppBar = () => {
 
 
 const pages = [<NavLink to="registration" className={styles.links}>Регистрация</NavLink>, <NavLink to="login" className={styles.links}>Логин</NavLink>];
-const settings = [<NavLink to={`/user/${user.user.id}`}>Личный кабинет</NavLink>,<NavLink to="/documents">Мои документы</NavLink>, <NavLink to="/appointments">Мои записи</NavLink>];
+const settings = [
+    <NavLink to={`/user/${user.user.id}`}>Личный кабинет</NavLink>,
+    <NavLink to="/documents">Мои документы</NavLink>,
+    <NavLink to="/timetable">Моё расписание</NavLink>,
+    <NavLink to="/appointments">Мои записи</NavLink>,
+];
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -165,6 +170,7 @@ const settings = [<NavLink to={`/user/${user.user.id}`}>Личный кабин�
                 <Typography textAlign="center"><p className={styles.p}>{settings[0]}</p></Typography>
                 <Typography textAlign="center">{settings[1]}</Typography>
                 <Typography textAlign="center">{settings[2]}</Typography>
+                  <Typography textAlign="center">{settings[3]}</Typography>
                 <Typography textAlign="center"><ButtonMy/></Typography>
                 </div>
               </MenuItem>

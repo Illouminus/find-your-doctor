@@ -27,7 +27,7 @@ function SearchBar() {
                     <TextField
                             onChange = {inputsHandler}
                             name = 'inputSpecialist'
-                            label="Специолист, жалобы"
+                            label="Специалист"
                             id="Специолист, жалобы"
                             sx={{ m: 1, width: '25ch' }}
                             InputProps={{
