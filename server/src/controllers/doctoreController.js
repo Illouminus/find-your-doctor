@@ -3,9 +3,9 @@ const { Doctor, Tag } = require("../../db/models");
 async function getDoctorLk(req, res) {
   try {
     const { id } = req.params;
-    console.log('id', id);
+    console.log("id", id);
     const user = await Doctor.findOne({ where: { id } });
-    console.log('user', user);
+    console.log("user", user);
     res.json(user);
   } catch (error) {
     console.log(error);
@@ -28,17 +28,35 @@ async function getDoctor(req, res) {
 
 async function updateDoctor(req, res) {
   try {
-    console.log('!!!!', req.body);
+    console.log("!!!!", req.body);
     const { id } = req.params;
     const {
-      first_name, last_name, email, telephone,
+      first_name,
+      last_name,
+      email,
+      telephone,
+      sex,
+      speciality,
+      education,
+      experience,
     } = req.body;
-    const newUser = await Doctor.update({
-      first_name, last_name, email, telephone,
-    }, { where: { id } });
+
+    const newUser = await Doctor.update(
+      {
+        first_name,
+        last_name,
+        email,
+        telephone,
+        sex,
+        education,
+        experience,
+        speciality,
+      },
+      { where: { id } }
+    );
     // const data = 'Данные изменены';
     const user = await Doctor.findOne({ where: { id } });
-    console.log('user', user);
+    console.log("user", user);
     res.json(user);
   } catch (error) {
     console.log(error);

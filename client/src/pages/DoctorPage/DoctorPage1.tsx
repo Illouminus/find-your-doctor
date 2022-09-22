@@ -30,6 +30,9 @@ export default function DoctorPage1({ el }: { el: DocState }) {
           <Typography fontSize="25px" id="card-description" mb={0.5}>
             {el?.speciality}
           </Typography>
+          <Typography fontSize="25px" id="card-description" mb={0.5}>
+            {el?.education}
+          </Typography>
         </Box>
         <Button variant="contained" color="success">
           Добавить в Мои врачи
