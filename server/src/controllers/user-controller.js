@@ -144,6 +144,15 @@ class UserController {
     }
   }
 
+  async getFiles(req, res, next) {
+    try {
+      console.log('Файлы если они есть=========>', req.files);
+      console.log('REQ BODY  =========>', req.body);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   // async calendar(req, res, next) {
   //   const { id } = req.params;
   //   const dayNum = new Date().getDay();

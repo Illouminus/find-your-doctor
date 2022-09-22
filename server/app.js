@@ -5,6 +5,9 @@ const cors = require('cors');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const multer = require('multer');
+
+const upload = multer({ dest: 'uploads/' });
 const FileStore = require('session-file-store')(session);
 
 const dbConnectionCheck = require('./db/dbConnectCheck');
