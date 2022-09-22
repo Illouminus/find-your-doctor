@@ -5,9 +5,9 @@ const cors = require('cors');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const multer = require('multer');
 
-const upload = multer({ dest: 'uploads/' });
+
+
 const FileStore = require('session-file-store')(session);
 
 const dbConnectionCheck = require('./db/dbConnectCheck');
@@ -33,7 +33,7 @@ const appointmentRouter = require('./src/routers/appointmentRouter');
 const ratingRouter = require('./src/routers/ratingRouter');
 
 app.use(morgan('dev'));
-app.use(express.static(path.join(__dirname, '../public/')));
+app.use(express.static(path.join(__dirname, './uploads/')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());

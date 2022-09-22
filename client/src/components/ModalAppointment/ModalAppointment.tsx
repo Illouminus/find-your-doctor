@@ -6,12 +6,16 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import IconButton from '@mui/material/IconButton';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import {IUser} from "../../models/iUser";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {FileUpload, Upload} from '../'
 import axios from "axios";
 import {useState} from "react";
 import {Checkbox, FormControlLabel} from "@mui/material";
+import { AnyNsRecord } from 'dns';
+import { Preview } from '@mui/icons-material';
 
 
 // @ts-ignore
@@ -21,17 +25,35 @@ export default function ModalAppointment({props}) {
     const user : IUser = useTypedSelector(state => state.user.user)
     const [comment, setComment] = useState('')
     const [firstTime, setFirstTime] = useState(true)
+    const [file, setFile]:any = useState<any>([])
+    console.log(file);
+    
     const sendFormHandler = async ()=> {
+      const data = new FormData();
+      data.append("doctor_id", id)
+      data.append("user_id", String(user.id))
+      data.append("time",time)
+      data.append("date", date)
+      data.append("comment", comment)
+      data.append("firstTime", String(firstTime))
+      file.forEach((fileOne: any)=> data.append("file", fileOne))
+      
     try{
-        const response = axios.post('http://localhost:4000/appointment', {
-            doctor_id: id,
-            user_id: user.id,
-            time:time,
-            date:date,
-            comment: comment,
-            firstTime:firstTime,
-        })
+        // const response = axios.post('http://localhost:4000/appointment', {
+        //     doctor_id: id,
+        //     user_id: user.id,
+        //     time:time,
+        //     date:date,
+        //     comment: comment,
+        //     firstTime:firstTime,
+        // })
+        const response = axios.post('http://localhost:4000/appointment', data)
+        // const response = axios.post('https://httpbin.org/anything', data).then(res => console.log(res)).catch(err => console.log(err))
+
+        
         const feedback = await response
+        console.log(feedback);
+        
         if (feedback.data){
             console.log(feedback.data)
         }}catch(e){
@@ -70,7 +92,18 @@ export default function ModalAppointment({props}) {
                         variant="standard"
                     />
                     {/* <FileUpload/> */}
-                <Upload id={user.id}/>
+                {/* <Upload id={user.id}/> */}
+              <Button variant="contained" component="label">
+                  Загрузить файл
+               <input hidden  multiple type="file" onChange={(e): any | null=> {
+                const files: any = e.target.files;
+                Array.from(files).forEach(file => {
+                  console.log(file)
+                  setFile((prev: any) => [...prev, file]);
+                })
+                
+               }}/>
+              </Button>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Отменить</Button>

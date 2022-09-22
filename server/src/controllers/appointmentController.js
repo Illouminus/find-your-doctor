@@ -1,8 +1,12 @@
 /* eslint-disable camelcase */
 const { Op } = require('sequelize');
-const { Appointment, Timetable } = require('../../db/models');
+const { Appointment, Timetable, Document } = require('../../db/models');
 
 async function setAppointment(req, res) {
+  // console.log(req.body);
+  console.log(req.files);
+  const path = req.files.map((el) => el.path).map((el) => el.slice(18));
+  console.log(path);
   try {
     let {
       doctor_id,
@@ -20,6 +24,10 @@ async function setAppointment(req, res) {
       comment,
       firstTime,
     );
+    for (let i = 0; i < path.length; i++) {
+      const response = await Document.create({ user_id, link: path[i] });
+      console.log(response);
+    }
     const newDate = `${date.slice(0, 10)} ${time}:00:00`;
     console.log(newDate);
     console.log(date.slice(0, 10));
@@ -90,4 +98,14 @@ async function updCommentAppointment(req, res) {
   }
 }
 
-module.exports = { setAppointment, cancelAppointment, updCommentAppointment };
+async function getDocuments(req, res) {
+  const { id } = req.body;
+  console.log(req.body.id);
+  const response = await Document.findAll({ where: { user_id: id } });
+  console.log(response);
+  return res.send(response);
+}
+
+module.exports = {
+  setAppointment, cancelAppointment, updCommentAppointment, getDocuments,
+};
