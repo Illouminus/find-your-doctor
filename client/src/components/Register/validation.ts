@@ -24,6 +24,16 @@ export const passwordValidation = {
   }
 }
 
+export const updateValidation = {
+  required: REQUIRED_FIELD,
+  validate: (value: string) => {
+    if (value.length < 1) {
+      return 'Поле должно быть заполнено'
+    }
+    return true;
+  }
+}
+
 export const telephoneValidation = {
   required: REQUIRED_FIELD,
   validate: (value: string) => {

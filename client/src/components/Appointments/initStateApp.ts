@@ -19,6 +19,7 @@ export const initStateApp: OneAppStateType = {
       speciality: null,
       sex: null,
       adress: null,
+      photo: null,
     },
     patient: {
       id: null,
@@ -28,6 +29,7 @@ export const initStateApp: OneAppStateType = {
       sex: null,
       email: null,
       telephone: null,
+      photo: null,
     },
   }
 }
