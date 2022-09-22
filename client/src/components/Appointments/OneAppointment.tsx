@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import cn from 'classnames'
+import { deepOrange, deepPurple, indigo, blue, teal, green, lime, orange, yellow, blueGrey } from '@mui/material/colors';
+import { Avatar } from '@mui/material';
 import Button from '@mui/material/Button';
 import AccessTimeRoundedIcon from '@mui/icons-material/AccessTime';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -11,6 +13,7 @@ import Rating from '@mui/material/Rating';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { OneAppStateType } from '../../components/Appointments/types'
 import { IUser } from '../../models/iUser'
+import { pickRandomColor } from './AllAppointments'
 
 import styles from './appoint.module.css'
 
@@ -124,15 +127,29 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
         </div>
         <div className={styles.onecard_first_desc}>
           <div className={styles.card_avatar_box}>
-            <div className={styles.card_avatar}>
-              <p className={styles.card_avatar_name}>
-                {!isDoctor ? (
-                  item.doctor.last_name?.slice(0, 1) + item.doctor.first_name?.slice(0, 1)
-                ) : (
-                  item.patient.last_name?.slice(0, 1) + item.patient.first_name?.slice(0, 1)
-                )}
-              </p>
-            </div>
+            {isDoctor ? (
+              item?.patient?.photo ? (
+                <Avatar src={`http://localhost:4000/img/${item?.patient?.photo}`} sx={{ width: 60, height: 60 }} />
+              ) : (
+                <Avatar
+                  sx={{ width: 60, height: 60, bgcolor: pickRandomColor()[500] }}
+                >
+                  {item?.patient?.last_name[0]}
+                  {item?.patient?.first_name[0]}
+                </Avatar>
+              )
+            ) : (
+              item?.doctor?.photo ? (
+                <Avatar src={`http://localhost:4000/img/${item?.doctor?.photo}`} sx={{ width: 60, height: 60 }} />
+              ) : (
+                <Avatar
+                  sx={{ width: 60, height: 60, bgcolor: pickRandomColor()[500] }}
+                >
+                  {item?.doctor?.last_name[0]}
+                  {item?.doctor?.first_name[0]}
+                </Avatar>
+              )
+            )}
           </div>
           <div>
             {!isDoctor ? (

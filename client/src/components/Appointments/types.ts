@@ -15,6 +15,7 @@ export type AppStateType = {
     speciality: string | null
     sex: string | null
     adress: string | null
+    photo: string | null
   }
   patient: {
     id: number | null
@@ -24,6 +25,7 @@ export type AppStateType = {
     sex: string | null
     email: string | null
     telephone: string | null
+    photo: string | null
   }
 }
 

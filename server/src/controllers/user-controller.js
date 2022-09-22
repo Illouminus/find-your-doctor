@@ -103,6 +103,7 @@ class UserController {
           speciality: el.Doctor.speciality,
           sex: el.Doctor.sex,
           adress: el.Doctor.adress,
+          photo: el.Doctor.photo,
         },
       }));
       // console.log(result);
@@ -139,6 +140,15 @@ class UserController {
       // const data = 'Данные изменены';
       const user = await User.findOne({ where: { id } });
       res.json(user);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async getFiles(req, res, next) {
+    try {
+      console.log('Файлы если они есть=========>', req.files);
+      console.log('REQ BODY  =========>', req.body);
     } catch (error) {
       console.log(error);
     }
