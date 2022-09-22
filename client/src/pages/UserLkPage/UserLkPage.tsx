@@ -134,7 +134,8 @@ const UserLkPage = () => {
               <Box>
                 <Box sx={{ ml: 0.5 }}>
                   <Typography fontSize="25px" id="card-description" mb={0.5}>
-                    {userLk?.first_name} {userLk?.last_name}
+                    {userLk?.last_name} {userLk?.first_name}{" "}
+                    {userLk?.patronymic}
                   </Typography>
                   <Typography fontSize="25px" id="card-description" mb={0.5}>
                     Email: {userLk?.email}
