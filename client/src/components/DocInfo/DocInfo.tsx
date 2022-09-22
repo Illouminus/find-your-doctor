@@ -25,14 +25,19 @@ const bull = (
 );
 
 export default function DocInfo(props:any) {
-    const {id, email, photo, sex, experience, first_name, last_name, speciality, tags} = props.props.el
+    const { id, email, photo, sex, experience, first_name, last_name, speciality, education, adress, tags} = props.props.el
     return (
         <>
 
                 <Card sx={{ minWidth: 250, maxWidth: 250, mr:2, border: "none", boxShadow: "none"}}>
                     <CardContent>
                         <Box sx = {{display:'flex'}}>
-                            <Avatar sx={{ bgcolor: pickRandomColor()[500] }}>{first_name[0]}{last_name[0]} </Avatar>
+                        {photo ? (
+                            <Avatar src={`http://localhost:4000/img/${photo}`} sx={{ width: 56, height: 56}} />
+                            ) : (
+                                
+                                <Avatar sx={{ width: 56, height: 56, bgcolor: pickRandomColor()[500] }}>{first_name[0]}{last_name[0]} </Avatar>
+                            )}
                             <br/>
                             <Typography variant="h5" component="div" className={s.docNameDiv}>
                             <NavLink to={`/doctor/${id}`} className={s.docName}>{first_name} {last_name} </NavLink>
@@ -40,17 +45,22 @@ export default function DocInfo(props:any) {
                         </Box>
                         <br/>
                         <Typography sx={{ fontSize: 14 }}  gutterBottom>
-                            {speciality}     {sex}
+                            {speciality}    
                         </Typography>
                         {/*<TagsCard ></TagsCard>*/}
                         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                            Опыт
+                        Опыт {experience}
                         </Typography>
                         <Typography variant="body2">
-                            {experience} awdawdaw dawdawdaw dwadawdaw dawdawdawdaw dawdawdawdawda wdawdawdawdawdaw awdawdawdawd awdawdawdawd awdawdawdawd awdawd awdawdawdkbawdkabdw
-                            <br />
-
-                        </Typography>
+                        {education}
+                        <br />
+                        <br />
+                    </Typography>
+                    <Typography variant="body2">
+                        Место работы:
+                        <br />
+                        {adress}
+                    </Typography>
                     </CardContent>
 
                 </Card>

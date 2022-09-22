@@ -103,6 +103,7 @@ class UserController {
           speciality: el.Doctor.speciality,
           sex: el.Doctor.sex,
           adress: el.Doctor.adress,
+          photo: el.Doctor.photo,
         },
       }));
       // console.log(result);

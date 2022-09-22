@@ -30,7 +30,7 @@ const appointmentRouter = require('./src/routers/appointmentRouter');
 const ratingRouter = require('./src/routers/ratingRouter');
 
 app.use(morgan('dev'));
-app.use(express.static(path.join(__dirname, '../public/')));
+app.use(express.static(path.join(__dirname, './uploads/')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());

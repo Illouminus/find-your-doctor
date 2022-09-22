@@ -2,6 +2,12 @@ import { Avatar, Box, Button, Card, Typography } from "@mui/material";
 import * as React from "react";
 import { RatingDoc } from "../../components";
 import { DocState } from "./DoctorPage";
+import { deepOrange, deepPurple, indigo, blue, teal, green, lime, orange, yellow, blueGrey } from '@mui/material/colors';
+
+function pickRandomColor() {
+  const colors: any[] = [deepOrange, deepPurple, indigo, blue, teal, green, lime, orange, yellow, blueGrey]
+  return colors[Math.floor((Math.random() * colors.length))]
+}
 
 export default function DoctorPage1({ el }: { el: DocState }) {
   console.log('el', el);
@@ -17,13 +23,16 @@ export default function DoctorPage1({ el }: { el: DocState }) {
         border: "none",
       }}
     >
-      <Avatar
-        src="/static/images/avatar/1.jpg"
-        sx={{ width: 100, height: 100 }}
+      {el.photo ? (
+        <Avatar src={`http://localhost:4000/img/${el.photo}`} sx={{ width: 100, height: 100 }} />
+      ) : (
+        <Avatar
+            sx={{ width: 100, height: 100, bgcolor: pickRandomColor()[500] }}
       >
         {el?.last_name[0]}
         {el?.first_name[0]}
-      </Avatar>
+      </Avatar>  
+      )}
       <Box>
         <Box sx={{ ml: 0.5 }}>
           <Typography fontSize="25px" id="card-description" mb={0.5}>

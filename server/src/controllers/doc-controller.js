@@ -99,6 +99,7 @@ class DocController {
           sex: el.User.sex,
           email: el.User.email,
           telephone: el.User.telephone,
+          photo: el.User.photo,
         },
       }));
       console.log(result);
