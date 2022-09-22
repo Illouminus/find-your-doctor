@@ -109,11 +109,11 @@ async function getDocuments(req, res) {
 }
 
 async function deleteDocuments(req, res) {
-  const { id, link } = req.body;
-  console.log(id, link);
-  const response = await Document.destroy({ where: { user_id: id.id, link } });
+  const { id, idDoc } = req.body;
+  console.log(id, idDoc);
+  const responseApp = await App_docs.destroy({ where: { doc_id: idDoc } });
+  const response = await Document.destroy({ where: { user_id: id.id, id: idDoc } });
   console.log(response);
-  res.send(response);
 }
 
 module.exports = {

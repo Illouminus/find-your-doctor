@@ -19,7 +19,7 @@ const Documents = () => {
           console.log(response.data);
           if (response.data) {
             response.data.forEach((data: any) => {
-              setLinks((prev):any => [...prev, data.link])
+              setLinks((prev):any => [...prev, data])
             })
           } else {          
           }
@@ -32,7 +32,10 @@ const Documents = () => {
 
   const deleteHeandler = (link: any) => {
 
-    axios.post('http://localhost:4000/deleteDocuments', {id, link}).then(data => data).catch(error => error)
+    const idDoc = link.id
+
+    console.log()
+    axios.post('http://localhost:4000/deleteDocuments', {idDoc, id}).then(data => data).catch(error => error)
     return setLinks(links.filter(item => item !== link))
   }
 
