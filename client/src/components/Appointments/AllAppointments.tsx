@@ -1,8 +1,7 @@
 import React from 'react'
 import cn from 'classnames'
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
+import { deepOrange, deepPurple, indigo, blue, teal, green, lime, orange, yellow, blueGrey } from '@mui/material/colors';
+import { Avatar } from '@mui/material';
 import AccessTimeRoundedIcon from '@mui/icons-material/AccessTime';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import Button from '@mui/material/Button';
@@ -13,11 +12,10 @@ import { IUser } from '../../models/iUser'
 
 import styles from './appoint.module.css'
 
-// const arr = [
-//   { id: 1, first_name: 'John', last_name: 'Smith', speciality: 'уролог', date: new Date('2022-09-25T12:00').toLocaleDateString(), time: new Date('2022-09-25T12:00').toLocaleTimeString().slice(0, 5) },
-//   { id: 2, first_name: 'Mary', last_name: 'Pirth', speciality: 'уролог', date: new Date('2022-09-05T14:00').toLocaleDateString(), time: new Date('2022-09-05T14:00').toLocaleTimeString().slice(0, 5) }
-// ]
-// console.log(arr);
+export function pickRandomColor() {
+  const colors: any[] = [deepOrange, deepPurple, indigo, blue, teal, green, lime, orange, yellow, blueGrey]
+  return colors[Math.floor((Math.random() * colors.length))]
+}
 
 type appsType = {
   appointments: AppStateType[]
@@ -27,6 +25,8 @@ type appsType = {
 export const AllAppointments: React.FC<appsType> = ({ appointments, setOneApp }) => {
   const user: IUser = useTypedSelector(state => state.user.user)
   const isDoctor = user.isDoctor
+  console.log('appointments', appointments);
+  
   return (
     <div className={styles.cards_box}>
       {appointments.map((item) => (
@@ -50,15 +50,29 @@ export const AllAppointments: React.FC<appsType> = ({ appointments, setOneApp })
           </div>
           <div className={styles.card_doc_desc}>
             <div className={styles.card_avatar_box}>
-              <div className={styles.card_avatar}>
-                <p className={styles.card_avatar_name}>
-                  {!isDoctor ? (
-                    item.doctor.last_name.slice(0, 1) + item.doctor.first_name.slice(0, 1)
+              {isDoctor ? (
+                item?.patient?.photo ? (
+                  <Avatar src={`http://localhost:4000/img/${item?.patient?.photo}`} sx={{ width: 60, height: 60 }} />
+                ) : (
+                  <Avatar
+                    sx={{ width: 60, height: 60, bgcolor: pickRandomColor()[500] }}
+                  >
+                      {item?.patient?.last_name[0]}
+                      {item?.patient?.first_name[0]}
+                  </Avatar>
+                )
+              ): (
+                  item?.doctor?.photo ? (
+                    <Avatar src={`http://localhost:4000/img/${item?.doctor?.photo}`} sx={{ width: 60, height: 60 }} />
                   ) : (
-                      item.patient.last_name.slice(0, 1) + item.patient.first_name.slice(0, 1)
-                  )}
-                </p>
-              </div>
+                    <Avatar
+                      sx={{ width: 60, height: 60, bgcolor: pickRandomColor()[500] }}
+                    >
+                        {item?.doctor?.last_name[0]}
+                        {item?.doctor?.first_name[0]}
+                    </Avatar>
+                  )
+              )}
             </div>
             <div>
               <Typography variant="h6" component="div">

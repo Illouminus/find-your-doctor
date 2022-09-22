@@ -79,7 +79,8 @@ const UserLkPage = () => {
       console.log(error) 
     }
   } 
-
+  console.log(userLk);
+  
   return (
     <>
     {isDoctor ? (
