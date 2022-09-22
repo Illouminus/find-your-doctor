@@ -8,7 +8,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import {IUser} from "../../models/iUser";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
-import {FileUpload} from '../'
+import {FileUpload, Upload} from '../'
 import axios from "axios";
 import {useState} from "react";
 import {Checkbox, FormControlLabel} from "@mui/material";
@@ -21,11 +21,11 @@ export default function ModalAppointment({props}) {
     const user : IUser = useTypedSelector(state => state.user.user)
     const [comment, setComment] = useState('')
     const [firstTime, setFirstTime] = useState(true)
-    const sendFormHandler =async ()=> {
+    const sendFormHandler = async ()=> {
     try{
         const response = axios.post('http://localhost:4000/appointment', {
             doctor_id: id,
-            user_id:user.id,
+            user_id: user.id,
             time:time,
             date:date,
             comment: comment,
@@ -37,8 +37,9 @@ export default function ModalAppointment({props}) {
         }}catch(e){
         console.log(e)
     }
-
     }
+
+    
     return (
         <div>
             <Dialog open={openModal} onClose={handleClose}>
@@ -55,7 +56,6 @@ export default function ModalAppointment({props}) {
                     </DialogContentText>
                     <FormControlLabel onClick ={()=>setFirstTime(!firstTime)}
                      control={<Checkbox defaultChecked />} label="Первичный приём" />
-
                     <TextField
                         onChange = {(e:any)=> setComment(e.target.value)}
                         name='comment'
@@ -69,8 +69,8 @@ export default function ModalAppointment({props}) {
                         fullWidth
                         variant="standard"
                     />
-                    <FileUpload/>
-
+                    {/* <FileUpload/> */}
+                <Upload id={user.id}/>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Отменить</Button>
