@@ -31,5 +31,6 @@ export const initStateApp: OneAppStateType = {
       telephone: null,
       photo: null,
     },
+    documents_id: []
   }
 }
