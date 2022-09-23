@@ -2,15 +2,17 @@
   text-decoration: none;
 }
 
+.links:active{
+  color: inherit;
+}
+
 .linksLk{
   text-decoration: none;
   color: black;
 }
 
 .buttonLogout{
-  border: none;
-  background: none;
-  font-size: 18px;  
+
 }
 .lk {
   display: flex;
@@ -28,4 +30,14 @@
 .logo{
   height: 100%;
   width: 100%;
+}
+
+.containerItemsBar{
+  display: flex;
+  flex-direction: column;
+  color: black;
+}
+
+.menuItem{
+  margin-bottom: 5px;
 }

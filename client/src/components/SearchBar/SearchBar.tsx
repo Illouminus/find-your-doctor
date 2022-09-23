@@ -24,14 +24,15 @@ function SearchBar() {
 
 
     return (
+
                 <div className={cn(doctors.length > 0 ? styles.top : styles.center)}>
                     <Box sx={{ display: 'flex', flexWrap: 'nowrap', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                         <form></form>
                         <TextField
                                 onChange = {inputsHandler}
                                 name = 'inputSpecialist'
-                                label="Специолист, жалобы"
-                                id="Специолист, жалобы"
+                                label="Специалист, жалобы"
+                                id="Специалист, жалобы"
                                 sx={{ m: 1, width: '25ch' }}
                                 InputProps={{
                                     startAdornment: <InputAdornment position="start"><VaccinesIcon/></InputAdornment>

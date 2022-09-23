@@ -1,0 +1,26 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+}
+
+.main {
+    background: #333;
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.box {
+    margin: 5px;
+    border-radius: 20px;
+    transition: background 100ms ease;
+}
+
+.selectable-selectbox {
+    z-index: 9000;
+    position: absolute;
+    cursor: default;
+    background: none;
+    border: 1px dashed grey;
+}

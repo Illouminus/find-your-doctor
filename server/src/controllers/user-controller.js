@@ -126,6 +126,50 @@ class UserController {
     }
   }
 
+  async getDocTimetable(req, res) {
+    try {
+      const {id} = req.params;
+      console.log('id', id)
+      const theTimetables = await Timetable.findAll({where: {doctor_id:id}})
+      const theAppointments = await Appointment.findAll({where: {doctor_id:id}})
+      res.json({theTimetables, theAppointments})
+    }catch(e){
+      console.log('Упс', e)
+      res.json('Ошибка')
+    }
+  }
+  async putDocTimetable(req, res) {
+    try {
+      const {calendar, user_id} = req.body;
+      console.log('id', calendar, user_id, 'AAAAAAA')
+      console.log('В ручку POST не заходит')
+        const oldTimetables = await Timetable.destroy({where:{doctor_id:user_id}})
+        for (let day of calendar){
+          let newTimetable = await Timetable.create({
+            8: day.timetable['8'],
+            9: day.timetable['9'],
+            10: day.timetable['10'],
+            11: day.timetable['11'],
+            12: day.timetable['12'],
+            13: day.timetable['13'],
+            14: day.timetable['14'],
+            15: day.timetable['15'],
+            16: day.timetable['16'],
+            17: day.timetable['17'],
+            18: day.timetable['18'],
+            19: day.timetable['19'],
+            doctor_id:user_id,
+            date:day.day
+          })
+        }
+        res.json('база успешно обновлена')
+    }catch(e){
+      console.log('Упс', e)
+      res.json('Ошибка')
+    }
+  }
+
+
   async updateUser(req, res) {
     try {
       console.log('!!!!', req.body);
@@ -154,6 +198,7 @@ class UserController {
   //     console.log(error);
   //   }
   // }
+
 
   // async calendar(req, res, next) {
   //   const { id } = req.params;

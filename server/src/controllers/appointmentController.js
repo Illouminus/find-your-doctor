@@ -1,6 +1,8 @@
 /* eslint-disable camelcase */
 const { Op } = require('sequelize');
-const { Appointment, Timetable, Document } = require('../../db/models');
+const {
+  Appointment, Timetable, Document, App_docs,
+} = require('../../db/models');
 
 async function setAppointment(req, res) {
   // console.log(req.body);
@@ -24,21 +26,14 @@ async function setAppointment(req, res) {
       comment,
       firstTime,
     );
-    for (let i = 0; i < path.length; i++) {
-      const response = await Document.create({ user_id, link: path[i] });
-      console.log(response);
-    }
     const newDate = `${date.slice(0, 10)} ${time}:00:00`;
     console.log(newDate);
     console.log(date.slice(0, 10));
     const newAppointment = await Appointment.create({
       doctor_id, user_id, date_time: newDate, first_time: firstTime, comments_patient: comment, status: true,
     });
-
     const startDate = new Date(`${date.slice(0, 10)}`);
-
     time = `${time}`;
-
     const t = await Timetable.update({ [time]: false }, {
       where: {
 
@@ -46,9 +41,16 @@ async function setAppointment(req, res) {
         date: { [Op.between]: [startDate, `${date.slice(0, 10)} 23:59:59.000`] },
       },
     });
-    console.log(t);
+    for (let i = 0; i < path.length; i++) {
+      const response = await Document.create({ user_id, link: path[i] });
+      const writeApp = await App_docs.create({ doc_id: response.id, app_id: newAppointment.id });
+      console.log('==============>', response);
+      console.log('==============>', writeApp);
+    }
 
+    console.log(t);
     const data = 'Вы успешно записались на приём ';
+
     res.json(data);
   } catch (error) {
     const data = 'Что-то пошло не так. Обновите страницу и попробуйте снова';
@@ -106,6 +108,14 @@ async function getDocuments(req, res) {
   return res.send(response);
 }
 
+async function deleteDocuments(req, res) {
+  const { id, idDoc } = req.body;
+  console.log(id, idDoc);
+  const responseApp = await App_docs.destroy({ where: { doc_id: idDoc } });
+  const response = await Document.destroy({ where: { user_id: id.id, id: idDoc } });
+  console.log(response);
+}
+
 module.exports = {
-  setAppointment, cancelAppointment, updCommentAppointment, getDocuments,
+  setAppointment, cancelAppointment, updCommentAppointment, getDocuments, deleteDocuments,
 };

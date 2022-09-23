@@ -3,7 +3,16 @@ import {Provider} from 'react-redux'
 import {store} from './store'
 import {Route, Routes, BrowserRouter} from 'react-router-dom'
 
-import {RegistrationPage, MainPage, LoginPage, DoctorPage, UserLkPage, Documents, AppointmentsPage} from './pages'
+import {
+    RegistrationPage,
+    MainPage,
+    LoginPage,
+    DoctorPage,
+    UserLkPage,
+    Documents,
+    AppointmentsPage,
+    SetTimetablePage
+} from './pages'
 
 import {Layout} from './components'
 import { useActions } from './hooks/useActions'
@@ -16,7 +25,7 @@ import DoctorLkPage from './pages/DoctorPage/DoctorLkPage'
 function App() {
   const user : IUser = useTypedSelector(state => state.user.user)
   const {checkAuthUser, checkAuthDoc} = useActions()
-  console.log(user.isDoctor)
+  // console.log(user.isDoctor)
 
   useEffect(() => {
     if(localStorage.getItem('token') && !localStorage.getItem('isDoctor')) {
@@ -30,7 +39,7 @@ function App() {
         <BrowserRouter>
             <Provider store={store}>
       <Routes>
-          <Route path="/" element={<Layout />}>
+          {/* <Route path="/" element={<Layout />} /> */}
           <Route path="/" element={ <MainPage /> } />
           <Route path="/registration" element={ <RegistrationPage /> } />
           <Route path="/login" element={ <LoginPage /> } />
@@ -38,8 +47,8 @@ function App() {
           <Route path="/appointments" element={ <AppointmentsPage /> } />
           <Route path="/documents" element={ <Documents />} />
           <Route path="/user/:id" element={ <UserLkPage /> } />
+              <Route path="/timetable/" element={ <SetTimetablePage /> } />
           <Route path="/doctor/lk/:id" element={<DoctorLkPage />} />
-          </Route>
       </Routes>
             </Provider>
             </BrowserRouter>
