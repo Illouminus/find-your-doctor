@@ -47,8 +47,9 @@ function App() {
           <Route path="/appointments" element={ <AppointmentsPage /> } />
           <Route path="/documents" element={ <Documents />} />
           <Route path="/user/:id" element={ <UserLkPage /> } />
-              <Route path="/timetable/" element={ <SetTimetablePage /> } />
+          <Route path="/timetable/" element={ <SetTimetablePage /> } />
           <Route path="/doctor/lk/:id" element={<DoctorLkPage />} />
+          </Route>
       </Routes>
             </Provider>
             </BrowserRouter>
