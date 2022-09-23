@@ -5,7 +5,7 @@ const { validationResult } = require('express-validator');
 const ApiError = require('../exceptions/api-error');
 const userService = require('../service/user-service');
 const {
-  Appointment, User, Doctor, Timetable,
+  Appointment, User, Doctor, Timetable, App_docs,
 } = require('../../db/models');
 
 class UserController {
@@ -85,7 +85,7 @@ class UserController {
   async getAppointments(req, res, next) {
     try {
       const { id } = req.params;
-      const response = await Appointment.findAll({ where: { user_id: id }, include: { model: Doctor }, order: [['date_time']] });
+      const response = await Appointment.findAll({ where: { user_id: id }, include: [{ model: Doctor }, { model: App_docs }], order: [['date_time', 'desc']] });
       const result = response.map((el) => ({
         id: el.id,
         comments_patient: el.comments_patient,
@@ -105,6 +105,7 @@ class UserController {
           adress: el.Doctor.adress,
           photo: el.Doctor.photo,
         },
+        documents_id: el.App_docs,
       }));
       // console.log(result);
       res.json(result);
@@ -122,6 +123,50 @@ class UserController {
       res.json(user);
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  async getDocTimetable(req, res) {
+    try {
+      const { id } = req.params;
+      console.log('id', id);
+      const theTimetables = await Timetable.findAll({ where: { doctor_id: id } });
+      const theAppointments = await Appointment.findAll({ where: { doctor_id: id } });
+      res.json({ theTimetables, theAppointments });
+    } catch (e) {
+      console.log('Упс', e);
+      res.json('Ошибка');
+    }
+  }
+
+  async putDocTimetable(req, res) {
+    try {
+      const { calendar, user_id } = req.body;
+      console.log('id', calendar, user_id, 'AAAAAAA');
+      console.log('В ручку POST не заходит');
+      const oldTimetables = await Timetable.destroy({ where: { doctor_id: user_id } });
+      for (const day of calendar) {
+        const newTimetable = await Timetable.create({
+          8: day.timetable['8'],
+          9: day.timetable['9'],
+          10: day.timetable['10'],
+          11: day.timetable['11'],
+          12: day.timetable['12'],
+          13: day.timetable['13'],
+          14: day.timetable['14'],
+          15: day.timetable['15'],
+          16: day.timetable['16'],
+          17: day.timetable['17'],
+          18: day.timetable['18'],
+          19: day.timetable['19'],
+          doctor_id: user_id,
+          date: day.day,
+        });
+      }
+      res.json('база успешно обновлена');
+    } catch (e) {
+      console.log('Упс', e);
+      res.json('Ошибка');
     }
   }
 

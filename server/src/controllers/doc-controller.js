@@ -2,7 +2,7 @@
 const { validationResult } = require('express-validator');
 const ApiError = require('../exceptions/api-error');
 const DocService = require('../service/doctor-service');
-const { Appointment, User } = require('../../db/models');
+const { Appointment, User, App_docs } = require('../../db/models');
 
 class DocController {
   async registration(req, res, next) {
@@ -83,7 +83,7 @@ class DocController {
   async getAppointments(req, res, next) {
     try {
       const { id } = req.params;
-      const response = await Appointment.findAll({ where: { doctor_id: id }, include: { model: User }, order: [['date_time']] });
+      const response = await Appointment.findAll({ where: { doctor_id: id }, include: [{ model: User }, { model: App_docs }], order: [['date_time', 'desc']] });
       const result = response.map((el) => ({
         id: el.id,
         comments_patient: el.comments_patient,
@@ -101,6 +101,7 @@ class DocController {
           telephone: el.User.telephone,
           photo: el.User.photo,
         },
+        documents_id: el.App_docs,
       }));
       console.log(result);
       res.json(result);
