@@ -29,17 +29,13 @@ function MainPage() {
                 {loading &&
                     <>
                         <Box sx={{display:'flex', margin:'5px'}}>
-
                             <Skeleton variant="circular">
                                 <Avatar />
                             </Skeleton>
                             <Skeleton variant="rounded"  width="600px">
-
                             </Skeleton>
-
                         </Box>
                         <Skeleton variant="rounded" width="600px" height='500px'>
-
                         </Skeleton>
                         </>
                 }
@@ -60,8 +56,6 @@ function MainPage() {
                 </div>
                 }
                 </div>
-
-
             </Stack>
         </>
     )

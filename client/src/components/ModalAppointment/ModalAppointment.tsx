@@ -41,34 +41,45 @@ export default function ModalAppointment({props}) {
     const navigate = useNavigate()
     
     const sendFormHandler = async ()=> {
-      const data = new FormData();
-      data.append("doctor_id", id)
-      data.append("user_id", String(user.id))
-      data.append("time",time)
-      data.append("date", date)
-      data.append("comment", comment)
-      data.append("firstTime", String(firstTime))
-      file.forEach((fileOne: any)=> data.append("file", fileOne))
+   
+      if(user.id) {
+        const data = new FormData();
+        data.append("doctor_id", id)
+        data.append("user_id", String(user.id))
+        data.append("time",time)
+        data.append("date", date)
+        data.append("comment", comment)
+        data.append("firstTime", String(firstTime))
+        file.forEach((fileOne: any)=> data.append("file", fileOne)) 
+      try{
+          const response = axios.post('http://localhost:4000/appointment', data)
+          const feedback = await response
+          console.log(feedback);
+          if (feedback.data){
+            setSeverity('success')
+            setMessage(feedback.data)
+            setOpen(true)
+            handleClose()
+            setTimeout(() => {
+              navigate('/')
+            }, 1000)
+              console.log()
+          }}catch(e){
+          console.log(e)
+      }
+      }
+      setSeverity('error')
+            setMessage('Зарегистрируйтесь чтобы записаться!')
+            setOpen(true)
+            handleClose()
+            setTimeout(() => {
+              navigate('/registration')
+            }, 2000)
       
-    try{
-        const response = axios.post('http://localhost:4000/appointment', data)
-        const feedback = await response
-        console.log(feedback);
-        if (feedback.data){
-          setSeverity('success')
-          setMessage(feedback.data)
-          setOpen(true)
-          handleClose()
-          setTimeout(() => {
-            navigate('/')
-          }, 1000)
-            console.log()
-        }}catch(e){
-        console.log(e)
-    }
     }
 
     return (
+      <>
         <div className={s.container}>
             <Dialog open={openModal} onClose={handleClose} className={s.container}>
                 <DialogTitle>Запись на {time}:00 {date.slice(8,10)}.{date.slice(5,7)}  {date.slice(0,4)}</DialogTitle>
@@ -98,8 +109,6 @@ export default function ModalAppointment({props}) {
                         variant="standard"
                         className={s.textArea}
                     />
-                    {/* <FileUpload/> */}
-                {/* <Upload id={user.id}/> */}
               <Button variant="contained" component="label">
                   Загрузить файл
                <input hidden  multiple type="file" onChange={(e): any | null=> {
@@ -117,7 +126,8 @@ export default function ModalAppointment({props}) {
                     <Button onClick={sendFormHandler}>Подтвердить запись</Button>
                 </DialogActions>
             </Dialog>
-            <MessageUser open={open} handleClose={handleCloseе} severity={severity} message={message}/>
         </div>
+        <MessageUser open={open} handleClose={handleCloseе} severity={severity} message={message}/>
+        </>
     );
 }

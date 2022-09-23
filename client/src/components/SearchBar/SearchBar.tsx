@@ -19,11 +19,12 @@ function SearchBar() {
     const inputsHandler = (e:any) => {
 
         setInputs((prev) => ({...prev, [e.target.name] : e.target.value}));
-        fetchDoctors(inputs.inputSpecialist.toLowerCase(), inputs.inputPlace.toLowerCase())
+        fetchDoctors(inputs.inputSpecialist.toLowerCase(), inputs.inputPlace)
     }
 
 
     return (
+
                 <div className={cn(doctors.length > 0 ? styles.top : styles.center)}>
                     <Box sx={{ display: 'flex', flexWrap: 'nowrap', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                         <form></form>
