@@ -6,8 +6,6 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
-
-
 const FileStore = require('session-file-store')(session);
 
 const dbConnectionCheck = require('./db/dbConnectCheck');
@@ -31,6 +29,7 @@ const doctorRouter = require('./src/routers/doctorRouter');
 const searchRouter = require('./src/routers/searchRouter');
 const appointmentRouter = require('./src/routers/appointmentRouter');
 const ratingRouter = require('./src/routers/ratingRouter');
+const documentsRouter = require('./src/routers/documentsRouter');
 
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, './uploads/')));
@@ -60,6 +59,7 @@ app.use('/', doctorRouter);
 app.use('/', searchRouter);
 app.use('/', appointmentRouter);
 app.use('/api/rating', ratingRouter);
+app.use('/api/documents', documentsRouter);
 
 app.listen(PORT ?? 4000, () => {
   console.log('Сервер запущен!');

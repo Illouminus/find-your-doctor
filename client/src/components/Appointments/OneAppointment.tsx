@@ -27,10 +27,10 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
   const isDoctor = user.isDoctor
   const item = oneApp.appointment;
   console.log('appointment', oneApp.appointment);
-  console.log('oneApp', oneApp);
+  // console.log('oneApp', oneApp);
 
   const [input, setInput] = useState<boolean>(false);
-
+  const [docs, setDocs] = useState<any>([]);
   const [stars, setStars] = useState<number | null>(0);
 
   useEffect(() => {
@@ -51,11 +51,24 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
     })();
   }, [item]);
 
+  useEffect(() => {
+    (async () => {
+      try {
+          const response = await axios.post('http://localhost:4000/api/documents/', {id: item.id})
+          console.log(response.data);
+          if (response.data) {
+            setDocs(response.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, [item]);
+
   const addRating = async (user_id: number | null, doctor_id: number | null, stars: number | null) => {
-    console.log('stars:', stars, 'user_id:', user_id, 'doctor_id:', doctor_id);
     try {
       const response = await axios.post(`http://localhost:4000/api/rating/setstars`, {user_id, doctor_id, stars })
-      console.log(response.data);
+      // console.log(response.data);
         // setOneApp((prev) => {
         //   const obj = { ...prev }
         //   obj.appointment.status = false
@@ -70,7 +83,6 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
     try {
       axios.post(`http://localhost:4000/appointment/undo`, { id: item.id, doctor_id: item.doctor.id, date_time: item.date_time }).then((resFromServer) => {
         const data = resFromServer.data;
-        console.log(data);
         setOneApp((prev) => {
           const obj = { ...prev }
           obj.appointment.status = false
@@ -256,9 +268,14 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
             )}
         </div>
       </div>
-      <div className={styles.onecard_secondcard_container}>
-        <div className={styles.onecard_second_desc}></div>
-      </div>
+      {item.documents_id.length > 0 && (
+        <div className={styles.onecard_secondcard_container}>
+          <div className={styles.onecard_second_desc}>
+
+          </div>
+        </div>
+      )}
+      
     </div>
   )
 }

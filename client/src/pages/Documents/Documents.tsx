@@ -4,7 +4,7 @@ import { Upload, } from '../../components'
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import OneFile from './OneFile';
 import s from './styles.module.css'
-import {CalendarDoc} from '../../components/CalendarDoc/CalendarDoc'
+// import {CalendarDoc} from '../../components/CalendarDoc/CalendarDoc'
 const Documents = () => {
   const user = useTypedSelector(state => state.user.user)
   console.log(user.id)

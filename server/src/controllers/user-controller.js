@@ -5,7 +5,7 @@ const { validationResult } = require('express-validator');
 const ApiError = require('../exceptions/api-error');
 const userService = require('../service/user-service');
 const {
-  Appointment, User, Doctor, Timetable,
+  Appointment, User, Doctor, Timetable, App_docs,
 } = require('../../db/models');
 
 class UserController {
@@ -85,7 +85,7 @@ class UserController {
   async getAppointments(req, res, next) {
     try {
       const { id } = req.params;
-      const response = await Appointment.findAll({ where: { user_id: id }, include: { model: Doctor }, order: [['date_time']] });
+      const response = await Appointment.findAll({ where: { user_id: id }, include: [{ model: Doctor }, { model: App_docs }], order: [['date_time']] });
       const result = response.map((el) => ({
         id: el.id,
         comments_patient: el.comments_patient,
@@ -105,6 +105,7 @@ class UserController {
           adress: el.Doctor.adress,
           photo: el.Doctor.photo,
         },
+        documents_id: el.App_docs,
       }));
       // console.log(result);
       res.json(result);
