@@ -21,7 +21,6 @@ import ButtonMy from './Button'
 
 
 export const ResponsiveAppBar = () => {
-
  const{user} = useTypedSelector(state => state)
  console.log(user);
 
@@ -185,7 +184,6 @@ const settings = [
                 <Typography textAlign="center">{settings[1]}</Typography>
                 {user.user.isDoctor && <Typography textAlign="center">{settings[2]}</Typography>}
                 <Typography textAlign="center">{settings[3]}</Typography>
-
                 </div>
               </MenuItem>
             </Menu>
