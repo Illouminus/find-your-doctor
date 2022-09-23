@@ -36,6 +36,7 @@ export interface UserLkState {
 const UserLkPage = () => {
   const user: IUser = useTypedSelector((state) => state.user.user);
   const isDoctor = user.isDoctor;
+  console.log(isDoctor)
 
   const [userLk, setUserLk] = useState<UserLkState>();
 
@@ -64,18 +65,18 @@ const UserLkPage = () => {
             const data = resFromServer.data;
             setUserLk(data);
           });
-  }, []);
+  }, [user]);
 
   const updateUser = (e: any) => {
     e.preventDefault();
-    const valueName = e.target.first_name.value;
-    const valueLastName = e.target.last_name.value;
-    const valueEmail = e.target.email.value;
-    const valueTelephone = e.target.telephone.value;
-    const valueSex = e.target.sex.value;
-    const valueSpeciality = e.target.speciality.value;
-    const valueEducation = e.target.education.value;
-    const valueExperience = e.target.experience.value;
+    const valueName = e.target?.first_name.value;
+    const valueLastName = e.target?.last_name.value;
+    const valueEmail = e.target?.email.value;
+    const valueTelephone = e.target?.telephone.value;
+    const valueSex = e.target?.sex?.value;
+    const valueSpeciality = e.target?.speciality?.value;
+    const valueEducation = e.target?.education?.value;
+    const valueExperience = e.target?.experience?.value;
     try {
       isDoctor
         ? axios
@@ -156,7 +157,7 @@ const UserLkPage = () => {
                     Телефон: {userLk?.telephone}
                   </Typography>
                   <Typography fontSize="25px" id="card-description" mb={0.5}>
-                    Образование: {userLk?.education}
+                    Категория: {userLk?.education}
                   </Typography>
                   <Typography fontSize="25px" id="card-description" mb={0.5}>
                     Специальность: {userLk?.speciality}
@@ -367,15 +368,6 @@ const UserLkPage = () => {
                     type="text"
                     fullWidth
                     defaultValue={userLk?.last_name}
-                  />
-                  <TextField
-                    autoFocus
-                    margin="dense"
-                    name="last_name"
-                    label="Фамилия"
-                    type="text"
-                    fullWidth
-                    defaultValue={userLk?.patronymic}
                   />
                   <TextField
                     autoFocus

@@ -83,7 +83,7 @@ class DocController {
   async getAppointments(req, res, next) {
     try {
       const { id } = req.params;
-      const response = await Appointment.findAll({ where: { doctor_id: id }, include: [{ model: User }, { model: App_docs }], order: [['date_time']] });
+      const response = await Appointment.findAll({ where: { doctor_id: id }, include: [{ model: User }, { model: App_docs }], order: [['date_time', 'desc']] });
       const result = response.map((el) => ({
         id: el.id,
         comments_patient: el.comments_patient,

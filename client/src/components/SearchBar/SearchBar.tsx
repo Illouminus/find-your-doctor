@@ -19,7 +19,7 @@ function SearchBar() {
     const inputsHandler = (e:any) => {
 
         setInputs((prev) => ({...prev, [e.target.name] : e.target.value}));
-        fetchDoctors(inputs.inputSpecialist.toLowerCase(), inputs.inputPlace.toLowerCase())
+        fetchDoctors(inputs.inputSpecialist.toLowerCase(), inputs.inputPlace)
     }
 
 

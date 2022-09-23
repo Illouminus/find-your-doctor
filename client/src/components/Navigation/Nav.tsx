@@ -205,8 +205,8 @@ const settings = [
               <MenuItem  onClick={handleCloseUserMenu}>
               <div className={styles.lk}>
                 <Typography textAlign="center"><p className={styles.p}>{settings[0]}</p></Typography>
-                <Typography textAlign="center">{settings[1]}</Typography>
-                <Typography textAlign="center">{settings[2]}</Typography>
+                {!user.user.isDoctor && <Typography textAlign="center">{settings[1]}</Typography>} 
+                {user.user.isDoctor && <Typography textAlign="center">{settings[2]}</Typography>} 
                   <Typography textAlign="center">{settings[3]}</Typography>
                 <Typography textAlign="center"><ButtonMy/></Typography>
 

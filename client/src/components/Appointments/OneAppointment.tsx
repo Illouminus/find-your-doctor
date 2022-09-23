@@ -28,9 +28,6 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
   const isDoctor = user.isDoctor
   const item = oneApp.appointment;
   console.log('appointment', oneApp.appointment);
-  // console.log('user', user);
-  // console.log('item', item);
-
   const [input, setInput] = useState<boolean>(false);
   const [docs, setDocs] = useState<any>([]);
   const [stars, setStars] = useState<number | null>(0);
@@ -70,12 +67,6 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
   const addRating = async (user_id: number | null, doctor_id: number | null, stars: number | null) => {
     try {
       const response = await axios.post(`http://localhost:4000/api/rating/setstars`, {user_id, doctor_id, stars })
-      // console.log(response.data);
-        // setOneApp((prev) => {
-        //   const obj = { ...prev }
-        //   obj.appointment.status = false
-        //   return obj;
-        // })
     } catch (error) {
       console.log(error);
     }
@@ -99,7 +90,6 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
   const updateComment = (e: any, isDoctor: boolean) => {
     e.preventDefault();
     const value = e.target.comment.value;
-    // const user_id = (!isDoctor ? item?.doctor?.id : item?.patient?.id);
     console.log(item.id, value, isDoctor);
     try {
       axios.post('http://localhost:4000/appointment/updcomment', { id: item.id, value, isDoctor }).then((resFromServer) => {
@@ -192,7 +182,6 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
             ('') : (
               <div className={styles.button_box}>
                 <Button onClick={() => appCancel(item.id)} size="small">Отменить запись</Button>
-                <Button size="small">перенести запись</Button>
               </div>
             ))
           ) : (
