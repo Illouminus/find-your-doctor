@@ -37,7 +37,7 @@ export const AppointmentsPage: React.FC = () => {
     <div className={styles.content_container}>
       <AllAppointments appointments={appointments} setOneApp={setOneApp} />
       {oneApp.isVisible && <OneAppointment oneApp={oneApp} setOneApp={setOneApp} />}
-      {/* <DocCalendar /> */}
+      {appointments.length  === 0 && <div>Записей не найдено</div>}
     </div>
   )
 }

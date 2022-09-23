@@ -13,13 +13,13 @@ const ButtonMy = ({color}: any) => {
   return (
     <>
      {user.isDoctor ?
-       (<Button sx={{ color: color,  display: 'block', padding: 0 }} 
+       (<Button size='small' sx={{ color: color,  display: 'block', padding: 0 }} 
         className={s.buttonLogout} onClick={() => {
         logoutDoc()
         navigate('/')
       }}>Выход</Button>) 
        :
-        (<Button sx={{ color: color, display: 'block', padding: 0 }}
+       (<Button size='small' sx={{ color: color, display: 'block', padding: 0 }}
         className={s.buttonLogout}onClick={() => {
         logoutUser()
         navigate('/')

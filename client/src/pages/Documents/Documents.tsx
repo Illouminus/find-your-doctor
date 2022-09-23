@@ -4,7 +4,6 @@ import { Upload, } from '../../components'
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import OneFile from './OneFile';
 import s from './styles.module.css'
-// import {CalendarDoc} from '../../components/CalendarDoc/CalendarDoc'
 const Documents = () => {
   const user = useTypedSelector(state => state.user.user)
   console.log(user.id)
@@ -42,14 +41,12 @@ const Documents = () => {
 
   return (
     <div className={s.containerDoc}>
-      {/* <Upload /> */}
       <div className={s.containerList}>
         {links.map((link) => (
           <OneFile link={link} deleteHeandler={deleteHeandler}/>
         ))}
       </div>
     </div>
-    // <CalendarDoc />
   )
 }
 
