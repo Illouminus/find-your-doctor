@@ -24,6 +24,7 @@ function SearchBar() {
 
 
     return (
+
                 <div className={cn(doctors.length > 0 ? styles.top : styles.center)}>
                     <Box sx={{ display: 'flex', flexWrap: 'nowrap', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                         <form></form>
