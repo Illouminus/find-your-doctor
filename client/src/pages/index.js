@@ -7,6 +7,7 @@ import UserLkPage from "./UserLkPage/UserLkPage";
 import Documents from "./Documents/Documents";
 import SetTimetablePage from "./SetTimetablePage/SetTimetablePage";
 
-
+// import Room from "./Room/Room"
+// import OneRoom from './Room/OneRoom'
 
 export { LoginPage, MainPage, RegistrationPage, AppointmentsPage, DoctorPage, UserLkPage, Documents, SetTimetablePage};

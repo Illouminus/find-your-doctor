@@ -1,3 +1,23 @@
-.containerDoc{
-  display: flex
+.content_container {
+  width: 100vw;
+  display: flex;
+  justify-content: end;
+  padding-right: 40px;
+  height: calc(100vh - 210px);
+  overflow: hidden;
+}
+
+.map_container {
+  width: 25vw;
+  margin-left: 40px;
+}
+
+.cards_box {
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.cards_box::-webkit-scrollbar {
+  display: none;
 }

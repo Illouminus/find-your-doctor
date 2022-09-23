@@ -29,9 +29,7 @@ const ParentMap = ({docs}: any) => {
 
 
   const onPlaceSelect = useCallback((coordinates : any) => {
-    console.log(coordinates);
-    
-    setCenter(coordinates)
+    setCenter(center)
   }, 
   [])
 
@@ -51,9 +49,18 @@ const handlerMode = useCallback(() => {
     
   }, [mode])
 
+
+
+
   const onMarkerAdd = useCallback((coordinates :any) =>{
+    console.log('PARENT MAP COORDINATES', coordinates);
+    
     setMarkers([...markers, coordinates])
   }, [markers])
+
+
+
+
 
   useEffect(() => {
     getBrowserLocation().then((curLoc :any) => {
@@ -64,13 +71,14 @@ const handlerMode = useCallback(() => {
     })
   }, [])
 
+
   return (
     <div className={s.mapContainer}>
       <div className={s.searchContainer}>
-      <Autocomplete isLoaded={isLoaded} onSelect={onPlaceSelect} docs={docs}/>
+      <Autocomplete isLoaded={isLoaded} onSelect={onPlaceSelect} handlerMode={handlerMode} onMarkerAdd={onMarkerAdd} docs={docs}/>
       {/* <button onClick={handlerMode}>Сменить режим</button> */}
       </div>
-    {isLoaded ?  (<Map center={center} mode={mode} markers={markers} onMarkerAdd={onMarkerAdd}/>): (<h2>Загрузка</h2>)}
+    {isLoaded ?  (<Map handlerMode={handlerMode} center={center} mode={mode} markers={markers} onMarkerAdd={onMarkerAdd} docs={docs}/>): (<h2>Загрузка</h2>)}
     </div>
   )
 }

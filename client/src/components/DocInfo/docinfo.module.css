@@ -1,0 +1,9 @@
+.docNameDiv{
+  padding-left: 10px;
+}
+
+.docName{
+  list-style: none;
+  text-decoration: none;
+  color: black;
+}

@@ -1,7 +1,10 @@
+import axios from 'axios'
 import React, { useState, DragEvent } from 'react'
 import styles from './styles.module.css'
 
-const Upload = () => {
+const Upload = ({id}: any) => {
+  console.log(id);
+  
   const [drag, setDrag] = useState(false)
   const dragStartHandler = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault()
@@ -13,13 +16,19 @@ const Upload = () => {
     setDrag(false)
   }
 
-  const onDropHandler = (e: DragEvent<HTMLDivElement>) => {
+  const onDropHandler = async(e: DragEvent<HTMLDivElement>) => {
     e.preventDefault()
     let files = e.dataTransfer.files
+    console.log(files);
+    
     const formData = new FormData()
+    formData.append('id', id)
     Array.from(files).forEach(file => formData.append('file', file))
-    console.log('FORMDATA', formData);
     setDrag(false)
+    console.log(formData);
+    // 'http://localhost:4000/api/files'
+    const response = await axios.post('https://httpbin.org/anything', formData)
+    console.log(response);
   }
 
   return (

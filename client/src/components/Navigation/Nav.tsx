@@ -25,14 +25,14 @@ export const ResponsiveAppBar = () => {
  const{user} = useTypedSelector(state => state)
  console.log(user);
 
-
 const pages = [<NavLink to="registration" className={styles.links}>Регистрация</NavLink>, <NavLink to="login" className={styles.links}>Логин</NavLink>];
+
 const settings = [
-    <NavLink to={`/user/${user.user.id}`}>Личный кабинет</NavLink>,
-    <NavLink to="/documents">Мои документы</NavLink>,
-    <NavLink to="/timetable">Моё расписание</NavLink>,
-    <NavLink to="/appointments">Мои записи</NavLink>,
-];
+<NavLink to={`/user/${user.user.id}`} className={styles.linksLk}>Личный кабинет</NavLink>,
+<NavLink to="/documents" className={styles.linksLk}>Мои документы</NavLink>,
+ <NavLink to="/timetable" className={styles.linksLk}>Моё расписание</NavLink>,
+<NavLink to="/appointments" className={styles.linksLk}>Мои записи</NavLink>];
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -56,7 +56,6 @@ const settings = [
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -72,9 +71,10 @@ const settings = [
               textDecoration: 'none',
             }}
           >
-            <NavLink to="/main" className={styles.links}>LOGO</NavLink>
+            <div className={styles.containerLogo}>
+            <NavLink to="/" className={styles.links}><img className={styles.logo} src="./logo.png" alt=""/></NavLink>
+            </div>
           </Typography>
-
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -105,16 +105,22 @@ const settings = [
               }}
             >
                 <MenuItem onClick={handleCloseNavMenu}>
-                { !user.isAuth && 
-                     <>                  
-                        <Typography textAlign="center">{pages[0]}</Typography>
-                        <Typography textAlign="center">{pages[1]}</Typography>
-                     </>
+                { !user.isAuth ? (
+                  <div className={styles.containerItemsBar}>            
+                  <Typography className={styles.menuItem} textAlign="center">{pages[0]}</Typography>
+                  <Typography className={styles.menuItem} textAlign="center">{pages[1]}</Typography>
+                  </div>   
+                ): (
+                  <div className={styles.containerItemsBar}>            
+                  <Typography  textAlign="center"><ButtonMy color={'black'}/></Typography>
+                  </div>   
+                )
+
+
            } 
                 </MenuItem>
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -131,14 +137,22 @@ const settings = [
               textDecoration: 'none',
             }}
           >
-            <NavLink to="/main" className={styles.links}>LOGO</NavLink>
+            <div className={styles.containerLogo}>
+            <NavLink to="/" className={styles.links}><img className={styles.logo} src="./logo.png" alt=""/></NavLink>
+            </div>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-           { !user.isAuth && 
+           { !user.isAuth ? (
            <>
-            <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>{pages[0]}</Button>
-            <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>{pages[1]}</Button>
+           <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>{pages[0]}</Button>
+           <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>{pages[1]}</Button>
+           </>
+           ) : (
+            <>
+            <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}><ButtonMy color={'white'}/></Button>
             </>
+           )
+
            } 
            
           </Box>
@@ -146,7 +160,7 @@ const settings = [
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src="./defaultProfile.png" />
               </IconButton>
             </Tooltip>
             <Menu
@@ -172,6 +186,7 @@ const settings = [
                 <Typography textAlign="center">{settings[2]}</Typography>
                   <Typography textAlign="center">{settings[3]}</Typography>
                 <Typography textAlign="center"><ButtonMy/></Typography>
+
                 </div>
               </MenuItem>
             </Menu>

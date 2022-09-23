@@ -16,10 +16,10 @@ function MainPage() {
         <>
             <Stack sx={{ display: 'flex',
                 alignElements: 'flex-start',
-                alignItems: 'flex-start',
+                alignItems: 'center',
                 p: 1,
                 m: 1,
-                ml: '50vh',
+
                 // height: 100,
                 borderRadius: 1,}}>
                 <SearchBar/>
@@ -45,14 +45,19 @@ function MainPage() {
                 }
                 <div>
                 {doctors &&
-                <>
-                    {doctors.map((el:object,index:number) =>
-                        <Box mt ={3}>
-                        <SearchedDoctorCard el={el} key={index}/>
-                        </Box>
-                    )}
-                   <ParentMap docs={doctors}/>
-                </>
+                <div className={s.content_container}>
+                    <div className={s.cards_box}>
+                        {doctors.map((el:object,index:number) =>
+                            <Box mt ={3}>
+                            <SearchedDoctorCard el={el} key={index}/>
+                            </Box>
+                        )}
+                    </div>
+                    {doctors.length > 0 && 
+                    <div className={s.map_container}>
+                        <ParentMap docs={doctors} />
+                    </div>}
+                </div>
                 }
                 </div>
 

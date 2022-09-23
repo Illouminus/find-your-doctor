@@ -103,6 +103,7 @@ class UserController {
           speciality: el.Doctor.speciality,
           sex: el.Doctor.sex,
           adress: el.Doctor.adress,
+          photo: el.Doctor.photo,
         },
       }));
       // console.log(result);
@@ -114,7 +115,6 @@ class UserController {
 
   async getUserLk(req, res) {
     try {
-      // const data = req.body;
       const { id } = req.params;
       console.log('id', id);
       const user = await User.findOne({ where: { id } });
@@ -124,6 +124,7 @@ class UserController {
       console.log(error);
     }
   }
+
   async getDocTimetable(req, res) {
     try {
       const {id} = req.params;
@@ -166,6 +167,38 @@ class UserController {
       res.json('Ошибка')
     }
   }
+
+
+  async updateUser(req, res) {
+    try {
+      console.log('!!!!', req.body);
+      const { id } = req.params;
+      const {
+        first_name, last_name, email, telephone,
+      } = req.body;
+      // const { id } = req.params;
+      console.log('PARAMS', req.params);
+      const newUser = await User.update({
+        first_name, last_name, email, telephone,
+      }, { where: { id } });
+      // const data = 'Данные изменены';
+      const user = await User.findOne({ where: { id } });
+      res.json(user);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // async getFiles(req, res, next) {
+  //   try {
+  //     console.log('Файлы если они есть=========>', req.files);
+  //     console.log('REQ BODY  =========>', req.body);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+
+
   // async calendar(req, res, next) {
   //   const { id } = req.params;
   //   const dayNum = new Date().getDay();

@@ -20,9 +20,9 @@
 }
 
 .card_box {
-  background-color: rgb(234, 234, 234);
+  background-color: rgb(251, 251, 251);
   min-width: 275px;
-  /* border: 1px solid rgba(151, 151, 151, 0.566); */
+  border: 1px solid rgba(151, 151, 151, 0.18);
   border-radius: 10px;
   overflow: hidden;
   margin: 0 30px 10px;
@@ -111,20 +111,20 @@
 }
 
 .onecard_firstcard_container {
-  background-color: rgb(234, 234, 234);
+  background-color: rgb(251, 251, 251);
   min-width: 275px;
   max-width: 800px;
-  /* border: 1px solid rgba(151, 151, 151, 0.566); */
+  border: 1px solid rgba(151, 151, 151, 0.18);
   border-radius: 10px;
   overflow: hidden;
   margin: 0 30px 10px;
 }
 
 .onecard_secondcard_container {
-  background-color: rgb(234, 234, 234);
+  background-color: rgb(251, 251, 251);
   min-width: 275px;
   max-width: 800px;
-  /* border: 1px solid rgba(151, 151, 151, 0.566); */
+  border: 1px solid rgba(151, 151, 151, 0.18);
   border-radius: 10px;
   overflow: hidden;
   margin: 0 30px 10px;
@@ -150,26 +150,69 @@
 
 .doctor_adress {
   border-top: 1px solid rgba(151, 151, 151, 0.566);
+  padding: 10px 0;
+  min-height: 50px;
 }
 
 .comments_container {
   border-top: 1px solid rgba(151, 151, 151, 0.566);
+  padding: 10px 0;
+  min-height: 50px;
 }
 
 .first_time_container {
   min-height: 40px;
 }
 
-.doctor_adress {
-  padding-top: 10px;
-  min-height: 50px;
-}
-
-.comments_container {
-  padding-top: 10px;
-  min-height: 50px;
-}
-
 .app_cancel_p {
   margin: 5px 0 8px;
+}
+
+.comment_box {
+  display: flex;
+  /* justify-content: space-between; */
+}
+
+.comment_box form {
+  width: 100%;
+}
+
+.pen_button {
+  height: 24px;
+  width: 24px;
+  margin-left: 5px;
+  color: rgb(151, 151, 151);
+  border: 1px solid rgba(25, 131, 253, 0);
+}
+
+.pen_button:hover {
+  color: rgb(25, 118, 210);
+  border: 1px solid rgb(25, 118, 210);
+  border-radius: 5px;
+}
+
+.close_button {
+  height: 24px;
+  width: 24px;
+  color: rgb(151, 151, 151);
+  border: 1px solid rgba(25, 131, 253, 0);
+}
+
+.close_button:hover {
+  color: rgb(210, 25, 25);
+  border: 1px solid rgb(210, 25, 25);
+  border-radius: 5px;
+}
+
+.textarea {
+  /* min-width: 400px; */
+  width: 80%;
+}
+
+.rating {
+  margin-top: 4px;
+}
+
+.button_box {
+  margin-top: 1px;
 }

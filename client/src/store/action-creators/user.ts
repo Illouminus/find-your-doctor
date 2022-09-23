@@ -13,6 +13,7 @@ export const loginUser = (email:string, password:string) =>  async (dispatch: Di
             console.log(response);
             localStorage.setItem('token', response.data.accesToken)
             dispatch({type: UserActionType.LOGIN_SUCCESS, payload: response.data})
+            return response.data.user
         } catch (e) {
           console.log(e);     
         }
