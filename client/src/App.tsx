@@ -39,16 +39,17 @@ function App() {
         <BrowserRouter>
             <Provider store={store}>
       <Routes>
-          {/* <Route path="/" element={<Layout />} /> */}
-          <Route path="/" element={ <MainPage /> } />
-          <Route path="/registration" element={ <RegistrationPage /> } />
-          <Route path="/login" element={ <LoginPage /> } />
-          <Route path="/doctor/:id" element={<DoctorPage />} />
-          <Route path="/appointments" element={ <AppointmentsPage /> } />
-          <Route path="/documents" element={ <Documents />} />
-          <Route path="/user/:id" element={ <UserLkPage /> } />
-              <Route path="/timetable/" element={ <SetTimetablePage /> } />
-          <Route path="/doctor/lk/:id" element={<DoctorLkPage />} />
+          <Route path="/" element={<Layout />} >
+            <Route path="/" element={ <MainPage /> } />
+            <Route path="/registration" element={ <RegistrationPage /> } />
+            <Route path="/login" element={ <LoginPage /> } />
+            <Route path="/doctor/:id" element={<DoctorPage />} />
+            <Route path="/appointments" element={ <AppointmentsPage /> } />
+            <Route path="/documents" element={ <Documents />} />
+            <Route path="/user/:id" element={ <UserLkPage /> } />
+            <Route path="/timetable/" element={ <SetTimetablePage /> } />
+            <Route path="/doctor/lk/:id" element={<DoctorLkPage />} />
+          </Route>
       </Routes>
             </Provider>
             </BrowserRouter>

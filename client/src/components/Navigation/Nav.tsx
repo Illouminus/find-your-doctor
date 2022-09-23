@@ -16,14 +16,16 @@ import {NavLink} from 'react-router-dom'
 import styles from './styles.module.css'
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import ButtonMy from './Button'
+import axios from 'axios';
 
 
 
 
 export const ResponsiveAppBar = () => {
 
- const{user} = useTypedSelector(state => state)
- console.log(user);
+  const { user } = useTypedSelector(state => state)
+  const isDoctor = user.user.isDoctor
+ console.log('UUUUUUSSSSEEEERRR', user);
 
 const pages = [<NavLink to="registration" className={styles.links}>Регистрация</NavLink>, <NavLink to="login" className={styles.links}>Логин</NavLink>];
 
@@ -35,6 +37,23 @@ const settings = [
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const [ava, setAva] = React.useState<null | string>(null);
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const response = await axios.post('http://localhost:4000/api/documents/ava', { id: user.user.id, isDoc: user.user.isDoctor });
+        console.log('ava', response.data);
+        if (response.data) {
+          setAva(response.data);
+        } else {
+          setAva(null);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, [user])
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -159,8 +178,12 @@ const settings = [
           {user.isAuth && 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="./defaultProfile.png" />
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  {ava ? (
+                    <Avatar alt="Remy Sharp" src={`http://localhost:4000/img/${ava}`}  />
+                  ): (
+                      <Avatar alt="Remy Sharp" src="./defaultProfile.png" />
+                  )}
               </IconButton>
             </Tooltip>
             <Menu

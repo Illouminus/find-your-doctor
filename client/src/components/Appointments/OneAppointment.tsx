@@ -14,6 +14,7 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { OneAppStateType } from '../../components/Appointments/types'
 import { IUser } from '../../models/iUser'
 import { pickRandomColor } from './AllAppointments'
+import OneFile from '../../pages/Documents/OneFile'
 
 import styles from './appoint.module.css'
 
@@ -27,7 +28,8 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
   const isDoctor = user.isDoctor
   const item = oneApp.appointment;
   console.log('appointment', oneApp.appointment);
-  // console.log('oneApp', oneApp);
+  // console.log('user', user);
+  // console.log('item', item);
 
   const [input, setInput] = useState<boolean>(false);
   const [docs, setDocs] = useState<any>([]);
@@ -36,9 +38,9 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
   useEffect(() => {
     (async () => {
       try {
-        if (item.status && (new Date(item.date_time) < new Date())) {
+        if (item.status && (new Date(item.date_time) < new Date()) && !user.isDoctor) {
           const response = await axios.post('http://localhost:4000/api/rating/getstars', { user_id: user.id, doctor_id: item.doctor.id})
-          console.log(response.data);
+          console.log('stars', response.data);
           if (response.data) {
             setStars(response.data.stars);
           } else {
@@ -55,7 +57,7 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
     (async () => {
       try {
           const response = await axios.post('http://localhost:4000/api/documents/', {id: item.id})
-          console.log(response.data);
+          console.log('ДОКУМЕНТЫ', response.data);
           if (response.data) {
             setDocs(response.data);
         }
@@ -271,7 +273,10 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
       {item.documents_id.length > 0 && (
         <div className={styles.onecard_secondcard_container}>
           <div className={styles.onecard_second_desc}>
-
+            <p>{isDoctor ? 'Документы пациента:' : 'Ваши документы:'}</p>
+            {docs.map((doc : any) => (
+                <OneFile link={doc.Document} />
+            ))}
           </div>
         </div>
       )}
