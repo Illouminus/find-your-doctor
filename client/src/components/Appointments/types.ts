@@ -27,6 +27,7 @@ export type AppStateType = {
     telephone: string | null
     photo: string | null
   }
+  documents_id: any
 }
 
 export type OneAppStateType = {
