@@ -1,6 +1,8 @@
+/* eslint-disable max-len */
 const { validationResult } = require('express-validator');
 const ApiError = require('../exceptions/api-error');
 const DocService = require('../service/doctor-service');
+const { Appointment, User } = require('../../db/models');
 
 class DocController {
   async registration(req, res, next) {
@@ -9,14 +11,13 @@ class DocController {
       if (!errors.isEmpty()) {
         return next(ApiError.BadRequest('Ошибка при валидации', errors.array()));
       }
-      console.log(req.body);
+
       const sex = req.body.sex.value;
-      console.log(sex);
       const {
         email, password, firstName, lastName, patronymic, telephone, experience, education, speciality, photo, adress,
       } = req.body;
-
-      const userData = await DocService.registration(email, password, sex, firstName, lastName, patronymic, telephone, experience, education, speciality, photo, sex, adress);
+      console.log(req.body);
+      const userData = await DocService.registration(email, password, sex, firstName, lastName, patronymic, telephone, experience, education, speciality, photo, adress);
       res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 1000, httpOnly: true });
       return res.json(userData);
     } catch (error) {
@@ -74,6 +75,35 @@ class DocController {
     try {
       const users = await DocService.getAllUsers();
       res.json(users);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async getAppointments(req, res, next) {
+    try {
+      const { id } = req.params;
+      const response = await Appointment.findAll({ where: { doctor_id: id }, include: { model: User }, order: [['date_time']] });
+      const result = response.map((el) => ({
+        id: el.id,
+        comments_patient: el.comments_patient,
+        comments_doctor: el.comments_doctor,
+        date_time: el.date_time,
+        first_time: el.first_time,
+        status: el.status,
+        patient: {
+          id: el.User.id,
+          first_name: el.User.first_name,
+          last_name: el.User.last_name,
+          patronymic: el.User.patronymic,
+          sex: el.User.sex,
+          email: el.User.email,
+          telephone: el.User.telephone,
+          photo: el.User.photo,
+        },
+      }));
+      console.log(result);
+      res.json(result);
     } catch (error) {
       next(error);
     }

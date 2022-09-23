@@ -17,7 +17,6 @@ export const doctorReducer = (state = initState, action: DoctorAction): DoctorSt
         case DoctorActionTypes.FETCH_DOCTORS_ERROR:
             console.log(action.payload, 'doctors error')
             return {...state, error: action.payload, loading:false, doctors:[]};
-
         default:
             return state;
     }

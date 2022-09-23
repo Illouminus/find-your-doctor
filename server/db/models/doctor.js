@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       });
       this.hasMany(models.Raiting, { foreignKey: 'doctor_id' });
       this.hasMany(models.Appointment, { foreignKey: 'doctor_id' });
+      this.hasMany(models.Timetable, { foreignKey: 'doctor_id' });
     }
   }
   Doctor.init({

@@ -25,6 +25,7 @@ class DocService {
       const isDoctor = true;
       const userDto = new UserDto(user, isDoctor); // id, email, isActivated
       const tokens = tokenService.generateTokens({ ...userDto });
+      console.log(tokens);
       await tokenService.saveTokenDoc(userDto.id, tokens.refreshToken);
       return { ...tokens, user: userDto };
     } catch (error) {
@@ -56,7 +57,7 @@ class DocService {
     if (!isPassChech) {
       throw ApiError.BadRequest('Вы ввели неправильный пароль');
     }
-    const isDoctor = false;
+    const isDoctor = true;
     const userDto = new UserDto(user, isDoctor);
     const tokens = tokenService.generateTokens({ ...userDto });
     await tokenService.saveTokenDoc(userDto.id, tokens.refreshToken);
@@ -78,7 +79,9 @@ class DocService {
       throw ApiError.UnathorizedError();
     }
     const user = await Doctor.findByPk(userData.id);
-    const userDto = new UserDto(user);
+    const isDoctor = true;
+    const userDto = new UserDto(user, isDoctor);
+    console.log(userDto);
     const tokens = tokenService.generateTokens({ ...userDto });
     await tokenService.saveTokenDoc(userDto.id, tokens.refreshToken);
     return { ...tokens, user: userDto };

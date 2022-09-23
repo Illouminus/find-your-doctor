@@ -5,6 +5,13 @@ import DoctorPage1 from "./DoctorPage1";
 import DoctorPage2 from "./DoctorPage2";
 import DoctorPage3 from "./DoctorPage3";
 import DoctorPage4 from "./DoctorPage4";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { IUser } from "../../models/iUser";
+
+import { MessageUser } from "../../components";
+
+import { useParams } from "react-router-dom";
+
 
 export interface DocState {
   id: string;
@@ -22,25 +29,31 @@ export interface DocState {
 }
 
 function DoctorPage() {
+  // const user : IUser = useTypedSelector(state => state.user.user);
+  const { id } = useParams();
+  console.log(id);
   const [docState, setDocState] = useState<DocState[]>();
 
   useEffect(() => {
-    axios.get(`http://localhost:4000/doctor/${1}`).then((resFromServer) => {
+    axios.get(`http://localhost:4000/doctor/${id}`).then((resFromServer) => {
       const data = resFromServer.data;
       // console.log(data);
       setDocState(data);
     });
   }, []);
 
+  // console.log('docState', docState);
+  
   return (
-    <div className={styles.conteiner}>
+    <div className={styles.container}>
       <div className={styles.content}>
+        <MessageUser />
         {docState?.map((el) => (
           <div key={el.id} className={styles.mainInfo}>
             <DoctorPage1 el={el} />
             <DoctorPage2 el={el} />
             <DoctorPage3 el={el} />
-            <DoctorPage4 el={el} />
+            {/* <DoctorPage4 el={el} /> */}
             {/* <div className={styles.mainInfo}>
               <div>
                 {el?.first_name} {el?.last_name} {el?.patronymic}{" "}

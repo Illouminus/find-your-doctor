@@ -1,9 +1,10 @@
-import {UserAction, UserActionType} from '../types/user'
+import { UserActionType} from '../types/user'
 import {Dispatch} from "redux"
-import axios from "axios";
 import AuthService from '../../services/AuthSerice';
 import { IAllFields } from '../../components/Register/types';
-
+import axios from 'axios';
+import { AuthResponse } from '../../models/response/AuthResponse';
+import { API_URL } from '../../http';
 
 
 export const loginUser = (email:string, password:string) =>  async (dispatch: Dispatch) => {
@@ -12,6 +13,7 @@ export const loginUser = (email:string, password:string) =>  async (dispatch: Di
             console.log(response);
             localStorage.setItem('token', response.data.accesToken)
             dispatch({type: UserActionType.LOGIN_SUCCESS, payload: response.data})
+            return response.data.user
         } catch (e) {
           console.log(e);     
         }
@@ -23,6 +25,7 @@ export const loginUser = (email:string, password:string) =>  async (dispatch: Di
           const response = await AuthService.loginDoc(email, password);
           console.log(response);
           localStorage.setItem('token', response.data.accesToken)
+          localStorage.setItem('isDoctor', 'true')
           dispatch({type: UserActionType.LOGIN_SUCCESS, payload: response.data})
       } catch (e) {
         console.log(e);     
@@ -47,9 +50,8 @@ export const loginUser = (email:string, password:string) =>  async (dispatch: Di
       
       try {
           const response = await AuthService.registerDoc(object);
-          console.log(response);
-          
           localStorage.setItem('token', response.data.accesToken)
+          localStorage.setItem('isDoctor', 'true')
           dispatch({type: UserActionType.LOGIN_SUCCESS, payload: response.data})
       } catch (e) {
         console.log(e);
@@ -59,11 +61,45 @@ export const loginUser = (email:string, password:string) =>  async (dispatch: Di
 
       export const logoutUser = () =>  async (dispatch: Dispatch) => {
         try {
-            const response = await AuthService.logout();
+            await AuthService.logout();
             localStorage.removeItem('token')
             dispatch({type: UserActionType.LOGOUT})
         } catch (e) {
           console.log(e);
           
+        }
+      }
+
+      export const logoutDoc = () =>  async (dispatch: Dispatch) => {
+        try {
+          
+            await AuthService.logoutDoc();
+            localStorage.clear()
+            dispatch({type: UserActionType.LOGOUT})
+        } catch (e) {
+          console.log(e);
+          
+        }
+      }
+
+      export const checkAuthUser = () =>  async (dispatch: Dispatch) => {
+        try {
+            const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, {withCredentials: true}  )
+            console.log(response);
+            localStorage.setItem('token', response.data.accesToken)
+            dispatch({type: UserActionType.LOGIN_SUCCESS, payload: response.data})
+        } catch (e) {
+          console.log(e);
+        }
+      }
+
+      export const checkAuthDoc = () =>  async (dispatch: Dispatch) => {
+        try {
+            const response = await axios.get<AuthResponse>(`${API_URL}/doc/refresh`, {withCredentials: true}  )
+            console.log(response);
+            localStorage.setItem('token', response.data.accesToken)
+            dispatch({type: UserActionType.LOGIN_SUCCESS, payload: response.data})
+        } catch (e) {
+          console.log(e);
         }
       }
