@@ -34,6 +34,7 @@ const doctorRouter = require('./src/routers/doctorRouter');
 const searchRouter = require('./src/routers/searchRouter');
 const appointmentRouter = require('./src/routers/appointmentRouter');
 const ratingRouter = require('./src/routers/ratingRouter');
+const documentsRouter = require('./src/routers/documentsRouter');
 
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, './uploads/')));
@@ -160,6 +161,7 @@ app.use('/', doctorRouter);
 app.use('/', searchRouter);
 app.use('/', appointmentRouter);
 app.use('/api/rating', ratingRouter);
+app.use('/api/documents', documentsRouter);
 
 server.listen(PORT ?? 4000, () => {
   console.log('Сервер запущен!');

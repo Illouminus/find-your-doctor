@@ -14,6 +14,7 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { OneAppStateType } from '../../components/Appointments/types'
 import { IUser } from '../../models/iUser'
 import { pickRandomColor } from './AllAppointments'
+import OneFile from '../../pages/Documents/OneFile'
 
 import styles from './appoint.module.css'
 
@@ -27,18 +28,19 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
   const isDoctor = user.isDoctor
   const item = oneApp.appointment;
   console.log('appointment', oneApp.appointment);
-  console.log('oneApp', oneApp);
+  // console.log('user', user);
+  // console.log('item', item);
 
   const [input, setInput] = useState<boolean>(false);
-
+  const [docs, setDocs] = useState<any>([]);
   const [stars, setStars] = useState<number | null>(0);
 
   useEffect(() => {
     (async () => {
       try {
-        if (item.status && (new Date(item.date_time) < new Date())) {
+        if (item.status && (new Date(item.date_time) < new Date()) && !user.isDoctor) {
           const response = await axios.post('http://localhost:4000/api/rating/getstars', { user_id: user.id, doctor_id: item.doctor.id})
-          console.log(response.data);
+          console.log('stars', response.data);
           if (response.data) {
             setStars(response.data.stars);
           } else {
@@ -51,11 +53,24 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
     })();
   }, [item]);
 
+  useEffect(() => {
+    (async () => {
+      try {
+          const response = await axios.post('http://localhost:4000/api/documents/', {id: item.id})
+          console.log('ДОКУМЕНТЫ', response.data);
+          if (response.data) {
+            setDocs(response.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, [item]);
+
   const addRating = async (user_id: number | null, doctor_id: number | null, stars: number | null) => {
-    console.log('stars:', stars, 'user_id:', user_id, 'doctor_id:', doctor_id);
     try {
       const response = await axios.post(`http://localhost:4000/api/rating/setstars`, {user_id, doctor_id, stars })
-      console.log(response.data);
+      // console.log(response.data);
         // setOneApp((prev) => {
         //   const obj = { ...prev }
         //   obj.appointment.status = false
@@ -70,7 +85,6 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
     try {
       axios.post(`http://localhost:4000/appointment/undo`, { id: item.id, doctor_id: item.doctor.id, date_time: item.date_time }).then((resFromServer) => {
         const data = resFromServer.data;
-        console.log(data);
         setOneApp((prev) => {
           const obj = { ...prev }
           obj.appointment.status = false
@@ -256,9 +270,17 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
             )}
         </div>
       </div>
-      <div className={styles.onecard_secondcard_container}>
-        <div className={styles.onecard_second_desc}></div>
-      </div>
+      {item.documents_id.length > 0 && (
+        <div className={styles.onecard_secondcard_container}>
+          <div className={styles.onecard_second_desc}>
+            <p>{isDoctor ? 'Документы пациента:' : 'Ваши документы:'}</p>
+            {docs.map((doc : any) => (
+                <OneFile link={doc.Document} />
+            ))}
+          </div>
+        </div>
+      )}
+      
     </div>
   )
 }
