@@ -10,7 +10,7 @@ const CardDoc = ({description}: any) => {
         <h5 className={s.descriptionItem}>{description.speciality}</h5>
         <h5 className={s.descriptionItem}>{description.adress}</h5>
       </div>
-      <div className={s.imageDiv}><img className={s.image} src={`http://localhost:4000/img/${description.photo}`} alt=""/></div>
+      <div className={s.imageDiv}><img className={s.image} src={`/img/${description.photo}`} alt=""/></div>
     </div>
   )
 }

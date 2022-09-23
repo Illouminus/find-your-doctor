@@ -11,7 +11,7 @@ export default function RatingDoc({ el }: { el: DocState }) {
   useEffect(() => {
     (async () => {
       try {
-        const res = await axios.get(`http://localhost:4000/doctor/${el.id}/stars`)
+        const res = await axios.get(`/doctor/${el.id}/stars`)
         if (res.data) {
           setRating(res.data)
         }

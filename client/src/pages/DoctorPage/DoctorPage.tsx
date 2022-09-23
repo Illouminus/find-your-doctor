@@ -35,7 +35,7 @@ function DoctorPage() {
   const [docState, setDocState] = useState<DocState[]>();
 
   useEffect(() => {
-    axios.get(`http://localhost:4000/doctor/${id}`).then((resFromServer) => {
+    axios.get(`/doctor/${id}`).then((resFromServer) => {
       const data = resFromServer.data;
       // console.log(data);
       setDocState(data);

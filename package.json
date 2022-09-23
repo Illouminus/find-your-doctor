@@ -1,0 +1,21 @@
+{
+  "name": "find-your-doctor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd server && npm start",
+    "build": "cd client && cd your-game && npm i && npm run build && cd ../../server && npm i && npx sequelize-cli db:migrate:undo:all && npx sequelize db:migrate && npx sequelize-cli db:seed:all"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Illouminus/find-your-doctor.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Illouminus/find-your-doctor/issues"
+  },
+  "homepage": "https://github.com/Illouminus/find-your-doctor#readme"
+}

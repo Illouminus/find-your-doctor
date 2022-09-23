@@ -24,7 +24,7 @@ export default function DoctorPage1({ el }: { el: DocState }) {
       }}
     >
       {el.photo ? (
-        <Avatar src={`http://localhost:4000/img/${el.photo}`} sx={{ width: 100, height: 100 }} />
+        <Avatar src={`/img/${el.photo}`} sx={{ width: 100, height: 100 }} />
       ) : (
         <Avatar
             sx={{ width: 100, height: 100, bgcolor: pickRandomColor()[500] }}

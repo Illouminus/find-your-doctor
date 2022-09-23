@@ -52,14 +52,14 @@ const UserLkPage = () => {
   useEffect(() => {
     isDoctor
       ? axios
-          .get(`http://localhost:4000/doctor/lk/${user.id}`)
+          .get(`/doctor/lk/${user.id}`)
           .then((resFromServer) => {
             const data = resFromServer.data;
             console.log(data);
             setUserLk(data);
           })
       : axios
-          .get(`http://localhost:4000/api/user/${user.id}`)
+          .get(`/api/user/${user.id}`)
           .then((resFromServer) => {
             const data = resFromServer.data;
             setUserLk(data);
@@ -79,7 +79,7 @@ const UserLkPage = () => {
     try {
       isDoctor
         ? axios
-            .post(`http://localhost:4000/doctor/lk/${user.id}`, {
+            .post(`/doctor/lk/${user.id}`, {
               first_name: valueName,
               last_name: valueLastName,
               email: valueEmail,
@@ -94,7 +94,7 @@ const UserLkPage = () => {
               setUserLk(data);
             })
         : axios
-            .post(`http://localhost:4000/api/user/${user.id}`, {
+            .post(`/api/user/${user.id}`, {
               first_name: valueName,
               last_name: valueLastName,
               email: valueEmail,
@@ -134,7 +134,7 @@ const UserLkPage = () => {
                 {userLk?.last_name[0]}
               </Avatar> */}
               {userLk?.photo ? (
-                <Avatar src={`http://localhost:4000/img/${userLk?.photo}`} sx={{ width: 150, height: 150 }} />
+                <Avatar src={`/img/${userLk?.photo}`} sx={{ width: 150, height: 150 }} />
               ) : (
                 <Avatar
                   sx={{ width: 150, height: 150, bgcolor: pickRandomColor()[500] }}
@@ -307,7 +307,7 @@ const UserLkPage = () => {
             {userLk?.last_name[0]}
             </Avatar> */}
             {userLk?.photo ? (
-              <Avatar src={`http://localhost:4000/img/${userLk?.photo}`} sx={{ width: 150, height: 150 }} />
+              <Avatar src={`/img/${userLk?.photo}`} sx={{ width: 150, height: 150 }} />
             ) : (
               <Avatar
                 sx={{ width: 150, height: 150, bgcolor: pickRandomColor()[500] }}

@@ -52,7 +52,7 @@ export const AllAppointments: React.FC<appsType> = ({ appointments, setOneApp })
             <div className={styles.card_avatar_box}>
               {isDoctor ? (
                 item?.patient?.photo ? (
-                  <Avatar src={`http://localhost:4000/img/${item?.patient?.photo}`} sx={{ width: 60, height: 60 }} />
+                  <Avatar src={`/img/${item?.patient?.photo}`} sx={{ width: 60, height: 60 }} />
                 ) : (
                   <Avatar
                     sx={{ width: 60, height: 60, bgcolor: pickRandomColor()[500] }}
@@ -63,7 +63,7 @@ export const AllAppointments: React.FC<appsType> = ({ appointments, setOneApp })
                 )
               ): (
                   item?.doctor?.photo ? (
-                    <Avatar src={`http://localhost:4000/img/${item?.doctor?.photo}`} sx={{ width: 60, height: 60 }} />
+                    <Avatar src={`/img/${item?.doctor?.photo}`} sx={{ width: 60, height: 60 }} />
                   ) : (
                     <Avatar
                       sx={{ width: 60, height: 60, bgcolor: pickRandomColor()[500] }}

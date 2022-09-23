@@ -4,7 +4,7 @@ import axios from "axios";
 import {debounce} from 'lodash'
 
 const getDoctors = async (dispatch:any, inputSpecialist:string, inputLocation:string) =>{
-    const response = await axios.get(`http://localhost:4000/main/${inputSpecialist}/${inputLocation}`)
+    const response = await axios.get(`/main/${inputSpecialist}/${inputLocation}`)
     dispatch({type: DoctorActionTypes.FETCH_DOCTORS_SUCCESS, payload: response.data})
 }
 const debouncedGet = debounce(getDoctors, 2000)

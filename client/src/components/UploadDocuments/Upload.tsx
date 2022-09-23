@@ -26,7 +26,7 @@ const Upload = ({id}: any) => {
     Array.from(files).forEach(file => formData.append('file', file))
     setDrag(false)
     console.log(formData);
-    // 'http://localhost:4000/api/files'
+    // '/api/files'
     const response = await axios.post('https://httpbin.org/anything', formData)
     console.log(response);
   }

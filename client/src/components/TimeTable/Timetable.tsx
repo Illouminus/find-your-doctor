@@ -32,7 +32,7 @@ export default function Timetable() {
     useEffect(()=> {
         const fetchTimetables = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/api/timetable/${user.id}`);
+                const response = await axios.get(`/api/timetable/${user.id}`);
                 await setCalendar(makeMonthCalendar(response.data.theTimetables, response.data.theAppointments))
             } catch (error) {
                 console.error(error);
@@ -100,7 +100,7 @@ export default function Timetable() {
         }
         calendarToSend = calendarToSend.filter((el:any)=> el.day )
             try {
-                const response = await axios.post(`http://localhost:4000/api/timetable`, {
+                const response = await axios.post(`/api/timetable`, {
                     calendar:calendarToSend,
                     user_id: user.id,
                 });

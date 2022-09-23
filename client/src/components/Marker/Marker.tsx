@@ -5,7 +5,7 @@ import { borderRadius } from '@mui/system';
 import CardDoc from './CardDoc';
 
 //  label={{text: 'Вы нашли пиздатого врача',  fontSize: '25px', color: 'red' }}
-// http://localhost:4000/img/${description.photo}
+// /img/${description.photo}
 export const MarkerDoc = ({position, description}: any) => {
   console.log(position)
   console.log(description)

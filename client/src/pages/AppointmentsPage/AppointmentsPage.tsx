@@ -17,12 +17,12 @@ export const AppointmentsPage: React.FC = () => {
 
   useEffect(() => {
     if (!user.isDoctor) {
-      axios.get(`http://localhost:4000/api/appointments/${user.id}`).then((resFromServer) => {
+      axios.get(`/api/appointments/${user.id}`).then((resFromServer) => {
       const data = resFromServer.data;
       setAppointments(data);
     });
     } else {
-      axios.get(`http://localhost:4000/api/doc/appointments/${user.id}`).then((resFromServer) => {
+      axios.get(`/api/doc/appointments/${user.id}`).then((resFromServer) => {
         const data = resFromServer.data;
         setAppointments(data);
       });

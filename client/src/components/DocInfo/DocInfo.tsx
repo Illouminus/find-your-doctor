@@ -33,7 +33,7 @@ export default function DocInfo(props:any) {
                     <CardContent>
                         <Box sx = {{display:'flex'}}>
                         {photo ? (
-                            <Avatar src={`http://localhost:4000/img/${photo}`} sx={{ width: 56, height: 56}} />
+                            <Avatar src={`/img/${photo}`} sx={{ width: 56, height: 56}} />
                             ) : (
                                 
                                 <Avatar sx={{ width: 56, height: 56, bgcolor: pickRandomColor()[500] }}>{first_name[0]}{last_name[0]} </Avatar>

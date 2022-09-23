@@ -37,7 +37,7 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
     (async () => {
       try {
         if (item.status && (new Date(item.date_time) < new Date())) {
-          const response = await axios.post('http://localhost:4000/api/rating/getstars', { user_id: user.id, doctor_id: item.doctor.id})
+          const response = await axios.post('/api/rating/getstars', { user_id: user.id, doctor_id: item.doctor.id})
           console.log(response.data);
           if (response.data) {
             setStars(response.data.stars);
@@ -54,7 +54,7 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
   const addRating = async (user_id: number | null, doctor_id: number | null, stars: number | null) => {
     console.log('stars:', stars, 'user_id:', user_id, 'doctor_id:', doctor_id);
     try {
-      const response = await axios.post(`http://localhost:4000/api/rating/setstars`, {user_id, doctor_id, stars })
+      const response = await axios.post(`/api/rating/setstars`, {user_id, doctor_id, stars })
       console.log(response.data);
         // setOneApp((prev) => {
         //   const obj = { ...prev }
@@ -68,7 +68,7 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
 
   const appCancel = (id: number) => {
     try {
-      axios.post(`http://localhost:4000/appointment/undo`, { id: item.id, doctor_id: item.doctor.id, date_time: item.date_time }).then((resFromServer) => {
+      axios.post(`/appointment/undo`, { id: item.id, doctor_id: item.doctor.id, date_time: item.date_time }).then((resFromServer) => {
         const data = resFromServer.data;
         console.log(data);
         setOneApp((prev) => {
@@ -88,7 +88,7 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
     // const user_id = (!isDoctor ? item?.doctor?.id : item?.patient?.id);
     console.log(item.id, value, isDoctor);
     try {
-      axios.post('http://localhost:4000/appointment/updcomment', { id: item.id, value, isDoctor }).then((resFromServer) => {
+      axios.post('/appointment/updcomment', { id: item.id, value, isDoctor }).then((resFromServer) => {
         const data = resFromServer.data;
         console.log(data);
         setOneApp((prev) => {
@@ -129,7 +129,7 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
           <div className={styles.card_avatar_box}>
             {isDoctor ? (
               item?.patient?.photo ? (
-                <Avatar src={`http://localhost:4000/img/${item?.patient?.photo}`} sx={{ width: 60, height: 60 }} />
+                <Avatar src={`/img/${item?.patient?.photo}`} sx={{ width: 60, height: 60 }} />
               ) : (
                 <Avatar
                   sx={{ width: 60, height: 60, bgcolor: pickRandomColor()[500] }}
@@ -140,7 +140,7 @@ export const OneAppointment: React.FC<appType> = ({ oneApp, setOneApp }) => {
               )
             ) : (
               item?.doctor?.photo ? (
-                <Avatar src={`http://localhost:4000/img/${item?.doctor?.photo}`} sx={{ width: 60, height: 60 }} />
+                <Avatar src={`/img/${item?.doctor?.photo}`} sx={{ width: 60, height: 60 }} />
               ) : (
                 <Avatar
                   sx={{ width: 60, height: 60, bgcolor: pickRandomColor()[500] }}

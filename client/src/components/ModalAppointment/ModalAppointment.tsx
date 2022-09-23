@@ -51,7 +51,7 @@ export default function ModalAppointment({props}) {
       file.forEach((fileOne: any)=> data.append("file", fileOne))
       
     try{
-        const response = axios.post('http://localhost:4000/appointment', data)
+        const response = axios.post('/appointment', data)
         const feedback = await response
         console.log(feedback);
         if (feedback.data){

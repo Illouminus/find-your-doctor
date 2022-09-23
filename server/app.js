@@ -37,6 +37,7 @@ const ratingRouter = require('./src/routers/ratingRouter');
 
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, './uploads/')));
+app.use(express.static(path.resolve(process.env.PWD, '..', 'client', 'build')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());

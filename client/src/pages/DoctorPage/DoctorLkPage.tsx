@@ -36,7 +36,7 @@ const DoctorLkPage = () => {
   };
 
   useEffect(() => {
-    axios.get(`http://localhost:4000/doctor/lk/${user.id}`)
+    axios.get(`/doctor/lk/${user.id}`)
       .then((resFromServer) => {
       const data = resFromServer.data;
       setDoctorLk(data);
@@ -50,7 +50,7 @@ const DoctorLkPage = () => {
     const valueEmail = e.target.email.value
     const valueTelephone = e.target.telephone.value
     try {
-      axios.post(`http://localhost:4000/api/user/${user.id}`, 
+      axios.post(`/api/user/${user.id}`, 
       { first_name: valueName, last_name: valueLastName, email: valueEmail, telephone: valueTelephone
     }).then((resFromServer) => {
       const data = resFromServer.data
