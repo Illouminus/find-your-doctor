@@ -1,10 +1,9 @@
 import React, {useState, useCallback, useRef, useEffect} from 'react'
-import styles from './styles.module.css'
 import { GoogleMap, Marker, InfoWindow} from '@react-google-maps/api';
 import {defaultTheme} from './Theme'
 import { CurrentLocation } from '../CurrentLocationMarker/CurrentLocation';
 import { MarkerDoc } from '../Marker/Marker';
-
+import 'animate.css';
 const containerStyle = {
   width: '25vw',
   height: '60vh',
@@ -18,7 +17,7 @@ const defaultOptions = {
   scaleControl: true,
   streetViewControl: false,
   rotateControl: false,
-  clickableIcons: false,
+  clickableIcons: true,
   keyboardShortcuts: false,
   scrollwheel: false,
   disableDoubleClickZoom: false,
@@ -32,6 +31,8 @@ export const MODES = {
 }
 
 const Map = ({ center, mode, markers, onMarkerAdd, }: any ) => {
+
+
 
   console.log(markers);
   
@@ -55,10 +56,10 @@ const Map = ({ center, mode, markers, onMarkerAdd, }: any ) => {
   }, [mode, onMarkerAdd])
   
   return (
-    <div className={styles.container}>
+    <div className='animate__animated animate__backInRight' >
       <GoogleMap
         mapContainerStyle={containerStyle}
-        center={center}
+        center={markers[0]}
         zoom={10}
         onLoad={onLoad}
         onUnmount={onUnmount}
@@ -68,8 +69,7 @@ const Map = ({ center, mode, markers, onMarkerAdd, }: any ) => {
         <CurrentLocation  position={center}/>
         { /* Child components, such as markers, info windows, etc. */ }
         {markers.map((pos: any) => {
-          return <MarkerDoc description={pos.description} position={pos}>
-          </MarkerDoc>
+          return <MarkerDoc description={pos.description} position={pos} />
         })}
         <></>
       </GoogleMap>

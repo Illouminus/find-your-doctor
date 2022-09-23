@@ -1,0 +1,9 @@
+.container{
+  max-width: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.textArea{
+
+}
