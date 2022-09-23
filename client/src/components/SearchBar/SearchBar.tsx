@@ -30,8 +30,8 @@ function SearchBar() {
                         <TextField
                                 onChange = {inputsHandler}
                                 name = 'inputSpecialist'
-                                label="Специолист, жалобы"
-                                id="Специолист, жалобы"
+                                label="Специалист, жалобы"
+                                id="Специалист, жалобы"
                                 sx={{ m: 1, width: '25ch' }}
                                 InputProps={{
                                     startAdornment: <InputAdornment position="start"><VaccinesIcon/></InputAdornment>

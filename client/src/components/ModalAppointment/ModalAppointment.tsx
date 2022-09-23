@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -16,7 +17,8 @@ import {useState} from "react";
 import {Checkbox, FormControlLabel} from "@mui/material";
 import { AnyNsRecord } from 'dns';
 import { Preview } from '@mui/icons-material';
-
+import { MessageUser } from '..';
+import s from './modal.module.css'
 
 // @ts-ignore
 
@@ -26,7 +28,17 @@ export default function ModalAppointment({props}) {
     const [comment, setComment] = useState('')
     const [firstTime, setFirstTime] = useState(true)
     const [file, setFile]:any = useState<any>([])
-    console.log(file);
+
+    const [open, setOpen] = React.useState(false);
+    const [severity, setSeverity] = useState('');
+    const [message, setMessage] = useState('');
+    const handleCloseе = (event?: React.SyntheticEvent | Event, reason?: string) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setOpen(false);
+    };
+    const navigate = useNavigate()
     
     const sendFormHandler = async ()=> {
       const data = new FormData();
@@ -39,32 +51,26 @@ export default function ModalAppointment({props}) {
       file.forEach((fileOne: any)=> data.append("file", fileOne))
       
     try{
-        // const response = axios.post('http://localhost:4000/appointment', {
-        //     doctor_id: id,
-        //     user_id: user.id,
-        //     time:time,
-        //     date:date,
-        //     comment: comment,
-        //     firstTime:firstTime,
-        // })
         const response = axios.post('http://localhost:4000/appointment', data)
-        // const response = axios.post('https://httpbin.org/anything', data).then(res => console.log(res)).catch(err => console.log(err))
-
-        
         const feedback = await response
         console.log(feedback);
-        
         if (feedback.data){
-            console.log(feedback.data)
+          setSeverity('success')
+          setMessage(feedback.data)
+          setOpen(true)
+          handleClose()
+          setTimeout(() => {
+            navigate('/')
+          }, 1000)
+            console.log()
         }}catch(e){
         console.log(e)
     }
     }
 
-    
     return (
-        <div>
-            <Dialog open={openModal} onClose={handleClose}>
+        <div className={s.container}>
+            <Dialog open={openModal} onClose={handleClose} className={s.container}>
                 <DialogTitle>Запись на {time}:00 {date.slice(8,10)}.{date.slice(5,7)}  {date.slice(0,4)}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
@@ -90,6 +96,7 @@ export default function ModalAppointment({props}) {
                         type="text"
                         fullWidth
                         variant="standard"
+                        className={s.textArea}
                     />
                     {/* <FileUpload/> */}
                 {/* <Upload id={user.id}/> */}
@@ -110,6 +117,7 @@ export default function ModalAppointment({props}) {
                     <Button onClick={sendFormHandler}>Подтвердить запись</Button>
                 </DialogActions>
             </Dialog>
+            <MessageUser open={open} handleClose={handleCloseе} severity={severity} message={message}/>
         </div>
     );
 }

@@ -13,7 +13,8 @@ import Map from "./Map/Map";
 import RatingDoc from "./Stars/Stars";
 import ParentMap from './ParentMap/ParentMap'
 import MessageUser from './MessageUser/MessageUser'
+import CardDoc from "./Marker/CardDoc"
 export { Layout, Navigation, ResponsiveAppBar, SearchBar, TagsCard,
    SearchedDoctorCard, DocInfo,  LoginForm, DocCalendar, FileUpload, 
-   Upload, Map, RatingDoc, ParentMap, MessageUser };
+   Upload, Map, RatingDoc, ParentMap, MessageUser, CardDoc};
 
